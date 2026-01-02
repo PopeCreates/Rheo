@@ -1,6 +1,6 @@
 {
   "expo": {
-    "scheme": "MarkMe",
+    "scheme": "mark-me",
     "userInterfaceStyle": "automatic",
     "orientation": "default",
     "icon": "./assets/images/Markme.png",

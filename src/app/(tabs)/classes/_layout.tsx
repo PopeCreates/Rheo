@@ -24,6 +24,13 @@ export default function ClassesLayout() {
           headerShown: false,
         }}
       />
+      <Stack.Screen
+        name="groups"
+        options={{
+          title: "Groups",
+          headerShown: false,
+        }}
+      />
     </Stack>
   )
 }

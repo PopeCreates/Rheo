@@ -556,15 +556,70 @@ export function AppProvider({ children }: { children: ReactNode }) {
       status: s.status,
     }))
 
+    // setAttendanceRecords((prev) => {
+    //   const existingIndex = prev.findIndex((r) => r.id === recordId)
+    //   if (existingIndex >= 0) {
+    //     const updated = [...prev]
+    //     const now = new Date().toISOString()
+    //     updated[existingIndex] = { id: recordId, classId, date, createdAt: updated[existingIndex].createdAt, updatedAt: now, studentRecords: studentRecords.map((sr) => ({
+    //       id: `${recordId}-${sr.studentId}`,
+    //       studentId: sr.studentId,
+    //       name: classItem.students.find(s => s.id === sr.studentId)?.name || "Unknown",
+    //       status: sr.status
+    //     })) }
+    //     return updated
+    //   }
+    //   const now = new Date().toISOString()
+    //   return [...prev, { id: recordId, classId, date, createdAt: now, updatedAt: now, studentRecords }]
+    // })
     setAttendanceRecords((prev) => {
-      const existingIndex = prev.findIndex((r) => r.id === recordId)
-      if (existingIndex >= 0) {
-        const updated = [...prev]
-        updated[existingIndex] = { id: recordId, classId, date, studentRecords }
-        return updated
-      }
-      return [...prev, { id: recordId, classId, date, studentRecords }]
-    })
+  const existingIndex = prev.findIndex((r) => r.id === recordId)
+  const now = new Date().toISOString()
+
+  // UPDATE EXISTING RECORD
+  if (existingIndex >= 0) {
+    const updated = [...prev]
+
+    updated[existingIndex] = {
+      ...updated[existingIndex], // preserve takenBy, notes, createdAt
+      id: recordId,
+      classId,
+      date,
+      updatedAt: now,
+      studentRecords: studentRecords.map((sr) => ({
+        id: `${recordId}-${sr.studentId}`,
+        studentId: sr.studentId,
+        name:
+          classItem.students.find((s) => s.id === sr.studentId)?.name ??
+          "Unknown",
+        status: sr.status,
+      })),
+    }
+
+    return updated
+  }
+
+  // CREATE NEW RECORD
+  return [
+    ...prev,
+    {
+      id: recordId,
+      classId,
+      date,
+      createdAt: now,
+      updatedAt: now,
+      studentRecords: studentRecords.map((sr) => ({
+        id: `${recordId}-${sr.studentId}`,
+        studentId: sr.studentId,
+        name:
+          classItem.students.find((s) => s.id === sr.studentId)?.name ??
+          "Unknown",
+        status: sr.status,
+      })),
+    },
+  ]
+})
+
   }
 
   const getAttendanceHistory = (classId: string): AttendanceRecord[] => {
@@ -729,6 +784,86 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }
   }
 
+  
+  
+  // Helper functions for group hierarchy validation
+  // const getAllGroupAncestors = (groupId: string): string[] => {
+  //   const ancestors: string[] = []
+  //   let current = classGroups.find((g) => g.id === groupId)
+
+  //   while (current?.parentGroupId) {
+  //     ancestors.push(current.parentGroupId)
+  //     current = classGroups.find((g) => g.id === current.parentGroupId)
+  //   }
+
+  //   return ancestors
+  // }
+  const getAllGroupAncestors = (groupId: string): ClassGroup[] => {
+  const ancestors: ClassGroup[] = []
+  let current = classGroups.find((g) => g.id === groupId)
+
+  while (current?.parentGroupId) {
+    const parent = classGroups.find(
+      (g) => g.id === current.parentGroupId
+    )
+
+    if (!parent) break
+
+    ancestors.push(parent)
+    current = parent
+  }
+
+  return ancestors
+}
+
+
+  // const getAllGroupDescendants = (groupId: string): string[] => {
+  //   const descendants: string[] = []
+  //   const group = classGroups.find((g) => g.id === groupId)
+
+  //   if (!group) return descendants
+
+  //   const queue = [...group.subGroupIds]
+  //   while (queue.length > 0) {
+  //     const current = queue.shift()
+  //     if (current && !descendants.includes(current)) {
+  //       descendants.push(current)
+  //       const subGroup = classGroups.find((g) => g.id === current)
+  //       if (subGroup) {
+  //         queue.push(...subGroup.subGroupIds)
+  //       }
+  //     }
+  //   }
+  
+  //   return descendants
+  // }
+
+const getAllGroupDescendants = (groupId: string): ClassGroup[] => {
+  const descendants: ClassGroup[] = []
+  const visited = new Set<string>()
+
+  const root = classGroups.find((g) => g.id === groupId)
+  if (!root) return descendants
+
+  const queue: string[] = [...root.subGroupIds]
+
+  while (queue.length > 0) {
+    const currentId = queue.shift()
+    if (!currentId || visited.has(currentId)) continue
+
+    const group = classGroups.find((g) => g.id === currentId)
+    if (!group) continue
+
+    visited.add(currentId)
+    descendants.push(group)
+
+    queue.push(...group.subGroupIds)
+  }
+
+  return descendants
+}
+
+
   const getRootItems = (): { classes: Class[]; groups: ClassGroup[] } => {
     return {
       classes: classes.filter((c) => !c.parentGroupId),
@@ -772,7 +907,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
         saveAttendanceRecord,
         getAttendanceHistory,
         getStudentAttendanceHistory,
-        getAttendanceStats,
+        getAttendanceStats,  
+        getAllGroupAncestors,
+        getAllGroupDescendants,
       }}
     >
       {children}

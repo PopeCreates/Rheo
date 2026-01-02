@@ -216,7 +216,7 @@ export default function ClassesScreen() {
                                 </TouchableOpacity>
                               </View>
 
-                              <View className="w-24 min-w-[100px] bg-gray-700">
+                              <View className="w-24 min-w-25 bg-gray-700">
                                 <Image source={{ uri: classItem.image }} className="w-full h-full" resizeMode="cover" />
                               </View>
                             </TouchableOpacity>
@@ -324,7 +324,7 @@ export default function ClassesScreen() {
                   </TouchableOpacity>
                 </View>
 
-                <View className="w-32 min-w-[120px] bg-gray-700">
+                <View className="w-32 min-w-30 bg-gray-700">
                   <Image source={{ uri: classItem.image }} className="w-full h-full" resizeMode="cover" />
                 </View>
               </TouchableOpacity>
@@ -388,7 +388,7 @@ export default function ClassesScreen() {
                 <Ionicons name="school-outline" size={48} color="#64748b" />
               </View>
               <Text className="text-xl font-bold text-white mb-2">No Classes Yet</Text>
-              <Text className="text-sm text-[#92b7c9] text-center max-w-[280px]">
+              <Text className="text-sm text-[#92b7c9] text-center max-w-70">
                 Get started by creating your first class or organizing them into groups
               </Text>
             </View>

@@ -2,11 +2,11 @@
 
 import { View, Text, ScrollView, TouchableOpacity } from "react-native"
 import { Ionicons } from "@expo/vector-icons"
-import { Card } from "../../components/common/Card"
-import { useApp } from "../../contexts/AppContext"
+import { Card } from "@/components/common/Card"
+import { useApp } from "@/contexts/AppContext"
 import { useRouter } from "expo-router"
-import { calculateClassGradeStats } from "../../utils/gradeAnalytics"
-import { GradeDistributionChart } from "../../components/charts/GradeDistributionChart"
+import { calculateClassGradeStats } from "@/utils/gradeAnalytics"
+import { GradeDistributionChart } from "@/components/charts/GradeDistributionChart"
 import { useState } from "react"
 
 export default function ReportsScreen() {

@@ -25,9 +25,9 @@ export default function ClassGroupDetailScreen() {
 
   const classGroup = classGroups.find((g) => g.id === id)
 
-  const { classes: childClasses, groups: childGroups } = classGroup
+  const { classes: childClasses, subGroups: childGroups } = classGroup
     ? getGroupChildren(classGroup.id)
-    : { classes: [], groups: [] }
+    : { classes: [], subGroups: [] }
 
   useEffect(() => {
     if (classGroup) {
@@ -148,7 +148,7 @@ export default function ClassGroupDetailScreen() {
 
           {/* Description Input */}
           <TextInput
-            className="bg-[#0F1419] border border-[#325567] rounded-xl px-4 py-3 text-base text-white min-h-[80px]"
+            className="bg-[#0F1419] border border-[#325567] rounded-xl px-4 py-3 text-base text-white min-h-20"
             value={groupDescription}
             onChangeText={setGroupDescription}
             placeholder="Add a description (optional)"
@@ -319,7 +319,7 @@ export default function ClassGroupDetailScreen() {
               <Ionicons name="folder-open-outline" size={40} color="#64748b" />
             </View>
             <Text className="text-lg font-bold text-white mb-2">Empty Group</Text>
-            <Text className="text-sm text-[#94a3b8] text-center max-w-[250px]">
+            <Text className="text-sm text-[#94a3b8] text-center max-w-62.5">
               Add classes or create sub-groups to organize your content
             </Text>
           </View>

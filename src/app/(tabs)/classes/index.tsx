@@ -2,7 +2,7 @@
 
 import { View, Text, ScrollView, TouchableOpacity, Image, TextInput } from "react-native"
 import { useRouter } from "expo-router"
-import { useState } from "react"
+import { useState, useMemo } from "react"
 import { Ionicons } from "@expo/vector-icons"
 import { useApp } from "@/contexts/AppContext"
 import { ConfirmModal } from "@/components/common/ConfirmModal"
@@ -12,10 +12,11 @@ import { Toast } from "@/components/common/Toast"
 import { useToast } from "@/hooks/useToast"
 import type { Class, ClassGroup } from "@/interfaces/interface"
 import { ViewGroupModal } from "@/components/modals/ViewGroupModal"
+import { searchClassesAndGroups } from "@/utils/group"
 
 export default function ClassesScreen() {
   const router = useRouter()
-  const { classes, deleteClass, updateClass, userProfile, classGroups, getRootItems, getGroupChildren } = useApp()
+  const { classes, deleteClass, updateClass, userProfile, classGroups, getRootItems } = useApp()
   const { toast, hide, success } = useToast()
 
   const [searchQuery, setSearchQuery] = useState("")
@@ -67,22 +68,12 @@ export default function ClassesScreen() {
 
   const { classes: rootClasses, groups: rootGroups } = getRootItems()
 
-  const filteredRootClasses = rootClasses.filter(
-    (c) =>
-      c.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      c.subject.toLowerCase().includes(searchQuery.toLowerCase()),
-  )
-
-  const filteredRootGroups = rootGroups.filter((g) => g.name.toLowerCase().includes(searchQuery.toLowerCase()))
-
-  const filteredGroupClasses = (groupId: string) => {
-    const groupClasses = getGroupChildren(groupId).filter((item) => item.type === "class") as Class[]
-    return groupClasses.filter(
-      (c) =>
-        c.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        c.subject.toLowerCase().includes(searchQuery.toLowerCase()),
-    )
-  }
+  const filteredResults = useMemo(() => {
+    if (searchQuery.length === 0) {
+      return { classes: rootClasses, groups: rootGroups }
+    }
+    return searchClassesAndGroups(searchQuery, classGroups, classes)
+  }, [searchQuery, classes, classGroups, rootClasses, rootGroups])
 
   return (
     <View className="flex-1 bg-[#101c22]">
@@ -145,16 +136,13 @@ export default function ClassesScreen() {
           </View>
           <Text className="text-xl font-bold text-white tracking-tight">My Classes</Text>
         </View>
-        {/* <TouchableOpacity className="w-10 h-10 items-center justify-center rounded-full active:bg-gray-800">
-          <Ionicons name="search" size={24} color="#fff" />
-        </TouchableOpacity> */}
       </View>
 
       <View className="px-4 py-3 bg-[#101c22] border-b border-gray-800/50">
         <View className="flex-row items-center bg-[#192b33] border border-[#325567] rounded-full px-3 py-2">
           <Ionicons name="search" size={18} color="#8b9faa" />
           <TextInput
-            className="flex-1 ml-2 text-base text-white"
+            className="flex-1 ml-2 rounded-full text-base focus:outline-none text-white"
             placeholder="Search classes or groups..."
             placeholderTextColor="#64748b"
             value={searchQuery}
@@ -169,7 +157,7 @@ export default function ClassesScreen() {
       </View>
 
       <ScrollView className="flex-1 px-4 pt-6 pb-32" showsVerticalScrollIndicator={false}>
-        {searchQuery.length > 0 && filteredRootClasses.length === 0 && filteredRootGroups.length === 0 ? (
+        {searchQuery.length > 0 && filteredResults.classes.length === 0 && filteredResults.groups.length === 0 ? (
           <View className="flex-1 items-center justify-center py-12">
             <Ionicons name="search-outline" size={48} color="#8b9faa" />
             <Text className="text-[#8b9faa] text-base mt-4">No classes or groups found</Text>
@@ -177,28 +165,25 @@ export default function ClassesScreen() {
           </View>
         ) : (
           <>
-            <View className="flex-row justify-between items-center mb-5">
-              <Text className="text-sm font-medium text-[#92b7c9]">Q1 2025</Text>
-              <View className="bg-[#13a4ec]/10 px-3 py-1 rounded-full">
-                <Text className="text-xs font-bold text-[#13a4ec]">{filteredRootClasses.length} Active Classes</Text>
-              </View>
-            </View>
+            {searchQuery.length === 0 && (
+              <>
+                <View className="flex-row justify-between items-center mb-5">
+                  <Text className="text-sm font-medium text-[#92b7c9]">Q1 2025</Text>
+                  <View className="bg-[#13a4ec]/10 px-3 py-1 rounded-full">
+                    <Text className="text-xs font-bold text-[#13a4ec]">{rootClasses.length} Active Classes</Text>
+                  </View>
+                </View>
+              </>
+            )}
 
             <View className="flex-col gap-4 mb-20">
-              {filteredRootGroups.map((group) => {
+              {filteredResults.groups.map((group) => {
                 const isExpanded = expandedGroups.has(group.id)
-                const { classes: groupClasses, subGroups } = getGroupChildren(group.id)
-                const classCount = groupClasses.length
-                const subGroupCount = subGroups.length
+                const groupClasses = classes.filter((c) => group.classIds.includes(c.id))
 
                 return (
                   <View key={group.id} className="flex-col">
-                    <TouchableOpacity className="rounded-full bg-[#192b33] shadow-sm border border-gray-800 overflow-hidden"
-                      onPress={(e) => {
-                              e.stopPropagation()
-                              router.push(`/(tabs)/classes/groups/${group.id}`)
-                      }}
-                    >
+                    <View className="rounded-2xl bg-[#192b33] shadow-sm border border-gray-800 overflow-hidden">
                       <TouchableOpacity
                         className="flex-row items-center justify-between px-4 py-3 bg-gray-50/5 border-b border-gray-800"
                         onPress={() => toggleGroup(group.id)}
@@ -224,8 +209,9 @@ export default function ClassesScreen() {
                               <Text className="font-bold text-white">{group.name}</Text>
                             </View>
                             <Text className="text-xs text-[#92b7c9] ml-7">
-                              {classCount} {classCount === 1 ? "Class" : "Classes"}
-                              {subGroupCount > 0 && ` • ${subGroupCount} Sub-group${subGroupCount === 1 ? "" : "s"}`}
+                              {group.classIds.length} {group.classIds.length === 1 ? "Class" : "Classes"}
+                              {group.subGroupIds.length > 0 &&
+                                ` • ${group.subGroupIds.length} Sub-group${group.subGroupIds.length === 1 ? "" : "s"}`}
                             </Text>
                           </View>
                         </View>
@@ -255,10 +241,10 @@ export default function ClassesScreen() {
                       {isExpanded && groupClasses.length > 0 && (
                         <View className="flex-col gap-3 p-3 bg-black/20">
                           <View className="border-l-2 border-gray-700 pl-3 flex-col gap-3">
-                            {filteredGroupClasses(group.id).map((classItem) => (
+                            {groupClasses.map((classItem) => (
                               <View key={classItem.id} className="relative">
                                 <TouchableOpacity
-                                  className="flex-row bg-[#192b33] rounded-full overflow-hidden shadow-sm border border-gray-800"
+                                  className="flex-row bg-[#192b33] rounded-xl overflow-hidden shadow-sm border border-gray-800"
                                   onPress={() => router.push(`/(tabs)/classes/${classItem.id}`)}
                                 >
                                   <View className="flex-1 p-3">
@@ -375,12 +361,12 @@ export default function ClassesScreen() {
                           </View>
                         </View>
                       )}
-                    </TouchableOpacity>
+                    </View>
                   </View>
                 )
               })}
 
-              {filteredRootClasses.map((classItem) => (
+              {filteredResults.classes.map((classItem) => (
                 <View key={classItem.id} className="relative">
                   <TouchableOpacity
                     className="flex-row bg-[#192b33] rounded-2xl overflow-hidden shadow-sm border border-gray-800"
@@ -419,17 +405,17 @@ export default function ClassesScreen() {
                         onPress={() => router.push(`/(tabs)/classes/${classItem.id}`)}
                       >
                         <Text className="text-sm font-semibold text-[#13a4ec]">Manage</Text>
-                        <Ionicons name="arrow-forward" size={18} color="#13a4ec" />
+                        <Ionicons name="arrow-forward" size={16} color="#13a4ec" />
                       </TouchableOpacity>
                     </View>
 
-                    <View className="w-20 h-28 min-w-20 bg-gray-700 overflow-hidden">
+                    <View className="w-24 h-28 min-w-24 bg-gray-700 overflow-hidden">
                       <Image source={{ uri: classItem.image }} className="w-full h-full" resizeMode="cover" />
                     </View>
                   </TouchableOpacity>
 
                   {showOptionsId === classItem.id && (
-                    <View className="absolute right-5 top-16 bg-[#192b33] rounded-xl overflow-hidden shadow-2xl z-50 w-52 border border-[#325567]">
+                    <View className="absolute right-3 top-16 bg-[#192b33] rounded-xl overflow-hidden shadow-2xl z-50 w-48 border border-[#325567]">
                       <TouchableOpacity
                         className="flex-row items-center gap-3 px-4 py-3.5 border-b border-[#325567] active:bg-[#1a2730]"
                         onPress={(e) => {
@@ -491,26 +477,26 @@ export default function ClassesScreen() {
                   )}
                 </View>
               ))}
-
-              {filteredRootClasses.length === 0 && filteredRootGroups.length === 0 && (
-                <View className="items-center justify-center py-20">
-                  <View className="w-24 h-24 rounded-full bg-[#192b33] items-center justify-center mb-4">
-                    <Ionicons name="school-outline" size={48} color="#64748b" />
-                  </View>
-                  <Text className="text-xl font-bold text-white mb-2">No Classes Yet</Text>
-                  <Text className="text-sm text-[#92b7c9] text-center max-w-70">
-                    Get started by creating your first class or organizing them into groups
-                  </Text>
-                </View>
-              )}
             </View>
           </>
+        )}
+
+        {filteredResults.classes.length === 0 && filteredResults.groups.length === 0 && (
+          <View className="items-center justify-center py-20">
+            <View className="w-24 h-24 rounded-full bg-[#192b33] items-center justify-center mb-4">
+              <Ionicons name="school-outline" size={48} color="#64748b" />
+            </View>
+            <Text className="text-xl font-bold text-white mb-2">No Classes Yet</Text>
+            <Text className="text-sm text-[#92b7c9] text-center max-w-70">
+              Get started by creating your first class or organizing them into groups
+            </Text>
+          </View>
         )}
       </ScrollView>
 
       <TouchableOpacity
-        className="absolute bottom-24 right-6 w-14 h-14 bg-[#13a4ec] rounded-full items-center justify-center active:opacity-75 active:bg-[#0d8db8] shadow-lg z-40"
         onPress={() => setShowCreateModal(true)}
+        className="absolute bottom-24 right-6 w-14 h-14 rounded-full bg-[#13a4ec] items-center justify-center shadow-lg active:bg-[#13a4ec]/90"
       >
         <Ionicons name="add" size={28} color="#fff" />
       </TouchableOpacity>

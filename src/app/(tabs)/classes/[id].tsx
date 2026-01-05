@@ -186,6 +186,28 @@ export default function ClassDetailScreen() {
               <Text className="text-xs font-bold text-white">Grading</Text>
             </TouchableOpacity>
           </View>
+
+          <View className="flex-row gap-3 mt-3">
+            <TouchableOpacity
+              onPress={() => router.push(`/attendance/${id}`)}
+              className="flex-1 flex-col items-center justify-center gap-2 bg-[#192b33] border border-[#325567] rounded-xl p-4 active:opacity-80"
+            >
+              <View className="w-10 h-10 items-center justify-center rounded-full bg-white/5">
+                <Ionicons name="checkmark-circle-outline" size={24} color="#8b9faa" />
+              </View>
+              <Text className="text-xs font-bold text-white">Attendance</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => router.push(`/class-report/${id}`)}
+              className="flex-1 flex-col items-center justify-center gap-2 bg-[#192b33] border border-[#325567] rounded-xl p-4 active:opacity-80"
+            >
+              <View className="w-10 h-10 items-center justify-center rounded-full bg-white/5">
+                <Ionicons name="bar-chart-outline" size={24} color="#8b9faa" />
+              </View>
+              <Text className="text-xs font-bold text-white">Report</Text>
+            </TouchableOpacity>
+          </View>
         </View>
 
         <View className="flex-row items-center justify-between px-4 pb-2 pt-4">

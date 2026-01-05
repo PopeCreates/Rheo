@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { useRouter } from "expo-router"
 import { View, ActivityIndicator, Text } from "react-native"
-import { useApp } from "@/contexts/AppContext"
+import { useAuth } from "@/contexts/AuthContext"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 
 /**
@@ -15,13 +15,12 @@ import AsyncStorage from "@react-native-async-storage/async-storage"
  */
 export default function Index() {
   const router = useRouter()
-  const { isAuthenticated, isLoading } = useApp()
+  const { isAuthenticated, isLoading } = useAuth()
   const [checkingOnboarding, setCheckingOnboarding] = useState(true)
 
   useEffect(() => {
     /**
      * Check if user has completed onboarding
-     * Returns true if user has seen onboarding before
      */
     const checkOnboardingStatus = async () => {
       try {
@@ -39,18 +38,21 @@ export default function Index() {
     const navigateToScreen = async () => {
       if (!isLoading) {
         const hasCompletedOnboarding = await checkOnboardingStatus()
-
         setCheckingOnboarding(false)
 
+        // Small delay for smooth transition
         const timer = setTimeout(() => {
           if (isAuthenticated) {
             // User is logged in -> Go to main app
+            console.log("[v0] Navigating to main app (authenticated)")
             router.replace("/(tabs)/classes")
           } else if (hasCompletedOnboarding) {
             // User has seen onboarding before -> Go to login
+            console.log("[v0] Navigating to login (onboarding completed)")
             router.replace("/(auth)/login")
           } else {
             // First time user -> Show onboarding
+            console.log("[v0] Navigating to onboarding (first time user)")
             router.replace("/(onboarding)/welcome")
           }
         }, 500)

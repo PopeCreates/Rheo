@@ -33,13 +33,18 @@ export const getRootItems = (
 /**
  * Get all ancestor groups of a given group (parents, grandparents, etc.)
  */
-export const getAllGroupAncestors = (groupId: string, classGroups: ClassGroup[]): string[] => {
-  const ancestors: string[] = []
+export const getAllGroupAncestors = (groupId: string, classGroups: ClassGroup[]): ClassGroup[] => {
+  const ancestors: ClassGroup[] = []
   let current = classGroups.find((g) => g.id === groupId)
 
   while (current?.parentGroupId) {
-    ancestors.push(current.parentGroupId)
-    current = classGroups.find((g) => g.id === current.parentGroupId)
+    const parent = classGroups.find((g) => g.id === current.parentGroupId)
+    if (parent) {
+      ancestors.push(parent)
+      current = parent
+    } else {
+      break
+    }
   }
 
   return ancestors
@@ -48,21 +53,20 @@ export const getAllGroupAncestors = (groupId: string, classGroups: ClassGroup[])
 /**
  * Get all descendant groups of a given group (all nested subgroups)
  */
-export const getAllGroupDescendants = (groupId: string, classGroups: ClassGroup[]): string[] => {
-  const descendants: string[] = []
+export const getAllGroupDescendants = (groupId: string, classGroups: ClassGroup[]): ClassGroup[] => {
+  const descendants: ClassGroup[] = []
   const group = classGroups.find((g) => g.id === groupId)
 
   if (!group) return descendants
 
   const queue = [...group.subGroupIds]
   while (queue.length > 0) {
-    const current = queue.shift()
-    if (current && !descendants.includes(current)) {
+    const currentId = queue.shift()
+    const current = classGroups.find((g) => g.id === currentId)
+
+    if (current && !descendants.find((d) => d.id === current.id)) {
       descendants.push(current)
-      const subGroup = classGroups.find((g) => g.id === current)
-      if (subGroup) {
-        queue.push(...subGroup.subGroupIds)
-      }
+      queue.push(...current.subGroupIds)
     }
   }
 

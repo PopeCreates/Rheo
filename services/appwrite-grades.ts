@@ -28,7 +28,7 @@ interface GradingCriteria {
   weight?: number
 }
 
-export const appwriteGrades = {
+export const gradesService = {
   // Save grade (0-100 scale)
   async saveGrade(grade: Grade): Promise<void> {
     try {

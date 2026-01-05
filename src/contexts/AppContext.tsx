@@ -21,12 +21,17 @@ import {
   getAllGroupDescendants,
   getGroupItemCounts,
 } from "@/utils/group"
-import { Avatar } from "@/components/common/Avatar"
-
+import { classesService } from "@/../services/appwrite-classes"
+import { classGroupsService } from "@/../services/appwrite-class-groups"
+import { attendanceService } from "@/../services/appwrite-attendance"
+import { gradesService } from "@/../services/appwrite-grades"
+import { useAuth } from "@/contexts/AuthContext"
 
 const AppContext = createContext<AppContextType | undefined>(undefined)
 
 export function AppProvider({ children }: { children: ReactNode }) {
+  const { user: authUser } = useAuth()
+
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [classes, setClasses] = useState<Class[]>([])
   const [classGroups, setClassGroups] = useState<ClassGroup[]>([])
@@ -36,12 +41,29 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [attendanceRecords, setAttendanceRecords] = useState<AttendanceRecord[]>([])
 
   const [userProfile, setUserProfile] = useState<UserProfile>({
-    name: "Oluwaseun Damilola",
-    title: "Senior Mathematics Teacher",
-    email: "oluwaseun.damilola@school.edu",
-    phone: "+234 (555) 123-4567",
-    avatar: "OD",
+    name: "",
+    title: "Teacher",
+    email: "",
+    phone: "",
+    avatar: "",
   })
+
+  useEffect(() => {
+    if (authUser) {
+      const fullName = `${authUser.firstName} ${authUser.lastName}`
+      setUserProfile((prev) => ({
+        ...prev,
+        name: fullName,
+        email: authUser.email,
+        phone: authUser.phone || "",
+        avatar: authUser.avatar || "https://i.pravatar.cc/100?img=5",
+        title: authUser.title || "Teacher",
+      }))
+      setIsAuthenticated(true)
+    } else {
+      setIsAuthenticated(false)
+    }
+  }, [authUser])
 
   useEffect(() => {
     loadPersistedData()
@@ -51,25 +73,18 @@ export function AppProvider({ children }: { children: ReactNode }) {
     try {
       setIsLoading(true)
 
-      const [savedAuth, savedClasses, savedAssignments, savedGrades, savedProfile, savedAttendance, savedGroups] =
-        await Promise.all([
-          storage.getAuth(),
-          storage.getClasses(),
-          storage.getAssignments(),
-          storage.getGrades(),
-          storage.getUserProfile(),
-          storage.getItem("attendanceRecords"),
-          storage.getItem("classGroups"),
-        ])
+      const [appwriteClasses, appwriteGroups] = await Promise.all([
+        classesService.getClasses().catch(() => []),
+        classGroupsService.getGroups().catch(() => []),
+      ])
 
-      setIsAuthenticated(savedAuth)
-      setClasses(savedClasses || mockClasses)
+      setClasses(appwriteClasses.length > 0 ? appwriteClasses : mockClasses)
+      setClassGroups(appwriteGroups)
+
+      const [savedAssignments, savedProfile] = await Promise.all([storage.getAssignments(), storage.getUserProfile()])
+
       setAssignments(savedAssignments || [])
-      setGrades(savedGrades || [])
-      setAttendanceRecords(savedAttendance ? JSON.parse(savedAttendance) : [])
-      setClassGroups(savedGroups ? JSON.parse(savedGroups) : [])
-
-      if (savedProfile) {
+      if (savedProfile && !authUser) {
         setUserProfile(savedProfile)
       }
     } catch (error) {
@@ -81,46 +96,70 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }
 
   useEffect(() => {
-    if (!isLoading) {
-      storage.saveAuth(isAuthenticated)
-    }
-  }, [isAuthenticated, isLoading])
-
-  useEffect(() => {
-    if (!isLoading) {
-      storage.saveClasses(classes)
+    if (!isLoading && classes.length > 0) {
+      const syncClasses = async () => {
+        try {
+          for (const c of classes) {
+            await classesService.updateClass(c.id, c)
+          }
+          console.log("[v0] Classes synced to Appwrite successfully")
+        } catch (error) {
+          console.error("[v0] Failed to sync classes:", error)
+        }
+      }
+      syncClasses()
     }
   }, [classes, isLoading])
 
   useEffect(() => {
-    if (!isLoading) {
-      storage.saveAssignments(assignments)
+    if (!isLoading && classGroups.length > 0) {
+      const syncGroups = async () => {
+        try {
+          for (const g of classGroups) {
+            await classGroupsService.updateGroup(g.id, g)
+          }
+          console.log("[v0] Class groups synced to Appwrite successfully")
+        } catch (error) {
+          console.error("[v0] Failed to sync class groups:", error)
+        }
+      }
+      syncGroups()
     }
-  }, [assignments, isLoading])
+  }, [classGroups, isLoading])
 
   useEffect(() => {
     if (!isLoading) {
-      storage.saveGrades(grades)
-    }
-  }, [grades, isLoading])
-
-  useEffect(() => {
-    if (!isLoading) {
-      storage.saveUserProfile(userProfile)
-    }
-  }, [userProfile, isLoading])
-
-  useEffect(() => {
-    if (!isLoading) {
-      storage.saveItem("attendanceRecords", JSON.stringify(attendanceRecords))
+      attendanceRecords.forEach((r) => {
+        r.studentRecords.forEach((sr) => {
+          attendanceService
+            .saveAttendanceRecord({
+              classId: r.classId,
+              studentId: sr.studentId,
+              date: r.date,
+              status: sr.status,
+            })
+            .catch((err) => console.error("Failed to sync attendance:", err))
+        })
+      })
     }
   }, [attendanceRecords, isLoading])
 
   useEffect(() => {
     if (!isLoading) {
-      storage.saveItem("classGroups", JSON.stringify(classGroups))
+      grades.forEach((g) => {
+        gradesService
+          .saveGrade({
+            studentId: g.studentId,
+            classId: g.classId || "",
+            assignmentId: g.assignmentId || "",
+            score: g.score,
+            maxScore: g.maxScore || 100,
+            gradedDate: new Date().toISOString(),
+          })
+          .catch((err) => console.error("Failed to sync grade:", err))
+      })
     }
-  }, [classGroups, isLoading])
+  }, [grades, isLoading])
 
   const updateStudentStatus = (classId: string, studentId: string, status: "present" | "absent") => {
     setClasses((prev) =>
@@ -233,23 +272,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       status: s.status,
     }))
 
-    // setAttendanceRecords((prev) => {
-    //   const existingIndex = prev.findIndex((r) => r.id === recordId)
-    //   if (existingIndex >= 0) {
-    //     const updated = [...prev]
-    //     const now = new Date().toISOString()
-    //     updated[existingIndex] = { id: recordId, classId, date, createdAt: updated[existingIndex].createdAt, updatedAt: now, studentRecords: studentRecords.map((sr) => ({
-    //       id: `${recordId}-${sr.studentId}`,
-    //       studentId: sr.studentId,
-    //       name: classItem.students.find(s => s.id === sr.studentId)?.name || "Unknown",
-    //       status: sr.status
-    //     })) }
-    //     return updated
-    //   }
-    //   const now = new Date().toISOString()
-    //   return [...prev, { id: recordId, classId, date, createdAt: now, updatedAt: now, studentRecords }]
-    // })
-    setAttendanceRecords((prev) => {
+  setAttendanceRecords((prev) => {
   const existingIndex = prev.findIndex((r) => r.id === recordId)
   const now = new Date().toISOString()
 
@@ -390,10 +413,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setClassGroups((prev) => prev.filter((g) => g.id !== groupId))
     setClasses((prev) => prev.map((c) => (c.parentGroupId === groupId ? { ...c, parentGroupId: undefined } : c)))
     setClassGroups((prev) =>
-      prev.map((g) => ({
-        ...g,
-        subGroupIds: g.subGroupIds.filter((id) => id !== groupId),
-      })),
+      prev.map((g) =>
+        g.subGroupIds.includes(groupId)
+          ? { ...g, subGroupIds: g.subGroupIds.filter((id) => id !== groupId), updatedAt: new Date().toISOString() }
+          : g,
+      ),
     )
   }
 
@@ -460,25 +484,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }
 
   const getAllGroupAncestorsWrapper = (groupId: string) => {
-    const ancestorIds = getAllGroupAncestors(groupId, classGroups)
-    return ancestorIds.map(id => classGroups.find(g => g.id === id)).filter(Boolean) as ClassGroup[]
+    return getAllGroupAncestors(groupId, classGroups)
   }
 
-  const getAllGroupDescendantsWrapper = (groupId: string): ClassGroup[] => {
-    const descendantIds = getAllGroupDescendants(groupId, classGroups)
-    return descendantIds.map(id => classGroups.find(g => g.id === id)).filter(Boolean) as ClassGroup[]
+  const getAllGroupDescendantsWrapper = (groupId: string) => {
+    return getAllGroupDescendants(groupId, classGroups)
   }
 
   const getGroupItemCountsWrapper = (groupId: string) => {
     return getGroupItemCounts(groupId, classGroups)
-  }
-
-
-  const getRootItems = (classGroups: ClassGroup[], classes: Class[]): { classes: Class[]; groups: ClassGroup[] } => {
-    return {
-      classes: classes.filter((c) => !c.parentGroupId),
-      groups: classGroups.filter((g) => !g.parentGroupId),
-    }
   }
 
   return (
@@ -517,9 +531,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
         saveAttendanceRecord,
         getAttendanceHistory,
         getStudentAttendanceHistory,
-        getAttendanceStats,  
+        getAttendanceStats,
         getAllGroupAncestors: getAllGroupAncestorsWrapper,
-        getAllGroupDescendants: getAllGroupDescendantsWrapper,        
+        getAllGroupDescendants: getAllGroupDescendantsWrapper,
         getGroupItemCounts: getGroupItemCountsWrapper,
       }}
     >

@@ -1,17 +1,18 @@
 import { Client, Databases, ID, Query } from "react-native-appwrite"
 
 // Environment configuration
+const ENDPOINT = process.env.EXPO_PUBLIC_APPWRITE_ENDPOINT || "https://cloud.appwrite.io/v1"
 const DATABASE_ID = process.env.EXPO_PUBLIC_APPWRITE_DATABASE_ID!
 const COLLECTION_ID = process.env.EXPO_PUBLIC_APPWRITE_COLLECTION_ID!
 const PROJECT_ID = process.env.EXPO_PUBLIC_APPWRITE_PROJECT_ID!
 
 // Initialize Appwrite client
-const client = new Client().setEndpoint("https://cloud.appwrite.io/v1").setProject(PROJECT_ID)
+const client = new Client().setEndpoint(ENDPOINT).setProject(PROJECT_ID)
 
 // Initialize database instance
 const database = new Databases(client)
 
-export { client, database, DATABASE_ID, COLLECTION_ID }
+export { client as appwriteClient, database, DATABASE_ID, COLLECTION_ID }
 
 export interface AttendanceRecord {
   user_id: string

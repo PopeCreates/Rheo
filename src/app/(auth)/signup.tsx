@@ -17,10 +17,8 @@ import {
 } from "react-native"
 import { z } from "zod"
 import AsyncStorage from "@react-native-async-storage/async-storage"
-import { useApp } from "@/contexts/AppContext"
+import { useAuth } from "@/contexts/AuthContext"
 import { useToast } from "@/hooks/useToast"
-import { signUp } from "@/utils/auth"
-import { showToast } from "@/utils/toast"
 import { MarkMeFullLogo } from "@/images/images"
 
 const schema = z.object({
@@ -34,10 +32,8 @@ type FormData = z.infer<typeof schema>
 
 export default function SignUpScreen() {
   const router = useRouter()
-  const { setIsAuthenticated } = useApp()
-  const { show } = useToast()
-
-  // State for toggling password visibility
+  const { signUp, isLoading } = useAuth()
+  const { show: showToast } = useToast() // Declare the showToast variable here
   const [passwordVisible, setPasswordVisible] = useState(false)
 
   const {
@@ -50,19 +46,21 @@ export default function SignUpScreen() {
 
   /**
    * Handle signup form submission
-   * Marks onboarding as complete and creates new user account
+   * Creates new teacher account via Appwrite
    */
   const onSubmit = async (data: FormData) => {
     try {
+      await signUp(data)
+
       // Mark onboarding as complete when user signs up
       await AsyncStorage.setItem("hasSeenOnboarding", "true")
 
-      // Create new user account
-      signUp(data)
-      showToast("Account created successfully!", "success")
+      showToast("Account created successfully! Please log in.", "success")
 
       // Navigate to login screen after successful signup
-      router.push("/(auth)/login")
+      setTimeout(() => {
+        router.push("/(auth)/login")
+      }, 100)
     } catch (error: any) {
       showToast(error.message || "Signup failed", "error")
     }
@@ -71,16 +69,16 @@ export default function SignUpScreen() {
   return (
     <KeyboardAvoidingView className="flex-1 bg-[#101c22]" behavior={Platform.OS === "ios" ? "padding" : "height"}>
       <ScrollView contentContainerClassName="flex-grow justify-center p-6" showsVerticalScrollIndicator={false}>
-        {/* Header Section with Logo */}
+        {/* Header Section with Logo and Branding */}
         <View className="items-center mb-8">
-         <View className="mb-4 flex-row gap-4 justify-center items-center">
-          <View className="w-25 h-25 rounded-3xl overflow-hidden bg-white justify-center items-center mb-6 shadow-xl">
-            <Image source={MarkMeFullLogo} className="w-20 h-20 mb-4" resizeMode="cover" />
-          </View>
-          <View>
-          <Text className="text-4xl font-semibold text-white">MarkMe</Text>
-          <Text className="text-base text-[#8b9faa] mb-6">Educator's Assistant</Text>
-          </View>
+          <View className="mb-4 flex-row gap-4 justify-center items-center">
+            <View className="w-25 h-25 rounded-3xl overflow-hidden bg-white justify-center items-center mb-6 shadow-xl">
+              <Image source={MarkMeFullLogo} className="w-20 h-20 mb-4" resizeMode="cover" />
+            </View>
+            <View>
+              <Text className="text-4xl font-semibold text-white">MarkMe</Text>
+              <Text className="text-base text-[#8b9faa] mb-6">Educator's Assistant</Text>
+            </View>
           </View>
           <Text className="text-white text-3xl font-bold">Welcome Onboard</Text>
           <Text className="text-base text-[#8b9faa]">Start your journey with us.</Text>
@@ -92,7 +90,7 @@ export default function SignUpScreen() {
             className="flex-1 py-3 items-center rounded-lg"
             onPress={() => router.push("/(auth)/login")}
           >
-            <Text className="text-base font-semibold text-[#8b9faa] ">Log In</Text>
+            <Text className="text-base font-semibold text-[#8b9faa]">Log In</Text>
           </TouchableOpacity>
           <TouchableOpacity className="flex-1 py-3 items-center rounded-lg bg-[#13a4ec]">
             <Text className="text-base font-semibold text-white">Sign Up</Text>
@@ -117,6 +115,7 @@ export default function SignUpScreen() {
                     onBlur={onBlur}
                     onChangeText={onChange}
                     value={value}
+                    editable={!isLoading}
                   />
                 )}
               />
@@ -140,6 +139,7 @@ export default function SignUpScreen() {
                     onBlur={onBlur}
                     onChangeText={onChange}
                     value={value}
+                    editable={!isLoading}
                   />
                 )}
               />
@@ -165,6 +165,7 @@ export default function SignUpScreen() {
                     onBlur={onBlur}
                     onChangeText={onChange}
                     value={value}
+                    editable={!isLoading}
                   />
                 )}
               />
@@ -189,11 +190,12 @@ export default function SignUpScreen() {
                     onBlur={onBlur}
                     onChangeText={onChange}
                     value={value}
+                    editable={!isLoading}
                   />
                 )}
               />
               {/* Toggle password visibility button */}
-              <TouchableOpacity onPress={() => setPasswordVisible(!passwordVisible)}>
+              <TouchableOpacity onPress={() => setPasswordVisible(!passwordVisible)} disabled={isLoading}>
                 <Ionicons name={passwordVisible ? "eye-off-outline" : "eye-outline"} size={20} color="#92b7c9" />
               </TouchableOpacity>
             </View>
@@ -204,8 +206,9 @@ export default function SignUpScreen() {
           <TouchableOpacity
             className="flex-row bg-[#13a4ec] py-4 rounded-xl items-center justify-center gap-2 mt-4 shadow-lg"
             onPress={handleSubmit(onSubmit)}
+            disabled={isLoading}
           >
-            <Text className="text-lg font-semibold text-white">Sign Up</Text>
+            <Text className="text-lg font-semibold text-white">{isLoading ? "Creating account..." : "Sign Up"}</Text>
             <Ionicons name="arrow-forward" size={20} color="#fff" />
           </TouchableOpacity>
 

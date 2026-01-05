@@ -17,7 +17,7 @@ interface AttendanceRecord {
   notes?: string
 }
 
-export const appwriteAttendance = {
+export const attendanceService = {
   // Save attendance record
   async saveAttendanceRecord(record: AttendanceRecord): Promise<void> {
     try {

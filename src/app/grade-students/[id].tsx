@@ -91,7 +91,7 @@ export default function GradeStudentsScreen() {
         <View className="flex-row items-center justify-between px-4 py-3">
           <TouchableOpacity
             onPress={() => router.back()}
-            className="w-12 h-12 items-center justify-center rounded-full active:bg-[#192b33]"
+            className="w-12 h-12 items-center justify-center rounded-full will-change-pressable active:bg-[#192b33]"
           >
             <Ionicons name="arrow-back" size={24} color="#ffffff" />
           </TouchableOpacity>
@@ -130,7 +130,7 @@ export default function GradeStudentsScreen() {
               <Text className="text-xs font-bold uppercase tracking-wider text-[#6b7280]">Grading Criteria</Text>
               <TouchableOpacity
                 onPress={() => setShowCriteriaModal(true)}
-                className="flex-row items-center gap-1.5 bg-[#233c48] px-3 py-1.5 rounded-lg active:bg-[#325567]"
+                className="flex-row items-center gap-1.5 bg-[#233c48] px-3 py-1.5 rounded-lg will-change-pressable active:bg-[#325567]"
               >
                 <Text className="text-xs font-bold text-[#13a4ec]">Manage Criteria</Text>
                 <Ionicons name="arrow-forward" size={14} color="#13a4ec" />
@@ -143,7 +143,7 @@ export default function GradeStudentsScreen() {
                   <TouchableOpacity
                     key={criterion.id}
                     onPress={() => toggleCriterion(criterion.id)}
-                    className={`h-8 flex-row items-center justify-center gap-2 px-4 rounded-full ${
+                    className={`h-8 flex-row items-center justify-center gap-2 px-4 rounded-full will-change-pressable ${
                       selectedCriteria.includes(criterion.id) ? "bg-[#13a4ec]" : "bg-[#1a2730]"
                     }`}
                   >
@@ -157,7 +157,7 @@ export default function GradeStudentsScreen() {
                 ))}
                 <TouchableOpacity
                   onPress={() => setShowCriteriaModal(true)}
-                  className="h-8 flex-row items-center justify-center gap-1 px-3 rounded-full border border-dashed border-[#325567] active:bg-[#192b33]"
+                  className="h-8 flex-row items-center justify-center gap-1 px-3 rounded-full border border-dashed border-[#325567] will-change-pressable active:bg-[#192b33]"
                 >
                   <Ionicons name="add" size={16} color="#13a4ec" />
                   <Text className="text-sm font-medium text-[#13a4ec]">Add</Text>
@@ -231,7 +231,7 @@ export default function GradeStudentsScreen() {
                             <TouchableOpacity
                               onPress={() => decrementGrade(student.id, criterionId)}
                               disabled={!editMode}
-                              className="w-8 h-8 rounded-lg bg-[#233c48] items-center justify-center border border-[#325567] active:bg-[#192b33]"
+                              className="w-8 h-8 rounded-lg bg-[#233c48] items-center justify-center border border-[#325567] will-change-pressable active:bg-[#192b33]"
                             >
                               <Ionicons name="remove" size={16} color="#6b7280" />
                             </TouchableOpacity>
@@ -252,7 +252,7 @@ export default function GradeStudentsScreen() {
                             <TouchableOpacity
                               onPress={() => incrementGrade(student.id, criterionId)}
                               disabled={!editMode}
-                              className="w-8 h-8 rounded-lg bg-[#233c48] items-center justify-center border border-[#325567] active:bg-[#192b33]"
+                              className="w-8 h-8 rounded-lg bg-[#233c48] items-center justify-center border border-[#325567] will-change-pressable active:bg-[#192b33]"
                             >
                               <Ionicons name="add" size={16} color="#6b7280" />
                             </TouchableOpacity>
@@ -282,7 +282,7 @@ export default function GradeStudentsScreen() {
             show("Grades saved successfully", "success")
             router.back()
           }}
-          className="w-full bg-[#13a4ec] h-12 rounded-xl items-center justify-center flex-row gap-2 active:bg-[#0b8acb]"
+          className="w-full bg-[#13a4ec] h-12 rounded-xl items-center justify-center flex-row gap-2 will-change-pressable active:bg-[#0b8acb]"
         >
           <Ionicons name="save-outline" size={20} color="#ffffff" />
           <Text className="text-base font-bold text-white">Save Grades</Text>

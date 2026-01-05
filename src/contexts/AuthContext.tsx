@@ -46,7 +46,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         }
       }
     } catch (error) {
-      console.error("[v0] Auth status check error:", error)
+      console.error("Auth status check error:", error)
     } finally {
       setIsLoading(false)
     }
@@ -56,7 +56,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       setIsLoading(true)
       const result = await appwriteAuth.signUp(data)
-      console.log("[v0] Signup complete, user:", result.userId)
+      console.log("Signup complete, user:", result.userId)
       // User needs to log in after signup
     } catch (error) {
       throw error
@@ -88,7 +88,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setUser(null)
       setIsAuthenticated(false)
     } catch (error) {
-      console.error("[v0] Logout error:", error)
+      console.error("Logout error:", error)
     }
   }
 

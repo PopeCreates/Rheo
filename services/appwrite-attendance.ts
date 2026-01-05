@@ -21,7 +21,7 @@ export const attendanceService = {
   // Save attendance record
   async saveAttendanceRecord(record: AttendanceRecord): Promise<void> {
     try {
-      console.log("[v0] Saving attendance record")
+      console.log("Saving attendance record")
 
       await databases.createDocument(DATABASE_ID, ATTENDANCE_COLLECTION_ID, ID.unique(), {
         classId: record.classId,
@@ -32,9 +32,9 @@ export const attendanceService = {
         createdAt: new Date().toISOString(),
       })
 
-      console.log("[v0] Attendance record saved")
+      console.log("Attendance record saved")
     } catch (error: any) {
-      console.error("[v0] Save attendance error:", error)
+      console.error("Save attendance error:", error)
       throw new Error(error.message || "Failed to save attendance")
     }
   },
@@ -55,7 +55,7 @@ export const attendanceService = {
         notes: doc.notes,
       }))
     } catch (error: any) {
-      console.error("[v0] Get attendance error:", error)
+      console.error("Get attendance error:", error)
       return []
     }
   },
@@ -76,7 +76,7 @@ export const attendanceService = {
         notes: doc.notes,
       }))
     } catch (error: any) {
-      console.error("[v0] Get history error:", error)
+      console.error("Get history error:", error)
       return []
     }
   },

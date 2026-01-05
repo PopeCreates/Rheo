@@ -102,9 +102,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
           for (const c of classes) {
             await classesService.updateClass(c.id, c)
           }
-          console.log("[v0] Classes synced to Appwrite successfully")
+          console.log("Classes synced to Appwrite successfully")
         } catch (error) {
-          console.error("[v0] Failed to sync classes:", error)
+          console.error("Failed to sync classes:", error)
         }
       }
       syncClasses()
@@ -118,9 +118,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
           for (const g of classGroups) {
             await classGroupsService.updateGroup(g.id, g)
           }
-          console.log("[v0] Class groups synced to Appwrite successfully")
+          console.log("Class groups synced to Appwrite successfully")
         } catch (error) {
-          console.error("[v0] Failed to sync class groups:", error)
+          console.error("Failed to sync class groups:", error)
         }
       }
       syncGroups()

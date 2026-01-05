@@ -44,15 +44,15 @@ export default function Index() {
         const timer = setTimeout(() => {
           if (isAuthenticated) {
             // User is logged in -> Go to main app
-            console.log("[v0] Navigating to main app (authenticated)")
+            console.log("Navigating to main app (authenticated)")
             router.replace("/(tabs)/classes")
           } else if (hasCompletedOnboarding) {
             // User has seen onboarding before -> Go to login
-            console.log("[v0] Navigating to login (onboarding completed)")
+            console.log("Navigating to login (onboarding completed)")
             router.replace("/(auth)/login")
           } else {
             // First time user -> Show onboarding
-            console.log("[v0] Navigating to onboarding (first time user)")
+            console.log("Navigating to onboarding (first time user)")
             router.replace("/(onboarding)/welcome")
           }
         }, 500)

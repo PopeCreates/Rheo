@@ -78,7 +78,7 @@ export const gradesService = {
   // Create grading criteria for a class
   async createCriteria(classId: string, criteria: GradingCriteria): Promise<void> {
     try {
-      console.log("[v0] Creating criteria for class:", classId)
+      console.log("Creating criteria for class:", classId)
 
       await databases.createDocument(DATABASE_ID, CRITERIA_COLLECTION_ID, ID.unique(), {
         classId,
@@ -131,7 +131,7 @@ export const gradesService = {
       const average = totalPercentage / grades.length
       return Math.round(average * 10) / 10
     } catch (error: any) {
-      console.error("[v0] Calculate average error:", error)
+      console.error("Calculate average error:", error)
       return 0
     }
   },

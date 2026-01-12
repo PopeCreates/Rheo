@@ -1,12 +1,18 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { View, Text, Modal, ScrollView, TextInput, TouchableOpacity } from "react-native"
 import { Ionicons } from "@expo/vector-icons"
 import type { ManageCriteriaModalProps, GradingCriterion } from "@/interfaces/interface"
 
 export function ManageCriteriaModal({ visible, classId, criteria, onSave, onCancel }: ManageCriteriaModalProps) {
-  const [localCriteria, setLocalCriteria] = useState<GradingCriterion[]>(criteria)
+  // Ensure criteria is always an array
+  const [localCriteria, setLocalCriteria] = useState<GradingCriterion[]>(Array.isArray(criteria) ? criteria : [])
+
+  // Sync localCriteria when criteria prop changes
+  useEffect(() => {
+    setLocalCriteria(Array.isArray(criteria) ? criteria : [])
+  }, [criteria])
 
   const addCriterion = () => {
     const newCriterion: GradingCriterion = {
@@ -28,7 +34,7 @@ export function ManageCriteriaModal({ visible, classId, criteria, onSave, onCanc
   }
 
   const handleSave = () => {
-    const totalWeight = localCriteria.reduce((sum, c) => sum + c.weight, 0)
+    const totalWeight = localCriteria.reduce((sum, c) => sum + (c.weight || 0), 0)
     if (totalWeight !== 100) {
       alert(`Total weight must equal 100%. Current: ${totalWeight}%`)
       return
@@ -36,7 +42,7 @@ export function ManageCriteriaModal({ visible, classId, criteria, onSave, onCanc
     onSave(localCriteria)
   }
 
-  const totalWeight = localCriteria.reduce((sum, c) => sum + c.weight, 0)
+  const totalWeight = localCriteria.reduce((sum, c) => sum + (c.weight || 0), 0)
   const isValidTotal = totalWeight === 100
 
   return (
@@ -82,16 +88,20 @@ export function ManageCriteriaModal({ visible, classId, criteria, onSave, onCanc
             </View>
 
             <View className="px-4 gap-4">
-              {localCriteria.map((criterion, index) => {
-                const isNew = !criterion.name || criterion.weight === 0
+              {localCriteria.map((criterion) => {
+                const isNew = !criterion.name || !criterion.weight
                 return (
                   <View
                     key={criterion.id}
-                    className={`bg-[#192b33] rounded-xl p-4 border ${isNew ? "border-[#13a4ec]/50 ring-2 ring-[#13a4ec]/20" : "border-[#325567]"}`}
+                    className={`bg-[#192b33] rounded-xl p-4 border ${
+                      isNew ? "border-[#13a4ec]/50 ring-2 ring-[#13a4ec]/20" : "border-[#325567]"
+                    }`}
                   >
                     <View className="flex-row items-center justify-between mb-3">
                       <Text
-                        className={`text-xs font-semibold uppercase tracking-wider ${isNew ? "text-[#13a4ec]" : "text-[#92b7c9]/70"}`}
+                        className={`text-xs font-semibold uppercase tracking-wider ${
+                          isNew ? "text-[#13a4ec]" : "text-[#92b7c9]/70"
+                        }`}
                       >
                         {isNew ? "New Criterion" : "Criterion Name"}
                       </Text>
@@ -110,22 +120,28 @@ export function ManageCriteriaModal({ visible, classId, criteria, onSave, onCanc
                           />
                         </View>
                         <TextInput
-                          value={criterion.name}
+                          value={criterion.name ?? ""}
                           onChangeText={(text) => updateCriterion(criterion.id, { name: text })}
                           placeholder="e.g. Quizzes"
                           placeholderTextColor="#6b7280"
-                          className={`w-full bg-[#111c22] border ${isNew ? "border-[#13a4ec]/50" : "border-[#325567]"} rounded-lg py-2.5 pl-10 pr-3 text-sm font-medium text-white`}
+                          className={`w-full bg-[#111c22] border ${
+                            isNew ? "border-[#13a4ec]/50" : "border-[#325567]"
+                          } rounded-lg py-2.5 pl-10 pr-3 text-sm font-medium text-white`}
                         />
                       </View>
 
                       <View className="w-24 relative">
                         <TextInput
-                          value={criterion.weight?.toString() || ""}
-                          onChangeText={(text) => updateCriterion(criterion.id, { weight: Number.parseInt(text) || 0 })}
+                          value={(criterion.weight ?? 0).toString()}
+                          onChangeText={(text) =>
+                            updateCriterion(criterion.id, { weight: Number.parseInt(text) || 0 })
+                          }
                           placeholder="0"
                           placeholderTextColor="#6b7280"
                           keyboardType="numeric"
-                          className={`w-full bg-[#111c22] border ${isNew ? "border-[#13a4ec]/50" : "border-[#325567]"} rounded-lg py-2.5 px-3 text-center text-sm font-bold text-[#13a4ec]`}
+                          className={`w-full bg-[#111c22] border ${
+                            isNew ? "border-[#13a4ec]/50" : "border-[#325567]"
+                          } rounded-lg py-2.5 px-3 text-center text-sm font-bold text-[#13a4ec]`}
                         />
                         <Text className="absolute right-3 top-1/2 -mt-2 text-xs font-bold text-[#6b7280]">%</Text>
                       </View>

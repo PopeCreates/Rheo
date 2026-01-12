@@ -194,7 +194,7 @@ export default function CreateClassGroupScreen() {
               <Text className="text-base font-bold text-white mb-2">Class Group Name</Text>
               <TextInput
                 className="w-full rounded-xl border border-[#325567] bg-[#192b33] px-4 py-4 text-base text-white placeholder:text-[#92b7c9] shadow-sm"
-                placeholder="e.g., Science Department"
+                placeholder=" e.g., Science Department"
                 placeholderTextColor="#92b7c9"
                 value={groupName}
                 onChangeText={setGroupName}
@@ -208,7 +208,7 @@ export default function CreateClassGroupScreen() {
               </View>
               <TextInput
                 className="w-full rounded-xl border border-[#325567] bg-[#192b33] px-4 py-3 text-base text-white placeholder:text-[#92b7c9] min-h-25"
-                placeholder="Add details about this group's purpose..."
+                placeholder=" Add details about this group's purpose..."
                 placeholderTextColor="#92b7c9"
                 multiline
                 numberOfLines={4}

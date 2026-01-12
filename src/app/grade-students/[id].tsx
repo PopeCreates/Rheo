@@ -18,18 +18,15 @@ export default function GradeStudentsScreen() {
 
   const [editMode, setEditMode] = useState(true)
   const [showCriteriaModal, setShowCriteriaModal] = useState(false)
-  const [selectedCriteria, setSelectedCriteria] = useState<string[]>(["1"])
-  const [studentGrades, setStudentGrades] = useState<{ [studentId: string]: { [criterionId: string]: number } }>({
-    "49201": { "1": 85, "2": 92 },
-  })
+  const [selectedCriteria, setSelectedCriteria] = useState<string[]>([])
+  const [studentGrades, setStudentGrades] = useState<{ [studentId: string]: { [criterionId: string]: number } }>({})
 
   const classItem = classes.find((c) => c.id === id)
 
+  // Safe fallback for grading criteria
   const criteria: GradingCriterion[] =
-    Array.isArray(classItem?.gradingCriteriaNew) &&
-    classItem?.gradingCriteriaNew.length > 0 &&
-    typeof classItem?.gradingCriteriaNew[0] === "object"
-      ? (classItem?.gradingCriteriaNew as unknown as GradingCriterion[])
+    Array.isArray(classItem?.gradingCriteriaNew) && classItem.gradingCriteriaNew.length > 0
+      ? (classItem.gradingCriteriaNew as GradingCriterion[])
       : [
           { id: "1", name: "Collaborative", weight: 30, maxScore: 100 },
           { id: "2", name: "Technical", weight: 40, maxScore: 100 },
@@ -37,43 +34,45 @@ export default function GradeStudentsScreen() {
         ]
 
   useEffect(() => {
-    if (classItem?.gradingCriteriaNew && Array.isArray(classItem?.gradingCriteriaNew)) {
-      // Reset selected criteria when criteria changes
-      const criteriaIds = (classItem?.gradingCriteriaNew as GradingCriterion[]).map((c) => c.id)
+    if (Array.isArray(classItem?.gradingCriteriaNew)) {
+      const criteriaIds = classItem.gradingCriteriaNew.map((c) => c.id)
       setSelectedCriteria(criteriaIds.length > 0 ? [criteriaIds[0]] : [])
     }
   }, [classItem?.gradingCriteriaNew])
 
   const handleSaveCriteria = (newCriteria: GradingCriterion[]) => {
-    updateGradingCriteria(classItem?.id || "", newCriteria)
+    if (!classItem?.id) return
+    updateGradingCriteria(classItem.id, newCriteria)
     setShowCriteriaModal(false)
     show("Grading criteria updated", "success")
   }
 
   const toggleCriterion = (criterionId: string) => {
     setSelectedCriteria((prev) =>
-      prev.includes(criterionId) ? prev.filter((id) => id !== criterionId) : [...prev, criterionId],
+      prev.includes(criterionId) ? prev.filter((id) => id !== criterionId) : [...prev, criterionId]
     )
   }
 
-  const updateGrade = (studentId: string, criterionId: string, value: number) => {
+  // SINGLE CLAMPED UPDATE FUNCTION
+  const updateStudentGrade = (studentId: string, criterionId: string, value: number) => {
+    const clamped = Math.max(0, Math.min(100, value))
     setStudentGrades((prev) => ({
       ...prev,
       [studentId]: {
         ...prev[studentId],
-        [criterionId]: value,
+        [criterionId]: clamped,
       },
     }))
   }
 
   const incrementGrade = (studentId: string, criterionId: string) => {
-    const current = studentGrades[studentId]?.[criterionId] || 0
-    if (current < 100) updateGrade(studentId, criterionId, current + 1)
+    const current = studentGrades[studentId]?.[criterionId] ?? 0
+    updateStudentGrade(studentId, criterionId, current + 1)
   }
 
   const decrementGrade = (studentId: string, criterionId: string) => {
-    const current = studentGrades[studentId]?.[criterionId] || 0
-    if (current > 0) updateGrade(studentId, criterionId, current - 1)
+    const current = studentGrades[studentId]?.[criterionId] ?? 0
+    updateStudentGrade(studentId, criterionId, current - 1)
   }
 
   const isStudentGraded = (studentId: string) => {
@@ -81,12 +80,16 @@ export default function GradeStudentsScreen() {
     return grades && selectedCriteria.every((criterionId) => grades[criterionId] !== undefined)
   }
 
-  const gradedCount = classItem?.students.filter((s) => isStudentGraded(s.id)).length || 0
+  const gradedCount = classItem?.students?.filter((s) => isStudentGraded(s.id)).length ?? 0
+
+  const studentsSafe = Array.isArray(classItem?.students) ? classItem.students : []
+  const selectedCriteriaSafe = Array.isArray(selectedCriteria) ? selectedCriteria : []
 
   if (!classItem) return null
 
   return (
     <View className="flex-1 bg-[#101c22]">
+      {/* Header */}
       <View className="border-b border-[#325567]">
         <View className="flex-row items-center justify-between px-4 py-3">
           <TouchableOpacity
@@ -100,12 +103,10 @@ export default function GradeStudentsScreen() {
             <Text className="text-sm font-bold text-[#92b7c9]">Help</Text>
           </TouchableOpacity>
         </View>
-        <Text className="text-sm text-[#92b7c9] text-center pb-3 px-4 border-t border-[#325567]/30">
-          {classItem.name} - Oct 24 • {classItem.section}
-        </Text>
       </View>
 
       <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
+        {/* Edit Mode & Grading Criteria */}
         <View className="py-4 gap-4">
           <View className="flex-row items-center justify-between px-4">
             <View className="flex-row items-center gap-4">
@@ -139,22 +140,24 @@ export default function GradeStudentsScreen() {
 
             <ScrollView horizontal showsHorizontalScrollIndicator={false} className="pb-1">
               <View className="flex-row gap-3">
-                {criteria.map((criterion) => (
-                  <TouchableOpacity
-                    key={criterion.id}
-                    onPress={() => toggleCriterion(criterion.id)}
-                    className={`h-8 flex-row items-center justify-center gap-2 px-4 rounded-full will-change-pressable ${
-                      selectedCriteria.includes(criterion.id) ? "bg-[#13a4ec]" : "bg-[#1a2730]"
-                    }`}
-                  >
-                    <Text
-                      className={`text-sm font-medium ${selectedCriteria.includes(criterion.id) ? "text-white" : "text-[#94a3b8]"}`}
+                {criteria.map((criterion) => {
+                  if (!criterion?.id) return null
+                  const isSelected = selectedCriteriaSafe.includes(criterion.id)
+                  return (
+                    <TouchableOpacity
+                      key={criterion.id}
+                      onPress={() => toggleCriterion(criterion.id)}
+                      className={`h-8 flex-row items-center justify-center gap-2 px-4 rounded-full will-change-pressable ${
+                        isSelected ? "bg-[#13a4ec]" : "bg-[#1a2730]"
+                      }`}
                     >
-                      {criterion.name}
-                    </Text>
-                    {selectedCriteria.includes(criterion.id) && <Ionicons name="checkmark" size={14} color="#ffffff" />}
-                  </TouchableOpacity>
-                ))}
+                      <Text className={`text-sm font-medium ${isSelected ? "text-white" : "text-[#94a3b8]"}`}>
+                        {criterion.name ?? ""}
+                      </Text>
+                      {isSelected && <Ionicons name="checkmark" size={14} color="#ffffff" />}
+                    </TouchableOpacity>
+                  )
+                })}
                 <TouchableOpacity
                   onPress={() => setShowCriteriaModal(true)}
                   className="h-8 flex-row items-center justify-center gap-1 px-3 rounded-full border border-dashed border-[#325567] will-change-pressable active:bg-[#192b33]"
@@ -169,27 +172,29 @@ export default function GradeStudentsScreen() {
 
         <View className="h-px bg-[#325567] mx-4 mb-4" />
 
+        {/* Students & Grades */}
         <View className="px-4 gap-4">
-          {classItem.students.map((student) => {
-            const isAbsent = student.status === "absent"
-            const isGraded = isStudentGraded(student.id)
+          {studentsSafe.map((student) => {
+            const isAbsent = student?.status === "absent"
+            const isGraded = student?.id ? isStudentGraded(student.id) : false
+            const studentId = student?.id ?? Math.random().toString() // Fallback key
 
             return (
               <View
-                key={student.id}
+                key={studentId}
                 className={`bg-[#1c2a33] rounded-xl p-4 border border-[#325567] ${isAbsent ? "opacity-90" : ""}`}
               >
                 {/* Student Header */}
                 <View className="flex-row items-center gap-4 mb-4">
                   <View className={isAbsent ? "opacity-60 grayscale" : ""}>
-                    <Avatar uri={student.avatar} name={student.name} size={48} />
+                    <Avatar uri={student?.avatar ?? ""} name={student?.name ?? ""} size={48} />
                   </View>
                   <View className="flex-1 min-w-0">
                     <Text className={`text-base font-bold ${isAbsent ? "text-[#6b7280]" : "text-white"}`}>
-                      {student.name}
+                      {student?.name ?? ""}
                     </Text>
                     <Text className={`text-xs ${isAbsent ? "text-[#6b7280]" : "text-[#94a3b8]"}`}>
-                      ID: {student.id} • {student.status === "present" ? "Present" : "Absent"}
+                      ID: {student?.id ?? "-"} • {student?.status === "present" ? "Present" : "Absent"}
                     </Text>
                   </View>
                   <View>
@@ -219,17 +224,17 @@ export default function GradeStudentsScreen() {
                   </View>
                 ) : (
                   <View className="bg-black/20 p-3 rounded-lg gap-3">
-                    {selectedCriteria.map((criterionId) => {
+                    {selectedCriteriaSafe.map((criterionId) => {
                       const criterion = criteria.find((c) => c.id === criterionId)
-                      if (!criterion) return null
-                      const currentGrade = studentGrades[student.id]?.[criterionId]
+                      if (!criterion?.id) return null
+                      const currentGrade = studentGrades[studentId]?.[criterionId] ?? 0
 
                       return (
                         <View key={criterionId} className="flex-row items-center justify-between gap-4">
-                          <Text className="text-sm font-medium text-[#94a3b8] flex-1">{criterion.name}</Text>
+                          <Text className="text-sm font-medium text-[#94a3b8] flex-1">{criterion.name ?? ""}</Text>
                           <View className="flex-row items-center gap-2">
                             <TouchableOpacity
-                              onPress={() => decrementGrade(student.id, criterionId)}
+                              onPress={() => decrementGrade(studentId, criterionId)}
                               disabled={!editMode}
                               className="w-8 h-8 rounded-lg bg-[#233c48] items-center justify-center border border-[#325567] will-change-pressable active:bg-[#192b33]"
                             >
@@ -237,10 +242,10 @@ export default function GradeStudentsScreen() {
                             </TouchableOpacity>
                             <View className="w-20">
                               <TextInput
-                                value={currentGrade?.toString() || ""}
+                                value={currentGrade.toString()}
                                 onChangeText={(text) => {
                                   const num = Number.parseInt(text) || 0
-                                  if (num >= 0 && num <= 100) updateGrade(student.id, criterionId, num)
+                                  updateStudentGrade(studentId, criterionId, num)
                                 }}
                                 keyboardType="numeric"
                                 editable={editMode}
@@ -250,7 +255,7 @@ export default function GradeStudentsScreen() {
                               />
                             </View>
                             <TouchableOpacity
-                              onPress={() => incrementGrade(student.id, criterionId)}
+                              onPress={() => incrementGrade(studentId, criterionId)}
                               disabled={!editMode}
                               className="w-8 h-8 rounded-lg bg-[#233c48] items-center justify-center border border-[#325567] will-change-pressable active:bg-[#192b33]"
                             >
@@ -268,10 +273,11 @@ export default function GradeStudentsScreen() {
         </View>
       </ScrollView>
 
+      {/* Footer */}
       <View className="bg-[#101c22] border-t border-[#325567] px-4 py-4 pb-6 shadow-[0_-5px_10px_rgba(0,0,0,0.1)]">
         <View className="flex-row justify-between items-center mb-3 px-1">
           <Text className="text-xs text-[#94a3b8]">
-            {gradedCount}/{classItem.students.length} Students Graded
+            {gradedCount}/{studentsSafe.length} Students Graded
           </Text>
           <TouchableOpacity onPress={() => setStudentGrades({})}>
             <Text className="text-xs font-medium text-[#13a4ec]">Clear All</Text>

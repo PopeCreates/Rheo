@@ -66,14 +66,14 @@ export default function LoginScreen() {
     <KeyboardAvoidingView className="flex-1 bg-[#101c22]" behavior={Platform.OS === "ios" ? "padding" : "height"}>
       <ScrollView contentContainerClassName="flex-grow justify-center p-6" showsVerticalScrollIndicator={false}>
         {/* Header Section with Logo */}
-        <View className="items-center mb-8">
+        <View className="items-center mb-8 mt-10">
           <View className="mb-4 flex-row gap-4 justify-center items-center">
             <View className="w-25 h-25 rounded-3xl overflow-hidden bg-white justify-center items-center mb-6 shadow-xl">
               <Image source={MarkMeFullLogo} className="w-20 h-20 mb-4" resizeMode="cover" />
             </View>
             <View>
               <Text className="text-4xl font-semibold text-white">MarkMe</Text>
-              <Text className="text-base text-[#8b9faa] mb-6">Educator's Assistant</Text>
+              <Text className="text-base text-[#8b9faa] mb-6">Educators Assistant</Text>
             </View>
           </View>
           <Text className="text-white text-3xl font-bold">Welcome Back</Text>
@@ -81,12 +81,12 @@ export default function LoginScreen() {
         </View>
 
         {/* Tab Switcher - Login/Signup */}
-        <View className="flex-row bg-[#192b33] rounded-xl p-1 mb-8">
-          <TouchableOpacity className="flex-1 py-3 items-center rounded-lg bg-[#13a4ec]">
+        <View className="flex-row bg-[#192b33] rounded-full p-1 mb-8">
+          <TouchableOpacity className="flex-1 py-3 items-center rounded-full bg-[#13a4ec]">
             <Text className="text-base font-semibold text-white">Log In</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            className="flex-1 py-3 items-center rounded-lg"
+            className="flex-1 py-3 items-center rounded-full"
             onPress={() => router.push("/(auth)/signup")}
           >
             <Text className="text-base font-semibold text-[#8b9faa]">Sign Up</Text>
@@ -98,7 +98,7 @@ export default function LoginScreen() {
           {/* Email Field */}
           <View>
             <Text className="text-sm font-semibold text-white mb-2">Email</Text>
-            <View className="flex-row items-center bg-[#192b33] rounded-xl px-4 h-14 border border-[#325567]">
+            <View className="flex-row items-center bg-[#192b33] rounded-full px-4 h-14 border border-[#325567]">
               <MaterialCommunityIcons name="email-outline" size={20} color="#92b7c9" className="mr-3" />
               <Controller
                 control={control}
@@ -129,7 +129,7 @@ export default function LoginScreen() {
                 <Text className="text-sm text-[#13a4ec] font-semibold">Forgot?</Text>
               </TouchableOpacity>
             </View>
-            <View className="flex-row items-center bg-[#192b33] rounded-xl px-4 h-14 border border-[#325567]">
+            <View className="flex-row items-center bg-[#192b33] rounded-full px-4 h-14 border border-[#325567]">
               <MaterialCommunityIcons name="lock-outline" size={20} color="#92b7c9" className="mr-3" />
               <Controller
                 control={control}
@@ -157,7 +157,7 @@ export default function LoginScreen() {
 
           {/* Login Button */}
           <TouchableOpacity
-            className="flex-row bg-[#13a4ec] py-4 rounded-xl items-center justify-center gap-2 mt-4 shadow-lg"
+            className="flex-row bg-[#13a4ec] py-4 rounded-full items-center justify-center gap-2 mt-4 shadow-lg"
             onPress={handleSubmit(onSubmit)}
             disabled={isLoading}
           >
@@ -174,11 +174,11 @@ export default function LoginScreen() {
 
           {/* OAuth Buttons */}
           <View className="flex-row gap-3">
-            <TouchableOpacity className="flex-1 flex-row items-center justify-center bg-[#192b33] py-3.5 rounded-xl gap-2 border border-[#325567]">
+            <TouchableOpacity className="flex-1 flex-row items-center justify-center bg-[#192b33] py-3.5 rounded-full gap-2 border border-[#325567]">
               <Ionicons name="logo-google" size={20} color="#fff" />
               <Text className="text-base font-semibold text-white">Google</Text>
             </TouchableOpacity>
-            <TouchableOpacity className="flex-1 flex-row items-center justify-center bg-[#192b33] py-3.5 rounded-xl gap-2 border border-[#325567]">
+            <TouchableOpacity className="flex-1 flex-row items-center justify-center bg-[#192b33] py-3.5 rounded-full gap-2 border border-[#325567]">
               <Ionicons name="logo-apple" size={20} color="#fff" />
               <Text className="text-base font-semibold text-white">Apple</Text>
             </TouchableOpacity>

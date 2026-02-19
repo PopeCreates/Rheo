@@ -1,7 +1,7 @@
 "use client"
 
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react"
-import { appwriteAuth } from "@/../services/appwrite-auth"
+import { appwriteAuth } from "archive/services/appwrite-auth"
 
 interface TeacherProfile {
   id: string

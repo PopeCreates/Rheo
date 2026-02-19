@@ -21,10 +21,10 @@ import {
   getAllGroupDescendants,
   getGroupItemCounts,
 } from "@/utils/group"
-import { classesService } from "@/../services/appwrite-classes"
-import { classGroupsService } from "@/../services/appwrite-class-groups"
-import { attendanceService } from "@/../services/appwrite-attendance"
-import { gradesService } from "@/../services/appwrite-grades"
+import { classesService } from "archive/services/appwrite-classes"
+import { classGroupsService } from "archive/services/appwrite-class-groups"
+import { attendanceService } from "archive/services/appwrite-attendance"
+import { gradesService } from "archive/services/appwrite-grades"
 import { useAuth } from "@/contexts/AuthContext"
 
 const AppContext = createContext<AppContextType | undefined>(undefined)

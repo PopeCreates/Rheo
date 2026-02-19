@@ -16,7 +16,7 @@ import { Toast } from "@/components/common/Toast"
 import { useToast } from "@/hooks/useToast"
 import { pickCSVFile, downloadCSVTemplate } from "@/utils/fileOperations"
 import { useApp } from "@/contexts/AppContext"
-import { classesService } from "@/../services/appwrite-classes"
+import { classesService } from "archive/services/appwrite-classes"
 import type { Student, Class } from "@/interfaces/interface"
 
 export default function CreateClassScreen() {

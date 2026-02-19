@@ -1,52 +1,69 @@
-import { Tabs } from "expo-router"
-import { Ionicons } from "@expo/vector-icons"
+import React from "react";
+import { View, Platform } from "react-native";
+import { Tabs } from "expo-router";
+import { MaterialIcons } from "@expo/vector-icons";
 
-export default function TabsLayout() {
+export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
+        headerShown: false,
         tabBarStyle: {
-          backgroundColor: "#0F1419",
-          borderTopColor: "#1E293B",
-          paddingTop: 8,
-          height: 80,
+          backgroundColor: "rgba(255,255,255,0.95)",
+          borderTopWidth: 1,
+          borderTopColor: "#fce7f3",
+          height: Platform.OS === "ios" ? 88 : 70,
+          paddingBottom: Platform.OS === "ios" ? 28 : 10,
+          paddingTop: 10,
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
         },
-        tabBarActiveTintColor: "#0EA5E9",
-        tabBarInactiveTintColor: "#64748B",
-        tabBarLabelStyle: {
-          fontSize: 12,
-          fontWeight: "600",
-          marginBottom: 8,
-        },
-        headerStyle: {
-          backgroundColor: "#0F1419",
-        },
-        headerTintColor: "#fff",
-        headerShadowVisible: false,
+        tabBarActiveTintColor: "#f90680",
+        tabBarInactiveTintColor: "#8c5f75",
+        tabBarLabelStyle: { fontSize: 10, fontWeight: "700", marginTop: 2 },
       }}
     >
       <Tabs.Screen
-        name="classes"
+        name="index"
         options={{
-          title: "Classes",
-          tabBarIcon: ({ color, size }) => <Ionicons name="bookmark" size={size} color={color} />,
-          headerShown: false,
+          title: "Today",
+          tabBarIcon: ({ color }) => <MaterialIcons name="home" size={26} color={color} />,
         }}
       />
       <Tabs.Screen
-        name="reports"
+        name="calendar"
         options={{
-          title: "Reports",
-          tabBarIcon: ({ color, size }) => <Ionicons name="bar-chart" size={size} color={color} />,
+          title: "Calendar",
+          tabBarIcon: ({ color }) => <MaterialIcons name="calendar-month" size={26} color={color} />,
         }}
       />
       <Tabs.Screen
-        name="settings"
+        name="log"
         options={{
-          title: "Settings",
-          tabBarIcon: ({ color, size }) => <Ionicons name="settings" size={size} color={color} />,
+          title: "",
+          tabBarIcon: () => (
+            <View className="w-14 h-14 rounded-full bg-brand items-center justify-center -mt-8 border-4 border-surface shadow-lg shadow-brand/30">
+              <MaterialIcons name="add" size={30} color="#fff" />
+            </View>
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="insights"
+        options={{
+          title: "Insights",
+          tabBarIcon: ({ color }) => <MaterialIcons name="insights" size={26} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: "Me",
+          tabBarIcon: ({ color }) => <MaterialIcons name="person" size={26} color={color} />,
         }}
       />
     </Tabs>
-  )
+  );
 }

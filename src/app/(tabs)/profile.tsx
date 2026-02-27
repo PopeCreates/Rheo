@@ -65,7 +65,7 @@ export default function ProfileScreen() {
           ))}
         </View>
 
-        <Text className="text-center text-xs text-black/20 mt-8">Her Circle v1.0.0</Text>
+        <Text className="text-center text-xs text-black/20 mt-8">Rheo v1.0.0</Text>
       </ScrollView>
     </View>
   );

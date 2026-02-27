@@ -38,7 +38,7 @@ export default function WelcomeScreen() {
       {/* Text */}
       <View className="items-center px-8 pt-8 pb-4">
         <Text className="text-4xl font-extrabold text-content text-center tracking-tight">
-          Welcome to Her Circle
+          Welcome to Rheo
         </Text>
         <Text className="text-lg font-medium text-content/70 text-center mt-4 leading-7 max-w-75">
           Your personal guide to understanding your body and cycle with love.

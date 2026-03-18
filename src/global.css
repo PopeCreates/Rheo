@@ -7,9 +7,35 @@
 
 @layer theme {
   @theme {
-    /* Fonts */
+    /* Bunny Assistant Theme - Plus Jakarta Sans */
+    --font-display: "PlusJakartaSans", "Plus Jakarta Sans", system-ui, sans-serif;
     --font-rounded: "SF Pro Rounded", "Hiragino Maru Gothic ProN", Meiryo,
       "MS PGothic", sans-serif;
+    
+    /* Color Tokens */
+    --color-primary: #fecfd5;
+    --color-primary-dark: #fba4b0;
+    --color-primary-accent: #f0428b;
+    
+    --color-background-light: #fdfbfc;
+    --color-background-dark: #1a0d13;
+    --color-surface: #ffffff;
+    --color-surface-dark: #1e1118;
+    
+    --color-text: #1a0b12;
+    --color-text-light: #fff9fb;
+    --color-text-secondary: #64748b;
+    
+    --color-border: #fce7f3;
+    --color-border-dark: #3d2832;
+    
+    /* Border Radius - Extra Rounded for Bunny Theme */
+    --radius-sm: 0.75rem;
+    --radius-md: 1rem;
+    --radius-lg: 1.5rem;
+    --radius-xl: 2rem;
+    --radius-2xl: 2.5rem;
+    --radius-full: 9999px;
   }
 }
 
@@ -19,6 +45,7 @@
     --font-rounded: normal;
     --font-serif: serif;
     --font-sans: normal;
+    --font-display: normal;
   }
 }
 
@@ -28,5 +55,6 @@
     --font-serif: ui-serif;
     --font-sans: system-ui;
     --font-rounded: ui-rounded;
+    --font-display: system-ui;
   }
 }

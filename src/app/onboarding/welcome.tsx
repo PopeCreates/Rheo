@@ -1,65 +1,99 @@
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
-import { LinearGradient } from "expo-linear-gradient";
+import { MaterialIcons } from "@expo/vector-icons";
 import { Button } from "@/components/ui/Button";
-import { ProgressDots } from "@/components/ui/ProgressDots";
+import { Colors } from "@/constants/colors";
 
 export default function WelcomeScreen() {
   const router = useRouter();
 
   return (
-    <LinearGradient colors={["#fff5f8", "#ffe4f0"]} className="flex-1">
-      {/* Skip */}
-      <View className="flex-row justify-end px-4 pt-14">
+    <View className="flex-1 bg-background-light">
+      {/* Header */}
+      <View className="flex-row items-center justify-between px-4 pt-14">
         <TouchableOpacity
-          onPress={() => router.push("/onboarding/last-period")}
-          className="px-4 py-2"
+          onPress={() => router.back()}
+          className="w-12 h-12 items-center justify-center"
         >
-          <Text className="text-brand font-semibold text-sm">Skip</Text>
+          <MaterialIcons name="close" size={28} color={Colors.slate[800]} />
         </TouchableOpacity>
+        <Text className="text-xl font-extrabold text-slate-800 tracking-tight">
+          Rheo
+        </Text>
+        <View className="w-12" />
       </View>
 
-      {/* Illustration */}
-      <View className="flex-1 items-center justify-center px-6">
-        <LinearGradient
-          colors={["#fce4ec", "#f8bbd0", "#f48fb1"]}
-          className="w-full aspect-square rounded-2xl items-center justify-center overflow-hidden"
-        >
-          <View className="w-48 h-48 relative">
-            <View className="w-16 h-16 rounded-full bg-[#d4a574] absolute top-5 left-7 border-[3px] border-white" />
-            <View className="w-16 h-16 rounded-full bg-[#8d5524] absolute top-2.5 left-20 border-[3px] border-white" />
-            <View className="w-16 h-16 rounded-full bg-[#f5cba7] absolute top-10 left-14 border-[3px] border-white" />
-            <View className="w-16 h-16 rounded-full bg-[#6b3a2a] absolute top-6 left-28 border-[3px] border-white" />
+      {/* Mascot Illustration */}
+      <View className="flex-1 px-4 pt-4">
+        <View className="flex-1 bg-primary/10 rounded-3xl items-center justify-center relative overflow-hidden">
+          {/* Gradient overlay */}
+          <View className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent" />
+          
+          {/* Bunny mascot placeholder */}
+          <View 
+            className="w-48 h-48 rounded-full bg-primary/30 items-center justify-center"
+            style={{
+              shadowColor: Colors.primary,
+              shadowOpacity: 0.4,
+              shadowRadius: 30,
+              shadowOffset: { width: 0, height: 0 },
+            }}
+          >
+            <MaterialIcons name="pets" size={96} color={Colors.rose[400]} />
           </View>
-        </LinearGradient>
+          
+          {/* Floating decorative elements */}
+          <View className="absolute top-10 left-10 w-4 h-4 rounded-full bg-primary/40" />
+          <View className="absolute bottom-20 right-10 w-6 h-6 rounded-full bg-primary/30" />
+          <View className="absolute top-1/2 right-4 w-3 h-3 rounded-full bg-primary/20" />
+        </View>
       </View>
 
-      {/* Text */}
-      <View className="items-center px-8 pt-8 pb-4">
-        <Text className="text-4xl font-extrabold text-content text-center tracking-tight">
-          Welcome to Rheo
+      {/* Text Content */}
+      <View className="px-6 py-4">
+        <Text className="text-[32px] font-extrabold text-slate-800 text-center tracking-tight leading-tight">
+          In sync with your flow
         </Text>
-        <Text className="text-lg font-medium text-content/70 text-center mt-4 leading-7 max-w-75">
-          Your personal guide to understanding your body and cycle with love.
+        <Text className="text-base text-slate-500 text-center mt-2 leading-relaxed px-4">
+          Personalized insights and cycle tracking designed for your unique rhythm.
         </Text>
       </View>
 
-      <ProgressDots total={3} current={0} />
-
-      {/* Actions */}
-      <View className="px-6 pb-12 gap-4">
+      {/* Action Buttons */}
+      <View className="px-6 pb-6 gap-3">
         <Button
-          title="Get Started"
+          title="Sign Up"
           onPress={() => router.push("/onboarding/last-period")}
         />
-        <TouchableOpacity className="items-center py-2">
-          <Text className="text-content/60 font-semibold text-xs">
-            {"Already have an account? "}
-            <Text className="text-brand">Log In</Text>
+        <Button
+          title="Log In"
+          variant="secondary"
+          onPress={() => router.push("/auth/login")}
+        />
+        
+        <View className="flex-row items-center py-3">
+          <View className="flex-1 h-px bg-slate-200" />
+          <Text className="px-4 text-xs font-medium text-slate-400 uppercase tracking-widest">
+            or
           </Text>
-        </TouchableOpacity>
+          <View className="flex-1 h-px bg-slate-200" />
+        </View>
+        
+        <Button
+          title="Continue with Google"
+          variant="outline"
+          onPress={() => {}}
+          icon={<MaterialIcons name="login" size={20} color={Colors.slate[600]} />}
+        />
       </View>
-    </LinearGradient>
+
+      {/* Footer Policy */}
+      <Text className="text-slate-400 text-[13px] text-center px-8 pb-8">
+        By continuing, you agree to our{" "}
+        <Text className="underline">Terms of Service</Text> and{" "}
+        <Text className="underline">Privacy Policy</Text>
+      </Text>
+    </View>
   );
 }

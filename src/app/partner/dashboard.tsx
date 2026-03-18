@@ -4,18 +4,19 @@ import { useRouter } from "expo-router";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useApp } from "@/context/AppContext";
 import { Button } from "@/components/ui/Button";
+import { Header } from "@/components/ui/Header";
+import { Colors } from "@/constants/colors";
 import {
   getCycleDay,
   getCyclePhase,
   getPhaseLabel,
   getDaysUntilPeriod,
-  getPhaseInsight,
 } from "../../utils/cycle";
 
 const symptoms = [
   { label: "Low Energy", icon: "battery-2-bar" },
   { label: "Cramps", icon: "healing" },
-  { label: "Irritable", icon: "sentiment-dissatisfied" },
+  { label: "Mood Swings", icon: "sentiment-dissatisfied" },
 ];
 
 export default function PartnerDashboardScreen() {
@@ -29,138 +30,181 @@ export default function PartnerDashboardScreen() {
   const daysUntil = getDaysUntilPeriod(cycleDay, cycleLength);
 
   return (
-    <View className="flex-1 bg-surface pt-12">
-      {/* Top Bar */}
-      <View className="flex-row items-center justify-between px-4 pb-2">
-        <View className="flex-row items-center gap-3">
-          <View className="w-11 h-11 rounded-full bg-brand-light items-center justify-center">
-            <Text className="text-lg font-bold text-brand">
+    <View className="flex-1 bg-background-light pt-12">
+      <Header showBack title="Partner View" />
+
+      <ScrollView className="px-5" showsVerticalScrollIndicator={false} contentContainerClassName="pb-32">
+        {/* Partner Avatar Row */}
+        <View className="flex-row items-center gap-4 mt-4">
+          <View 
+            className="w-14 h-14 rounded-full bg-primary items-center justify-center"
+            style={{
+              shadowColor: Colors.primary,
+              shadowOpacity: 0.4,
+              shadowRadius: 10,
+              shadowOffset: { width: 0, height: 2 },
+            }}
+          >
+            <Text className="text-xl font-bold text-rose-900">
               {userName.charAt(0)}
             </Text>
           </View>
-          <View>
-            <Text className="text-lg font-bold text-content">
+          <View className="flex-1">
+            <Text className="text-lg font-extrabold text-slate-800">
               {userName}{"'"}s Cycle
             </Text>
+            <Text className="text-sm text-slate-500">Day {cycleDay} of {cycleLength}</Text>
           </View>
+          <TouchableOpacity className="w-10 h-10 rounded-xl bg-rose-50 items-center justify-center">
+            <MaterialIcons name="notifications-none" size={22} color={Colors.rose[500]} />
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity className="w-11 h-11 items-center justify-center">
-          <MaterialIcons name="notifications-none" size={24} color="#181114" />
-        </TouchableOpacity>
-      </View>
 
-      <ScrollView className="px-4" showsVerticalScrollIndicator={false}>
         {/* Countdown Card */}
-        <View className="bg-brand rounded-3xl mt-4 overflow-hidden">
-          <View className="items-center pt-10 pb-6">
+        <View 
+          className="bg-slate-900 rounded-3xl mt-6 overflow-hidden"
+          style={{
+            shadowColor: Colors.black,
+            shadowOpacity: 0.2,
+            shadowRadius: 16,
+            shadowOffset: { width: 0, height: 8 },
+          }}
+        >
+          <View className="items-center pt-8 pb-4">
             <Text className="text-7xl font-extrabold text-white">
               {daysUntil}
             </Text>
-            <Text className="text-sm font-bold text-white/80 tracking-[3px] mt-1">
-              DAYS TO GO
+            <Text className="text-xs font-bold text-white/60 tracking-[3px] mt-1">
+              DAYS UNTIL PERIOD
             </Text>
           </View>
           <View className="bg-white rounded-t-3xl px-5 pt-5 pb-6">
-            <Text className="text-xl font-bold text-content">
+            <View className="flex-row items-center gap-2 mb-2">
+              <View className="px-3 py-1 rounded-full bg-rose-50">
+                <Text className="text-xs font-bold text-rose-500 uppercase tracking-widest">
+                  {getPhaseLabel(phase)}
+                </Text>
+              </View>
+            </View>
+            <Text className="text-lg font-bold text-slate-800">
               Period starts in {daysUntil} days
             </Text>
-            <Text className="text-sm font-bold text-brand mt-1 tracking-widest">
-              PHASE: {getPhaseLabel(phase).toUpperCase()}
-            </Text>
-            <Text className="text-sm text-content-secondary mt-2 leading-5">
-              The cycle is currently on day {cycleDay}. {userName} might be
-              feeling a bit more tired or sensitive than usual.
+            <Text className="text-sm text-slate-500 mt-2 leading-relaxed">
+              {userName} is on day {cycleDay}. They might need some extra care and understanding right now.
             </Text>
           </View>
         </View>
 
         {/* Current Mood */}
-        <Text className="text-xl font-bold text-content mt-8 mb-3">
-          Current Mood
+        <Text className="text-lg font-bold text-slate-800 mt-8 mb-3">
+          How They Might Feel
         </Text>
-        <View className="bg-surface-soft rounded-3xl p-5 flex-row items-center">
+        <View 
+          className="bg-white rounded-3xl p-5 flex-row items-center border border-slate-100"
+          style={{
+            shadowColor: Colors.black,
+            shadowOpacity: 0.05,
+            shadowRadius: 10,
+            shadowOffset: { width: 0, height: 2 },
+          }}
+        >
           <View className="flex-1">
-            <View className="flex-row items-center gap-2 mb-1">
-              <MaterialIcons
-                name="sentiment-dissatisfied"
-                size={20}
-                color="#8c5f75"
-              />
-              <Text className="text-base font-bold text-content">
+            <View className="flex-row items-center gap-2 mb-2">
+              <View className="w-8 h-8 rounded-lg bg-amber-50 items-center justify-center">
+                <MaterialIcons name="sentiment-neutral" size={18} color={Colors.warning} />
+              </View>
+              <Text className="text-base font-bold text-slate-800">
                 Feeling Sensitive
               </Text>
             </View>
-            <Text className="text-sm text-content-secondary leading-5 mt-1">
-              <Text className="font-bold text-brand">Pro-tip:</Text> She might
-              need some extra chocolate, a warm hug, or a movie night in!
+            <Text className="text-sm text-slate-500 leading-relaxed">
+              <Text className="font-bold text-rose-500">Pro-tip:</Text> Some extra chocolate, a warm hug, or a cozy movie night might help!
             </Text>
           </View>
-          <View className="w-20 h-20 rounded-full bg-surface items-center justify-center ml-3">
-            <MaterialIcons name="cookie" size={36} color="#d4a574" />
+          <View className="w-16 h-16 rounded-2xl bg-amber-50 items-center justify-center ml-3">
+            <MaterialIcons name="cookie" size={32} color="#d4a574" />
           </View>
         </View>
 
         {/* Send a Gift */}
-        <Text className="text-xl font-bold text-content mt-8 mb-1">
-          Send a Gift
+        <Text className="text-lg font-bold text-slate-800 mt-8 mb-1">
+          Show You Care
         </Text>
-        <Text className="text-sm text-content-secondary mb-4">
-          Brighten her day
+        <Text className="text-sm text-slate-500 mb-4">
+          Send a thoughtful gift
         </Text>
-        <View className="flex-row gap-4">
+        <View className="flex-row gap-3">
           <TouchableOpacity
-            className="flex-1 bg-white rounded-2xl py-6 items-center border border-line"
+            className="flex-1 bg-white rounded-2xl py-5 items-center border border-slate-100"
             onPress={() => router.push("/partner/gift-selection")}
+            style={{
+              shadowColor: Colors.black,
+              shadowOpacity: 0.05,
+              shadowRadius: 8,
+              shadowOffset: { width: 0, height: 2 },
+            }}
           >
-            <MaterialIcons name="local-florist" size={32} color="#f90680" />
-            <Text className="text-sm font-bold text-content mt-3">
-              Send Flowers
-            </Text>
+            <View className="w-12 h-12 rounded-xl bg-rose-50 items-center justify-center mb-2">
+              <MaterialIcons name="local-florist" size={24} color={Colors.rose[500]} />
+            </View>
+            <Text className="text-sm font-bold text-slate-700">Flowers</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            className="flex-1 bg-white rounded-2xl py-6 items-center border border-line"
+            className="flex-1 bg-white rounded-2xl py-5 items-center border border-slate-100"
             onPress={() => router.push("/partner/gift-selection")}
+            style={{
+              shadowColor: Colors.black,
+              shadowOpacity: 0.05,
+              shadowRadius: 8,
+              shadowOffset: { width: 0, height: 2 },
+            }}
           >
-            <MaterialIcons name="cookie" size={32} color="#f90680" />
-            <Text className="text-sm font-bold text-content mt-3">
-              Send Chocolate
-            </Text>
+            <View className="w-12 h-12 rounded-xl bg-amber-50 items-center justify-center mb-2">
+              <MaterialIcons name="cookie" size={24} color={Colors.warning} />
+            </View>
+            <Text className="text-sm font-bold text-slate-700">Treats</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            className="flex-1 bg-white rounded-2xl py-5 items-center border border-slate-100"
+            onPress={() => router.push("/partner/gift-selection")}
+            style={{
+              shadowColor: Colors.black,
+              shadowOpacity: 0.05,
+              shadowRadius: 8,
+              shadowOffset: { width: 0, height: 2 },
+            }}
+          >
+            <View className="w-12 h-12 rounded-xl bg-indigo-50 items-center justify-center mb-2">
+              <MaterialIcons name="spa" size={24} color={Colors.indigo[500]} />
+            </View>
+            <Text className="text-sm font-bold text-slate-700">Self-Care</Text>
           </TouchableOpacity>
         </View>
 
         {/* Send Support */}
-        <Text className="text-xl font-bold text-content mt-8 mb-3">
-          Send Support
-        </Text>
-        <Button
-          title="Send Love"
-          onPress={() => {}}
-          icon={<MaterialIcons name="favorite" size={22} color="#fff" />}
-        />
+        <View className="mt-8">
+          <Button
+            title="Send Love"
+            onPress={() => {}}
+            icon={<MaterialIcons name="favorite" size={20} color={Colors.rose[900]} />}
+          />
+        </View>
 
         {/* Logged Symptoms */}
-        <Text className="text-xs font-bold text-content-secondary tracking-[3px] mt-8 mb-3">
-          LOGGED SYMPTOMS
+        <Text className="text-xs font-bold text-slate-400 tracking-widest uppercase mt-8 mb-3">
+          Recent Symptoms
         </Text>
-        <View className="flex-row flex-wrap gap-3 mb-10">
+        <View className="flex-row flex-wrap gap-2">
           {symptoms.map((s) => (
             <View
               key={s.label}
-              className="flex-row items-center gap-2 bg-surface-soft rounded-full px-4 py-2"
+              className="flex-row items-center gap-2 bg-white rounded-full px-4 py-2 border border-slate-100"
             >
-              <MaterialIcons
-                name={s.icon as any}
-                size={16}
-                color="#8c5f75"
-              />
-              <Text className="text-sm text-content-secondary font-medium">
-                {s.label}
-              </Text>
+              <MaterialIcons name={s.icon as any} size={16} color={Colors.slate[500]} />
+              <Text className="text-sm text-slate-600 font-medium">{s.label}</Text>
             </View>
           ))}
         </View>
-
-        <View className="h-6" />
       </ScrollView>
     </View>
   );

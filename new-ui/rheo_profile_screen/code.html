@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Rheo - Profile</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#fecfd5",
+                        "background-light": "#fff9fa",
+                        "background-dark": "#221018",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.75rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .soft-shadow {
+            box-shadow: 0 4px 20px -2px rgba(254, 207, 213, 0.3);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex h-full w-full max-w-md mx-auto flex-col overflow-x-hidden pb-24">
+<!-- Header -->
+<div class="flex items-center bg-transparent p-4 justify-between sticky top-0 z-10 backdrop-blur-md">
+<div class="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary/20 text-slate-900 dark:text-slate-100">
+<span class="material-symbols-outlined text-[24px]">settings</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-tight flex-1 text-center">My Rheo Profile</h2>
+<div class="flex w-10 items-center justify-end">
+<button class="flex size-10 items-center justify-center rounded-full bg-primary/20 text-slate-900 dark:text-slate-100">
+<span class="material-symbols-outlined text-[24px]">notifications</span>
+</button>
+</div>
+</div>
+<!-- User Profile Section -->
+<div class="flex p-6 flex-col items-center">
+<div class="relative">
+<div class="bg-primary/30 aspect-square rounded-full h-32 w-32 flex items-center justify-center overflow-hidden border-4 border-white dark:border-slate-800 soft-shadow">
+<img class="object-cover w-full h-full" data-alt="Cute bunny rabbit mascot for profile avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqFKrT-YggPbgP6G6LRkDzsNeCpzoVDdH4pfD9MRIk5wzupV4JSHotDSzHkbCsnTDQATnzTgNczFHc5bgYyvAVE7CeYurO1oOhz94vFx99xoPhnE3ag312hJGvpD5dAiq0AgruR-LxSzwCIc48YNfLdu89F0oDFqFw9MCRUzFP7K2v6g90B97VNFqO_02WvY3LrmeD0Nbr10F0BjGnitKAeAXxOknSDPwBoY_N8RduJw2s0OExL-az0b2siXhAgvPGrDmCFMyahMA"/>
+</div>
+<div class="absolute bottom-1 right-1 bg-primary p-1.5 rounded-full border-2 border-white dark:border-slate-800 text-slate-900">
+<span class="material-symbols-outlined text-[16px] block">edit</span>
+</div>
+</div>
+<div class="mt-4 text-center">
+<h1 class="text-slate-900 dark:text-slate-100 text-2xl font-bold">Sarah Miller</h1>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Rheo Member since Jan 2023</p>
+</div>
+</div>
+<!-- Cycle Summary Section -->
+<div class="px-4 py-2">
+<h3 class="text-slate-900 dark:text-slate-100 text-sm font-bold uppercase tracking-widest mb-3 px-1">Cycle Summary</h3>
+<div class="flex gap-4">
+<div class="flex-1 bg-white dark:bg-slate-800/50 rounded-xl p-5 border border-primary/20 soft-shadow">
+<p class="text-slate-500 dark:text-slate-400 text-xs font-semibold mb-1">Current Day</p>
+<p class="text-slate-900 dark:text-slate-100 text-2xl font-bold">Day 14</p>
+<div class="mt-2 w-full bg-primary/10 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 50%"></div>
+</div>
+</div>
+<div class="flex-1 bg-white dark:bg-slate-800/50 rounded-xl p-5 border border-primary/20 soft-shadow">
+<p class="text-slate-500 dark:text-slate-400 text-xs font-semibold mb-1">Next Period</p>
+<p class="text-slate-900 dark:text-slate-100 text-2xl font-bold">in 12 days</p>
+<p class="text-primary text-[10px] font-bold mt-2 uppercase tracking-tight">Fertile Window</p>
+</div>
+</div>
+</div>
+<!-- Connected Partners -->
+<div class="px-4 py-6">
+<div class="flex justify-between items-center mb-3 px-1">
+<h3 class="text-slate-900 dark:text-slate-100 text-sm font-bold uppercase tracking-widest">Connected Partners</h3>
+<button class="text-primary text-xs font-bold px-2 py-1 rounded-lg hover:bg-primary/10 transition-colors">Manage</button>
+</div>
+<div class="bg-white dark:bg-slate-800/50 rounded-xl p-4 flex items-center justify-between border border-primary/20">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-primary/40 flex items-center justify-center text-slate-900">
+<span class="material-symbols-outlined">person</span>
+</div>
+<div>
+<p class="text-slate-900 dark:text-slate-100 font-bold text-sm">James Miller</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs">Syncing active since Feb 2024</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary">chevron_right</span>
+</div>
+</div>
+<!-- Settings List -->
+<div class="px-4 space-y-2">
+<h3 class="text-slate-900 dark:text-slate-100 text-sm font-bold uppercase tracking-widest mb-3 px-1">Preferences</h3>
+<a class="flex items-center justify-between p-4 bg-white dark:bg-slate-800/50 rounded-xl border border-primary/10" href="#">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary">account_circle</span>
+<span class="text-slate-900 dark:text-slate-100 font-medium">Account Settings</span>
+</div>
+<span class="material-symbols-outlined text-slate-400">chevron_right</span>
+</a>
+<a class="flex items-center justify-between p-4 bg-white dark:bg-slate-800/50 rounded-xl border border-primary/10" href="#">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary">notifications_active</span>
+<span class="text-slate-900 dark:text-slate-100 font-medium">Notification Preferences</span>
+</div>
+<span class="material-symbols-outlined text-slate-400">chevron_right</span>
+</a>
+<div class="flex items-center justify-between p-4 bg-white dark:bg-slate-800/50 rounded-xl border border-primary/10">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary">dark_mode</span>
+<span class="text-slate-900 dark:text-slate-100 font-medium">Dark Theme</span>
+</div>
+<div class="w-10 h-5 bg-slate-200 dark:bg-primary/40 rounded-full relative cursor-pointer">
+<div class="absolute left-1 top-1 bg-white size-3 rounded-full transition-all"></div>
+</div>
+</div>
+<a class="flex items-center justify-between p-4 bg-white dark:bg-slate-800/50 rounded-xl border border-primary/10" href="#">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary">help_center</span>
+<span class="text-slate-900 dark:text-slate-100 font-medium">Help &amp; Support</span>
+</div>
+<span class="material-symbols-outlined text-slate-400">chevron_right</span>
+</a>
+</div>
+<!-- Logout Section -->
+<div class="p-6 mt-4">
+<button class="w-full py-4 bg-white dark:bg-slate-800/50 border border-red-200 dark:border-red-900/30 text-red-500 font-bold rounded-xl flex items-center justify-center gap-2 hover:bg-red-50 dark:hover:bg-red-950/20 transition-all">
+<span class="material-symbols-outlined">logout</span>
+                Logout
+            </button>
+<!-- Subtle Mascot Detail -->
+<div class="mt-8 flex justify-center opacity-20 grayscale">
+<div class="size-8 bg-primary rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-900 text-sm">pets</span>
+</div>
+</div>
+</div>
+<!-- Bottom Navigation Bar -->
+<div class="fixed bottom-0 left-0 right-0 z-50 max-w-md mx-auto">
+<div class="flex gap-2 border-t border-primary/20 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl px-4 pb-4 pt-3 rounded-t-xl">
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<p class="text-[10px] font-bold uppercase tracking-tighter">Calendar</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<p class="text-[10px] font-bold uppercase tracking-tighter">Insights</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">groups</span>
+<p class="text-[10px] font-bold uppercase tracking-tighter">Community</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined fill-1" style="font-variation-settings: 'FILL' 1">account_circle</span>
+<p class="text-[10px] font-bold uppercase tracking-tighter">Profile</p>
+</a>
+</div>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#f0428b",
+                "soft-pink": "#fecfd5",
+                "background-light": "#f8f6f7",
+                "background-dark": "#221018",
+              },
+              fontFamily: {
+                "display": ["Plus Jakarta Sans"]
+              },
+              borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+            },
+          },
+        }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen font-display">
+<div class="max-w-md mx-auto min-h-screen flex flex-col bg-background-light dark:bg-background-dark pb-24">
+<!-- Header -->
+<header class="sticky top-0 z-10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-4 py-4 flex items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-white dark:bg-slate-800 shadow-sm">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<h1 class="text-xl font-bold tracking-tight">Settings</h1>
+</header>
+<div class="px-4 space-y-6">
+<!-- Profile Section -->
+<div class="bg-white dark:bg-slate-800 rounded-xl p-4 shadow-sm border border-soft-pink/30">
+<div class="flex items-center gap-4">
+<div class="relative">
+<div class="w-16 h-16 rounded-full bg-soft-pink flex items-center justify-center overflow-hidden border-2 border-primary/20">
+<img alt="Cute bunny avatar" data-alt="A cute illustrated pink bunny mascot avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-PRk7iobr4fqOwOqRGy13uY5mUgcNU8t3YcoOLaa_t05J-5qIZi3qFA39hD_gf9Wmqa6OoF-0-zP3vh8aShBV7az-lY1YoTXxxQgZiHYZ4skMY91lSS2clmTCLBuFDst_er_l5nDxpnIZdnAb75rE_yY1DOPIyV26wmsd9CtSMYH00KVPm42zT-emNqKVqg_RNoUkMrMt33wyJO2DyZ1qa35byOZeN48YzkZrwFWn1s9EczQCMKcbLNtrXAbHoHRM8FP1-g-BM9E"/>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-primary text-white p-1 rounded-full border-2 border-white dark:border-slate-800">
+<span class="material-symbols-outlined text-[16px] block">edit</span>
+</div>
+</div>
+<div>
+<h2 class="font-bold text-lg">Bunny Lover</h2>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-sm mr-1">workspace_premium</span> Premium Member
+                        </span>
+</div>
+</div>
+</div>
+<!-- Account Section -->
+<section>
+<h3 class="text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2 ml-1">Account</h3>
+<div class="bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-sm border border-soft-pink/30">
+<div class="flex items-center justify-between p-4 border-b border-soft-pink/10">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">mail</span>
+<span class="font-medium">Email</span>
+</div>
+<span class="text-slate-500 text-sm">bunny@rheo.app</span>
+</div>
+<div class="flex items-center justify-between p-4 border-b border-soft-pink/10">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">lock</span>
+<span class="font-medium">Password</span>
+</div>
+<span class="material-symbols-outlined text-slate-400">chevron_right</span>
+</div>
+<div class="flex items-center justify-between p-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">stars</span>
+<span class="font-medium">Subscription</span>
+</div>
+<span class="text-primary font-bold text-sm">Active Premium</span>
+</div>
+</div>
+</section>
+<!-- Notifications Section -->
+<section>
+<h3 class="text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2 ml-1">Notifications</h3>
+<div class="bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-sm border border-soft-pink/30">
+<div class="flex items-center justify-between p-4 border-b border-soft-pink/10">
+<span class="font-medium">Period Reminders</span>
+<div class="w-12 h-6 bg-primary rounded-full relative">
+<div class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full"></div>
+</div>
+</div>
+<div class="flex items-center justify-between p-4 border-b border-soft-pink/10">
+<span class="font-medium">Ovulation Alerts</span>
+<div class="w-12 h-6 bg-primary rounded-full relative">
+<div class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full"></div>
+</div>
+</div>
+<div class="flex items-center justify-between p-4 border-b border-soft-pink/10">
+<span class="font-medium">Partner Updates</span>
+<div class="w-12 h-6 bg-slate-200 dark:bg-slate-700 rounded-full relative">
+<div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full"></div>
+</div>
+</div>
+<div class="flex items-center justify-between p-4">
+<span class="font-medium">Mood Prompts</span>
+<div class="w-12 h-6 bg-primary rounded-full relative">
+<div class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Privacy Section -->
+<section>
+<h3 class="text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2 ml-1">Privacy &amp; Safety</h3>
+<div class="bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-sm border border-soft-pink/30">
+<div class="flex items-center justify-between p-4 border-b border-soft-pink/10">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">groups</span>
+<span class="font-medium">Manage Partners</span>
+</div>
+<span class="material-symbols-outlined text-slate-400">chevron_right</span>
+</div>
+<div class="flex items-center justify-between p-4 border-b border-soft-pink/10">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">share</span>
+<span class="font-medium">Data Sharing</span>
+</div>
+<span class="material-symbols-outlined text-slate-400">chevron_right</span>
+</div>
+<div class="flex items-center justify-between p-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">block</span>
+<span class="font-medium">Blocked Contacts</span>
+</div>
+<span class="material-symbols-outlined text-slate-400">chevron_right</span>
+</div>
+</div>
+</section>
+<!-- Appearance Section -->
+<section>
+<h3 class="text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2 ml-1">Appearance</h3>
+<div class="bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-sm border border-soft-pink/30">
+<div class="flex items-center justify-between p-4 border-b border-soft-pink/10">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">palette</span>
+<span class="font-medium">Theme</span>
+</div>
+<span class="text-primary font-bold text-sm">Pink Bunny</span>
+</div>
+<div class="flex items-center justify-between p-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">language</span>
+<span class="font-medium">Language</span>
+</div>
+<span class="text-slate-500 text-sm">English</span>
+</div>
+</div>
+</section>
+<!-- Support Section -->
+<section>
+<h3 class="text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2 ml-1">Support</h3>
+<div class="bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-sm border border-soft-pink/30">
+<div class="flex items-center justify-between p-4 border-b border-soft-pink/10">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">quiz</span>
+<span class="font-medium">FAQ</span>
+</div>
+<span class="material-symbols-outlined text-slate-400">chevron_right</span>
+</div>
+<div class="flex items-center justify-between p-4 border-b border-soft-pink/10">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">contact_support</span>
+<span class="font-medium">Contact Support</span>
+</div>
+<span class="material-symbols-outlined text-slate-400">chevron_right</span>
+</div>
+<div class="flex items-center justify-between p-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">info</span>
+<span class="font-medium">About Rheo</span>
+</div>
+<span class="text-slate-400 text-sm">v2.4.0</span>
+</div>
+</div>
+</section>
+<!-- Logout Button -->
+<button class="w-full py-4 rounded-xl bg-white dark:bg-slate-800 text-red-500 font-bold shadow-sm border border-red-100 dark:border-red-900/30 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">logout</span>
+                Logout
+            </button>
+</div>
+<!-- Mascot Footer Element -->
+<div class="flex flex-col items-center justify-center py-8 opacity-40">
+<div class="w-12 h-12 bg-soft-pink rounded-full flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-primary text-3xl">cruelty_free</span>
+</div>
+<p class="text-xs font-medium italic">Made with love by Rheo Bunny</p>
+</div>
+</div>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md border-t border-soft-pink/20 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md px-4 pb-6 pt-3 flex justify-between items-center z-50">
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px] font-bold">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">insights</span>
+<span class="text-[10px] font-bold">Insights</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center -mt-8 shadow-lg shadow-primary/30 border-4 border-background-light dark:border-background-dark">
+<span class="material-symbols-outlined text-white">add</span>
+</div>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="text-[10px] font-bold">Calendar</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">settings</span>
+<span class="text-[10px] font-bold">Settings</span>
+</a>
+</nav>
+</body></html>

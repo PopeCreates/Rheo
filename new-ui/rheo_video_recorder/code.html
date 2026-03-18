@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#f0428b",
+              "rheo-pink": "#fecfd5",
+              "background-light": "#f8f6f7",
+              "background-dark": "#221018",
+            },
+            fontFamily: {
+              "display": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .camera-viewfinder {
+            background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 20%, rgba(0,0,0,0) 80%, rgba(0,0,0,0.6) 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="relative mx-auto max-w-md h-screen overflow-hidden flex flex-col bg-slate-950">
+<div class="absolute inset-0 z-0 bg-cover bg-center" data-alt="Blurry camera viewfinder showing a cozy room interior" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCWGXU2Zu4ySeM-2XdVZtpBuKXNvyksjyGUg754_HBkCMGpPGzuSdM9IVDRW2DxhWP0cSjXJsA2MimUc0uycoL4PcGU-YFXObC4lxzEH7ZSgvaIYdGfUtuR2D2dxAEN2k2Hpp6hnmsmRLHx3_1gzPnng61AV-ezwkKBJRIRB3HDEzz0LjnkFdrH9m_tBlz54w-ggC5X-9ZZhI9M0gabY6015quy004BQhicIq5iMzjWDBN-nZA1v7y8fFNK9pg0IP0rN0840UhVo94');">
+<div class="absolute inset-0 camera-viewfinder"></div>
+</div>
+<div class="relative z-10 flex flex-col h-full justify-between p-4">
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<button class="bg-black/20 backdrop-blur-md p-2 rounded-full text-white hover:bg-black/40 transition-colors">
+<span class="material-symbols-outlined block">close</span>
+</button>
+<div class="bg-black/40 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/20 flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+<span class="text-white font-bold text-sm tracking-widest uppercase">00:42</span>
+</div>
+<button class="bg-black/20 backdrop-blur-md p-2 rounded-full text-white hover:bg-black/40 transition-colors">
+<span class="material-symbols-outlined block">help</span>
+</button>
+</div>
+<div class="flex justify-end pr-2">
+<div class="flex flex-col gap-4 bg-black/20 backdrop-blur-md p-2 rounded-full border border-white/10">
+<button class="text-white p-2 hover:bg-white/20 rounded-full transition-colors">
+<span class="material-symbols-outlined block">flash_on</span>
+</button>
+<button class="text-white p-2 hover:bg-white/20 rounded-full transition-colors">
+<span class="material-symbols-outlined block">flip_camera_ios</span>
+</button>
+<button class="text-white p-2 hover:bg-white/20 rounded-full transition-colors">
+<span class="material-symbols-outlined block">face_6</span>
+</button>
+</div>
+</div>
+</div>
+<div class="absolute top-1/2 left-4 -translate-y-1/2 opacity-30 select-none">
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-rheo-pink !text-5xl">pets</span>
+<span class="text-[10px] font-bold text-rheo-pink uppercase tracking-tighter">Rheo Bunny</span>
+</div>
+</div>
+<div class="flex flex-col gap-6">
+<div class="flex items-center justify-around px-4">
+<button class="flex flex-col items-center gap-1 text-white group">
+<div class="bg-black/20 backdrop-blur-md p-3 rounded-full group-hover:bg-black/40 transition-colors">
+<span class="material-symbols-outlined block">close</span>
+</div>
+<span class="text-xs font-semibold">Cancel</span>
+</button>
+<button class="relative flex items-center justify-center">
+<div class="absolute inset-0 rounded-full border-4 border-white animate-ping opacity-20"></div>
+<div class="w-20 h-20 bg-white rounded-full flex items-center justify-center p-1.5">
+<div class="w-full h-full bg-primary rounded-full flex items-center justify-center">
+<div class="w-6 h-6 bg-white rounded-sm"></div>
+</div>
+</div>
+</button>
+<button class="flex flex-col items-center gap-1 text-white group">
+<div class="bg-black/20 backdrop-blur-md p-3 rounded-full group-hover:bg-black/40 transition-colors">
+<span class="material-symbols-outlined block">visibility</span>
+</div>
+<span class="text-xs font-semibold">Preview</span>
+</button>
+</div>
+<div class="bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl p-4 rounded-xl flex items-center justify-between gap-4 shadow-2xl mb-4">
+<div class="flex-1">
+<div class="flex items-center gap-2 mb-1">
+<div class="w-6 h-6 bg-rheo-pink rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-primary !text-xs">pets</span>
+</div>
+<span class="text-xs font-bold text-primary uppercase">Ready to send?</span>
+</div>
+<p class="text-slate-600 dark:text-slate-400 text-sm leading-tight">Your video is looking great!</p>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-lg font-bold flex items-center gap-2 transition-all active:scale-95 shadow-lg shadow-primary/30">
+<span>Send</span>
+<span class="material-symbols-outlined !text-sm">send</span>
+</button>
+</div>
+</div>
+</div>
+<div class="absolute bottom-1 w-1/3 h-1 bg-white/30 self-center rounded-full pointer-events-none z-20"></div>
+</div>
+</body></html>

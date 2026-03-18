@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f0428b",
+                        "secondary": "#fecfd5",
+                        "background-light": "#f8f6f7",
+                        "background-dark": "#221018",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .bunny-bg {
+            background-image: radial-gradient(circle at 20% 20%, rgba(254, 207, 213, 0.4) 0%, transparent 50%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="max-w-md mx-auto min-h-screen flex flex-col relative pb-24">
+<!-- Header -->
+<div class="flex items-center bg-white/80 dark:bg-background-dark/80 backdrop-blur-md sticky top-0 z-50 p-4 justify-between border-b border-secondary/20">
+<div class="text-primary flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-secondary/20 transition-colors cursor-pointer">
+<span class="material-symbols-outlined">arrow_back</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-tight flex-1 text-center">Gift Details</h2>
+<div class="flex w-10 items-center justify-end">
+<button class="flex size-10 cursor-pointer items-center justify-center rounded-full text-primary hover:bg-secondary/20 transition-colors">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+</div>
+</div>
+<!-- Product Image Section -->
+<div class="@container p-4">
+<div class="relative w-full aspect-square overflow-hidden rounded-xl bg-secondary/10 group">
+<img alt="Cozy Care Package" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Luxurious gift box with gourmet chocolates and spa items" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEWOlT1e4tVYsU-XZAd76WmLoK9pX5BkoH4Goq8e3q4NmATibK_9NCprDzTDWB7ZH7yXBi3yyTndnXckRPf0ZshJMVtskn6wskE3CjhPC_1vKuOLAd6MtRTrj9A7lFn2--AoMVQT1QKWLfrCSjjPRt9__bXeUz7ZIGYNu9F5dS0wnlIcDkZsj-6BWFTx_zG-DMPSMqjbufTe1BQwmjGaw1yCirTOf1XpxicbPNLmRIxanG37O4tk_je6RBs241zK_Iv0SgEJPbRfw"/>
+<div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1.5 rounded-full flex items-center gap-2 shadow-sm">
+<img alt="Rheo Bunny" class="w-5 h-5" data-alt="Cute bunny mascot icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4gkrsDuubToMELzR3BXjH3NoeJHvjBR9RbHdpYajnlQcOmCLWQeX2QZIRcYJGnx0iTO1D9lqKbc2oIZpvVuTV8a2ExRTwLQhA2hgB1uUMjb_8Y7GiIF1xftnenEbupX0pyzkSKjZw6tKHwrmlgg1b6Cs6Xj-m8nKdt7yog9z50vxSIVRYughd3vJXG5JbIMDsNR-mYiPsvuXqWwthQDORvhAr01_a0_L-9_NfNtd1b2Dik4x8XprPisQ904gmIFBXfMxoMq6SFnw"/>
+<span class="text-xs font-bold text-primary uppercase tracking-wider">Rheo Pick</span>
+</div>
+</div>
+</div>
+<!-- Product Info -->
+<div class="px-6 pt-4 pb-2">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h1 class="text-3xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight leading-none">Cozy Care Package</h1>
+<p class="text-primary font-medium mt-1">Premium Collection</p>
+</div>
+<div class="text-right">
+<p class="text-2xl font-bold text-slate-900 dark:text-slate-100">$45.00</p>
+<div class="flex items-center justify-end text-yellow-500">
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="text-xs font-bold ml-1 text-slate-600 dark:text-slate-400">4.9</span>
+</div>
+</div>
+</div>
+<p class="mt-4 text-slate-600 dark:text-slate-300 leading-relaxed">
+                Send a warm hug in a box. This carefully curated set includes organic lavender tea, a hand-poured soy candle, artisan dark chocolate, and plush cashmere-blend socks. Perfect for showing someone you care.
+            </p>
+</div>
+<!-- Delivery Options -->
+<div class="px-6 mt-6">
+<h3 class="text-sm font-bold text-slate-900 dark:text-slate-100 uppercase tracking-widest mb-3">Delivery Method</h3>
+<div class="grid grid-cols-2 gap-4">
+<label class="relative cursor-pointer">
+<input checked="" class="peer sr-only" name="delivery" type="radio" value="standard"/>
+<div class="p-4 rounded-xl border-2 border-secondary/30 bg-white dark:bg-background-dark/50 peer-checked:border-primary peer-checked:bg-secondary/10 transition-all">
+<span class="material-symbols-outlined text-primary mb-2">local_shipping</span>
+<p class="font-bold text-sm block">Standard</p>
+<p class="text-xs text-slate-500">3-5 business days</p>
+<p class="text-xs font-bold text-primary mt-1">FREE</p>
+</div>
+</label>
+<label class="relative cursor-pointer">
+<input class="peer sr-only" name="delivery" type="radio" value="express"/>
+<div class="p-4 rounded-xl border-2 border-secondary/30 bg-white dark:bg-background-dark/50 peer-checked:border-primary peer-checked:bg-secondary/10 transition-all">
+<span class="material-symbols-outlined text-primary mb-2">bolt</span>
+<p class="font-bold text-sm block">Express</p>
+<p class="text-xs text-slate-500">Next day delivery</p>
+<p class="text-xs font-bold text-primary mt-1">+$12.00</p>
+</div>
+</label>
+</div>
+</div>
+<!-- Mascot Tip Box -->
+<div class="mx-6 mt-8 p-4 rounded-xl bg-secondary/20 flex items-center gap-4 border border-secondary/40 relative overflow-hidden">
+<div class="absolute -right-4 -bottom-4 opacity-10 scale-150 rotate-12">
+<img alt="Bunny Mascot Pattern" data-alt="Abstract bunny mascot pattern background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1YQdAikwJRW7wBDs3LeaTv5xhdk-J8nTOzeeIutcHMaTl6-LwFbh3zmogkKa0BLb3xKvCv5wK-E-rc9JP1_YcKkBDils-s6Hv4CO30TlPzDb7mcFaeycFH_c90kDKsGpDffXqzQ1V2C2KsvYDad2HLFNXGbHiiF0V2oghCcKK69aYuudsFwLYv83pW7J3VhrVjXHHIVpwtLJaI1oauR7nPsWCNrhNOX5NDmUtwghdG3ew_7kdY0365KP43Ey2GMjydal8iq4cvO0"/>
+</div>
+<div class="flex-shrink-0 size-12 bg-white rounded-full flex items-center justify-center shadow-sm">
+<img alt="Rheo Bunny" class="w-8 h-8" data-alt="Rheo bunny mascot face" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0bsiNoYMIcfwV_U5_k7VFwN4BhBBGDVJfliigofoc-b3_YuCsu8xET8IDKHA6ZJho6j8sGtxt5ZDaACpMglda-zDyBHhfkKhqZd8VPcELS_jwgBZWqytSp0cfQC3Qh0oeBciemlYujEzq3l7k2BSa4LMYvq7qBdevflZDkCn1hednmarCMpFQInfe-Qrh3XOOWeR0GfsMP28FrtGLLHGVh9YJbhzIdMlROCNSXNDmTiz9LvCg6hThKuLRsUQXPq5IgQ-C-QEQz84"/>
+</div>
+<div class="relative z-10">
+<p class="text-xs font-bold text-primary uppercase">Rheo says:</p>
+<p class="text-sm text-slate-700 dark:text-slate-200 italic">"Don't forget to add a personalized note at checkout! It makes the gift even more special."</p>
+</div>
+</div>
+<!-- Bottom Navigation / Action Bar -->
+<div class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white/90 dark:bg-background-dark/90 backdrop-blur-xl border-t border-secondary/20 px-6 py-4 flex items-center gap-4 z-50">
+<button class="flex flex-col items-center justify-center text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">shopping_bag</span>
+<span class="text-[10px] font-bold">Cart</span>
+</button>
+<button class="flex-1 bg-primary hover:bg-primary/90 text-white py-4 rounded-xl font-bold text-base shadow-lg shadow-primary/20 transition-transform active:scale-95 flex items-center justify-center gap-2">
+<span>Buy Now</span>
+<span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Background Decoration -->
+<div class="fixed top-0 left-0 w-full h-full -z-10 pointer-events-none opacity-50 dark:opacity-20">
+<div class="absolute top-10 right-10 w-64 h-64 bg-secondary rounded-full blur-[100px]"></div>
+<div class="absolute bottom-20 left-10 w-48 h-48 bg-primary/20 rounded-full blur-[80px]"></div>
+</div>
+</body></html>

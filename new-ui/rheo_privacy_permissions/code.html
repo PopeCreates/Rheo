@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f0428b",
+                        "soft-pink": "#fecfd5",
+                        "background-light": "#fff9fa",
+                        "background-dark": "#221018",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "12px",
+                        "lg": "16px",
+                        "xl": "24px",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative mx-auto max-w-md w-full flex flex-col min-h-screen pb-10">
+<!-- Top Navigation -->
+<header class="flex items-center px-4 pt-6 pb-2 justify-between sticky top-0 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-10">
+<button class="flex items-center justify-center size-10 rounded-full bg-soft-pink/30 text-primary hover:bg-soft-pink/50 transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="text-lg font-bold tracking-tight">Privacy Permissions</h1>
+<div class="size-10"></div> <!-- Spacer for balance -->
+</header>
+<!-- Bunny Mascot Banner -->
+<div class="px-4 py-6 flex flex-col items-center">
+<div class="relative w-24 h-24 bg-soft-pink rounded-full flex items-center justify-center mb-4 overflow-hidden border-4 border-white shadow-sm">
+<img alt="Cute bunny illustration" class="w-20 h-20 object-contain" data-alt="Cute white bunny mascot illustration smiling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAD714EJ8cjhijAjtBdejFgj5G4OQfgOzOoYmlh98lYWzH0ozMHwCCQnZ_rJQMAr-wWn8Au7OWZ1_VsLFnZIO5ytgNsuK6Y2SRzbsDh8FX2Cn1n7muhAHWkv0eSBf9kaMko19BwDNGjtw2vF2sJJ7Qkt0JH0em_q2RXERVp-CzZY_XKIgzsS1RnwgVLVzsCwVEgedPBNBCryxGksJ3x1FvAZqZb92vpoVyvwEpEMbP0GZs-GHW5sdzjw7Vaq52I9sV8-4QPfaQiKQY"/>
+</div>
+<p class="text-sm font-medium text-primary bg-primary/10 px-3 py-1 rounded-full">Rheo Privacy Guard</p>
+</div>
+<!-- Section: Partner Permissions -->
+<div class="px-4 space-y-4 mb-8">
+<h2 class="text-xl font-bold px-1">Partner Permissions</h2>
+<div class="bg-white dark:bg-white/5 rounded-lg p-1 shadow-sm border border-soft-pink/20">
+<!-- Toggle: Period Start -->
+<div class="flex items-center gap-4 px-4 min-h-[72px] py-2 justify-between">
+<div class="flex items-center gap-4">
+<div class="flex items-center justify-center rounded-lg bg-soft-pink/20 text-primary shrink-0 size-12">
+<span class="material-symbols-outlined">calendar_today</span>
+</div>
+<div class="flex flex-col justify-center">
+<p class="text-base font-semibold leading-normal line-clamp-1">Share period start</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-normal leading-normal">Notify partner when cycle begins</p>
+</div>
+</div>
+<label class="relative flex h-[31px] w-[51px] cursor-pointer items-center rounded-full border-none bg-slate-200 dark:bg-slate-700 p-0.5 has-[:checked]:justify-end has-[:checked]:bg-primary transition-all">
+<div class="h-full w-[27px] rounded-full bg-white shadow-md"></div>
+<input checked="" class="invisible absolute" type="checkbox"/>
+</label>
+</div>
+<div class="h-[1px] bg-soft-pink/10 mx-4"></div>
+<!-- Toggle: Current Mood -->
+<div class="flex items-center gap-4 px-4 min-h-[72px] py-2 justify-between">
+<div class="flex items-center gap-4">
+<div class="flex items-center justify-center rounded-lg bg-soft-pink/20 text-primary shrink-0 size-12">
+<span class="material-symbols-outlined">mood</span>
+</div>
+<div class="flex flex-col justify-center">
+<p class="text-base font-semibold leading-normal line-clamp-1">Share current mood</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-normal leading-normal">Let partner see how you feel</p>
+</div>
+</div>
+<label class="relative flex h-[31px] w-[51px] cursor-pointer items-center rounded-full border-none bg-slate-200 dark:bg-slate-700 p-0.5 has-[:checked]:justify-end has-[:checked]:bg-primary transition-all">
+<div class="h-full w-[27px] rounded-full bg-white shadow-md"></div>
+<input checked="" class="invisible absolute" type="checkbox"/>
+</label>
+</div>
+<div class="h-[1px] bg-soft-pink/10 mx-4"></div>
+<!-- Toggle: Symptoms -->
+<div class="flex items-center gap-4 px-4 min-h-[72px] py-2 justify-between">
+<div class="flex items-center gap-4">
+<div class="flex items-center justify-center rounded-lg bg-soft-pink/20 text-primary shrink-0 size-12">
+<span class="material-symbols-outlined">monitoring</span>
+</div>
+<div class="flex flex-col justify-center">
+<p class="text-base font-semibold leading-normal line-clamp-1">Share symptoms</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-normal leading-normal">Cramps, energy levels, and more</p>
+</div>
+</div>
+<label class="relative flex h-[31px] w-[51px] cursor-pointer items-center rounded-full border-none bg-slate-200 dark:bg-slate-700 p-0.5 has-[:checked]:justify-end has-[:checked]:bg-primary transition-all">
+<div class="h-full w-[27px] rounded-full bg-white shadow-md"></div>
+<input class="invisible absolute" type="checkbox"/>
+</label>
+</div>
+<div class="h-[1px] bg-soft-pink/10 mx-4"></div>
+<!-- Toggle: Fertility Window -->
+<div class="flex items-center gap-4 px-4 min-h-[72px] py-2 justify-between">
+<div class="flex items-center gap-4">
+<div class="flex items-center justify-center rounded-lg bg-soft-pink/20 text-primary shrink-0 size-12">
+<span class="material-symbols-outlined">flare</span>
+</div>
+<div class="flex flex-col justify-center">
+<p class="text-base font-semibold leading-normal line-clamp-1">Share fertility window</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-normal leading-normal">Predict ovulation dates for partner</p>
+</div>
+</div>
+<label class="relative flex h-[31px] w-[51px] cursor-pointer items-center rounded-full border-none bg-slate-200 dark:bg-slate-700 p-0.5 has-[:checked]:justify-end has-[:checked]:bg-primary transition-all">
+<div class="h-full w-[27px] rounded-full bg-white shadow-md"></div>
+<input class="invisible absolute" type="checkbox"/>
+</label>
+</div>
+</div>
+</div>
+<!-- Section: Privacy Mode -->
+<div class="px-4 mb-8">
+<h2 class="text-xl font-bold px-1 mb-4">Privacy Mode</h2>
+<div class="bg-primary/5 dark:bg-primary/10 border border-primary/20 rounded-xl p-4 flex items-start gap-4">
+<div class="bg-primary text-white size-10 rounded-full flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined">visibility_off</span>
+</div>
+<div class="flex-1">
+<div class="flex items-center justify-between mb-1">
+<p class="font-bold text-primary">Stealth Hide</p>
+<label class="relative flex h-[24px] w-[44px] cursor-pointer items-center rounded-full border-none bg-slate-200 dark:bg-slate-600 p-0.5 has-[:checked]:justify-end has-[:checked]:bg-primary transition-all">
+<div class="h-full w-[20px] rounded-full bg-white shadow-sm"></div>
+<input class="invisible absolute" type="checkbox"/>
+</label>
+</div>
+<p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                        Temporarily hide all updates from your partner for 7 days. This won't notify them, it just pauses data sync.
+                    </p>
+</div>
+</div>
+</div>
+<!-- Spacer -->
+<div class="flex-1"></div>
+<!-- Section: Breakup Mode -->
+<div class="px-4 mt-auto">
+<div class="bg-red-50 dark:bg-red-900/20 border-2 border-dashed border-red-200 dark:border-red-900/40 rounded-xl p-5 text-center">
+<p class="text-xs font-bold text-red-600 dark:text-red-400 uppercase tracking-widest mb-2">Emergency Reset</p>
+<p class="text-sm text-red-700 dark:text-red-300 mb-4">
+                    Remove all partners and delete shared history instantly. This action cannot be undone.
+                </p>
+<button class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-6 rounded-lg shadow-lg flex items-center justify-center gap-2 transition-transform active:scale-95">
+<span class="material-symbols-outlined">heart_broken</span>
+                    Breakup Mode
+                </button>
+</div>
+</div>
+<!-- Footer Mascot Small -->
+<div class="flex justify-center mt-6">
+<div class="flex items-center gap-2 opacity-50 grayscale hover:grayscale-0 transition-all cursor-default">
+<span class="text-[10px] font-bold uppercase tracking-widest">Powered by Rheo</span>
+<img alt="Small bunny" class="w-6 h-6 object-contain" data-alt="Small white bunny icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzJv4pKLYSJ2urX40TAJLzqiqm-ISfSUtfddjX1jRz9DCLn8UbANUYXp9xewBrGmB8bYRoq2RqwXyKPbFRAISRi8TMQaVvxHy6Ork40a6-39i84bLus3Z0srqx611ICdGb7_PxPMpTD1ZQdMNP8gvdGpJy6185jB08z3d4sRr_ZKrwJdd9wOHFauublybFRr8PXtPbvVpH2LTNqEEkSKgrrPC25NB31ZDZofTHjMddmSUNztJEBXMi5foITa_y8gyL5e9sBrJtL8A"/>
+</div>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Partner Permissions - Rheo</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f0428b",
+                        "accent-pink": "#fecfd5",
+                        "background-light": "#fcfafb",
+                        "background-dark": "#221018",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #fecfd5;
+            border-radius: 10px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen font-display">
+<div class="relative flex h-auto min-h-screen w-full max-w-md mx-auto flex-col bg-background-light dark:bg-background-dark shadow-2xl overflow-x-hidden border-x border-primary/10">
+<div class="sticky top-0 z-10 flex items-center bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md p-4 pb-2 justify-between">
+<button class="text-slate-900 dark:text-slate-100 flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-tight flex-1 text-center pr-10">Partner Permissions</h2>
+</div>
+<div class="flex p-6 @container">
+<div class="flex w-full flex-col gap-4 items-center">
+<div class="flex gap-4 flex-col items-center">
+<div class="relative">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full border-4 border-accent-pink h-28 w-28 shadow-lg overflow-hidden" data-alt="Profile portrait of James Miller smiling" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCbaVT3bXmurrihCTYxs0LsEv58uDAntN9VtQX-A8px-u1DSgGrHBAVhAU8A8SY-GrMnAoLTrqTD8qNl8mTfFiD9KxL2S2vMmPiOO33EMVnSn2Sk_8HjXfLjdQyC0i3y3ZbWt7zuoYIxbVf8WbrDk2aFFrmDsg77InS0N5NW0PQXPObK-yaLPFR5QIlVkIRbCFG4uXv5dQIsVUM8P15-wMC85xGVFu-7KXWK9BKMKh3YCcBlUDadMx9-AWixk6Qt-opmFp2x2P2sS0");'>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-primary text-white p-1 rounded-full border-2 border-background-light shadow-sm">
+<span class="material-symbols-outlined text-[16px] block">verified</span>
+</div>
+</div>
+<div class="flex flex-col items-center justify-center">
+<p class="text-slate-900 dark:text-slate-100 text-2xl font-bold leading-tight tracking-tight text-center">James Miller</p>
+<p class="text-primary/70 dark:text-primary/60 text-sm font-medium leading-normal text-center mt-1 uppercase tracking-wider">Active since Feb 2024</p>
+</div>
+</div>
+</div>
+</div>
+<div class="px-4 pb-20">
+<div class="flex items-center gap-2 mb-3 mt-4">
+<span class="material-symbols-outlined text-primary text-xl">share</span>
+<h3 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-tight">Data Sharing</h3>
+</div>
+<div class="bg-white dark:bg-white/5 rounded-xl shadow-sm border border-primary/5 overflow-hidden">
+<div class="flex items-center gap-4 px-4 min-h-[72px] py-3 justify-between border-b border-primary/5 last:border-none">
+<div class="flex items-center gap-4">
+<div class="text-primary flex items-center justify-center rounded-lg bg-accent-pink/30 shrink-0 size-11">
+<span class="material-symbols-outlined">calendar_today</span>
+</div>
+<div class="flex flex-col justify-center">
+<p class="text-slate-900 dark:text-slate-100 text-base font-semibold leading-tight">Share Cycle Status</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-normal leading-normal mt-0.5">Current day and phase</p>
+</div>
+</div>
+<div class="shrink-0">
+<label class="relative flex h-[28px] w-[48px] cursor-pointer items-center rounded-full border-none bg-slate-200 dark:bg-slate-700 p-0.5 has-[:checked]:justify-end has-[:checked]:bg-primary transition-all duration-300">
+<div class="h-full aspect-square rounded-full bg-white shadow-md"></div>
+<input checked="" class="invisible absolute" type="checkbox"/>
+</label>
+</div>
+</div>
+<div class="flex items-center gap-4 px-4 min-h-[72px] py-3 justify-between border-b border-primary/5 last:border-none">
+<div class="flex items-center gap-4">
+<div class="text-primary flex items-center justify-center rounded-lg bg-accent-pink/30 shrink-0 size-11">
+<span class="material-symbols-outlined">mood</span>
+</div>
+<div class="flex flex-col justify-center">
+<p class="text-slate-900 dark:text-slate-100 text-base font-semibold leading-tight">Share Moods</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-normal leading-normal mt-0.5">Selected bunny mood heads</p>
+</div>
+</div>
+<div class="shrink-0">
+<label class="relative flex h-[28px] w-[48px] cursor-pointer items-center rounded-full border-none bg-slate-200 dark:bg-slate-700 p-0.5 has-[:checked]:justify-end has-[:checked]:bg-primary transition-all duration-300">
+<div class="h-full aspect-square rounded-full bg-white shadow-md"></div>
+<input checked="" class="invisible absolute" type="checkbox"/>
+</label>
+</div>
+</div>
+<div class="flex items-center gap-4 px-4 min-h-[72px] py-3 justify-between border-b border-primary/5 last:border-none">
+<div class="flex items-center gap-4">
+<div class="text-primary flex items-center justify-center rounded-lg bg-accent-pink/30 shrink-0 size-11">
+<span class="material-symbols-outlined">medical_services</span>
+</div>
+<div class="flex flex-col justify-center">
+<p class="text-slate-900 dark:text-slate-100 text-base font-semibold leading-tight">Share Symptoms</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-normal leading-normal mt-0.5">Logged physical symptoms</p>
+</div>
+</div>
+<div class="shrink-0">
+<label class="relative flex h-[28px] w-[48px] cursor-pointer items-center rounded-full border-none bg-slate-200 dark:bg-slate-700 p-0.5 has-[:checked]:justify-end has-[:checked]:bg-primary transition-all duration-300">
+<div class="h-full aspect-square rounded-full bg-white shadow-md"></div>
+<input class="invisible absolute" type="checkbox"/>
+</label>
+</div>
+</div>
+<div class="flex items-center gap-4 px-4 min-h-[72px] py-3 justify-between border-b border-primary/5 last:border-none">
+<div class="flex items-center gap-4">
+<div class="text-primary flex items-center justify-center rounded-lg bg-accent-pink/30 shrink-0 size-11">
+<span class="material-symbols-outlined">auto_graph</span>
+</div>
+<div class="flex flex-col justify-center">
+<p class="text-slate-900 dark:text-slate-100 text-base font-semibold leading-tight">Fertility Window</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-normal leading-normal mt-0.5">Predictions and peak days</p>
+</div>
+</div>
+<div class="shrink-0">
+<label class="relative flex h-[28px] w-[48px] cursor-pointer items-center rounded-full border-none bg-slate-200 dark:bg-slate-700 p-0.5 has-[:checked]:justify-end has-[:checked]:bg-primary transition-all duration-300">
+<div class="h-full aspect-square rounded-full bg-white shadow-md"></div>
+<input class="invisible absolute" type="checkbox"/>
+</label>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2 mb-3 mt-8">
+<span class="material-symbols-outlined text-primary text-xl">settings_accessibility</span>
+<h3 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-tight">Interaction Permissions</h3>
+</div>
+<div class="bg-white dark:bg-white/5 rounded-xl shadow-sm border border-primary/5 overflow-hidden">
+<div class="flex items-center gap-4 px-4 min-h-[72px] py-3 justify-between border-b border-primary/5 last:border-none">
+<div class="flex items-center gap-4">
+<div class="text-primary flex items-center justify-center rounded-lg bg-accent-pink/30 shrink-0 size-11">
+<span class="material-symbols-outlined">featured_seasonal_and_gifts</span>
+</div>
+<div class="flex flex-col justify-center">
+<p class="text-slate-900 dark:text-slate-100 text-base font-semibold leading-tight">Allow Gifts</p>
+</div>
+</div>
+<div class="shrink-0">
+<label class="relative flex h-[28px] w-[48px] cursor-pointer items-center rounded-full border-none bg-slate-200 dark:bg-slate-700 p-0.5 has-[:checked]:justify-end has-[:checked]:bg-primary transition-all duration-300">
+<div class="h-full aspect-square rounded-full bg-white shadow-md"></div>
+<input checked="" class="invisible absolute" type="checkbox"/>
+</label>
+</div>
+</div>
+<div class="flex items-center gap-4 px-4 min-h-[72px] py-3 justify-between border-b border-primary/5 last:border-none">
+<div class="flex items-center gap-4">
+<div class="text-primary flex items-center justify-center rounded-lg bg-accent-pink/30 shrink-0 size-11">
+<span class="material-symbols-outlined">chat_bubble</span>
+</div>
+<div class="flex flex-col justify-center">
+<p class="text-slate-900 dark:text-slate-100 text-base font-semibold leading-tight">Allow Messaging</p>
+</div>
+</div>
+<div class="shrink-0">
+<label class="relative flex h-[28px] w-[48px] cursor-pointer items-center rounded-full border-none bg-slate-200 dark:bg-slate-700 p-0.5 has-[:checked]:justify-end has-[:checked]:bg-primary transition-all duration-300">
+<div class="h-full aspect-square rounded-full bg-white shadow-md"></div>
+<input checked="" class="invisible absolute" type="checkbox"/>
+</label>
+</div>
+</div>
+</div>
+<div class="mt-10 flex flex-col gap-4">
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-xl shadow-lg transition-transform active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">save</span>
+                    Save Changes
+                </button>
+<button class="w-full text-slate-400 dark:text-slate-500 hover:text-red-500 dark:hover:text-red-400 font-medium py-3 text-sm transition-colors border border-transparent hover:border-red-500/10 rounded-xl">
+                    Remove Partner
+                </button>
+</div>
+</div>
+<div class="h-10 flex items-center justify-center opacity-10 pointer-events-none mb-4 mt-auto">
+<svg class="w-12 h-12 text-primary" fill="currentColor" viewbox="0 0 24 24">
+<path d="M12,2C15.31,2 18,4.69 18,8C18,11.31 15.31,14 12,14C8.69,14 6,11.31 6,8C6,4.69 8.69,2 12,2M12,16C16.42,16 20,19.58 20,24H4C4,19.58 7.58,16 12,16M12,4C9.79,4 8,5.79 8,8C8,10.21 9.79,12 12,12C14.21,12 16,10.21 16,8C16,5.79 14.21,4 12,4Z"></path>
+</svg>
+</div>
+</div>
+</body></html>

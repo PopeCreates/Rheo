@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400,fill@0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f0428b",
+                        "accent-pink": "#fecfd5",
+                        "background-light": "#fdf8f9",
+                        "background-dark": "#221018",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<title>Rheo Chat - Partner</title>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="relative flex h-screen w-full max-w-md mx-auto flex-col bg-background-light dark:bg-background-dark overflow-hidden border-x border-accent-pink/20 shadow-xl">
+<!-- Header -->
+<div class="flex items-center bg-white/80 dark:bg-background-dark/80 backdrop-blur-md p-4 pb-3 justify-between sticky top-0 z-10 border-b border-accent-pink/30">
+<div class="flex items-center gap-3">
+<button class="text-primary">
+<span class="material-symbols-outlined">arrow_back_ios</span>
+</button>
+<div class="relative">
+<div class="bg-accent-pink aspect-square bg-cover rounded-full size-10 border-2 border-white shadow-sm" data-alt="Cute bunny sitting in grass" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDAOUUxw8wHfq-y-nGveZAWuylWWrwCkdIqLma1O6Q-i7en4ZBkFxnPLoznHhghZ1GWCqoSlcu2TeLeMrTQQKy9fG9NzJSwv2QlEZH0eL7ei-WjFMT1nEFfTgbkqvPgMgbJh0uyETVWabGjOMlK8ZhGc2mb4ELokX-_1tLiDXe0f04_lFtvmb9TdckjY7bEu-DHcuiq4l-FMxVMLUKcjZ-kUxGtpMyYGsf9DeTNuo4hCXdu19N94wRC4xDplDdwrhy6BiArtHVzeO8");'>
+</div>
+<div class="absolute bottom-0 right-0 size-3 bg-green-500 rounded-full border-2 border-white"></div>
+</div>
+<div class="flex flex-col">
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-none">Leo</h2>
+<span class="text-xs text-primary font-medium mt-1">Online</span>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="size-10 flex items-center justify-center rounded-full bg-accent-pink/30 text-primary">
+<span class="material-symbols-outlined">call</span>
+</button>
+<button class="size-10 flex items-center justify-center rounded-full bg-accent-pink/30 text-primary">
+<span class="material-symbols-outlined">videocam</span>
+</button>
+</div>
+</div>
+<!-- Chat Area -->
+<div class="flex-1 overflow-y-auto p-4 space-y-6">
+<div class="flex flex-col items-center">
+<span class="text-[11px] font-semibold text-primary/60 uppercase tracking-widest bg-accent-pink/20 px-3 py-1 rounded-full">Today</span>
+</div>
+<!-- Partner Message -->
+<div class="flex items-end gap-2 max-w-[85%]">
+<div class="bg-accent-pink aspect-square bg-cover rounded-full size-8 shrink-0 mb-1" data-alt="Cute bunny profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCYBZ660SrEqAfCYYRhY-mOOlMzrCPT84X5lHSSeHH5bqvsbEh_0aAwnodPTh3-UrLKTgSa1Y3llWTQa3qTBBHzRXiJEruiXmSQLIGAdjvn0XWwjL_9fz0MyBqYuQs1WwHIXK4_qJSkrhHLI1KSMy7gIExHl8ImVttp5q8oMOMM_v0hUMLBz8_fY0iDZ0SmKRQRwdmSq5g9FMAHwijuEaqwoZlyQmXskHN6Ixm6al8n4mG0zDqCjFTZbu9sCsoRuFYJhYjgS5jIHec");'>
+</div>
+<div class="flex flex-col gap-1">
+<div class="text-slate-700 dark:text-slate-200 text-[15px] font-normal leading-relaxed rounded-2xl rounded-bl-none px-4 py-3 bg-white dark:bg-slate-800 shadow-sm border border-accent-pink/10">
+                        How are you feeling today, honey? 🌸 I saw your cycle update on the app.
+                    </div>
+<p class="text-[10px] text-slate-400 font-medium ml-1">10:42 AM</p>
+</div>
+</div>
+<!-- User Message -->
+<div class="flex flex-col items-end gap-1 ml-auto max-w-[85%]">
+<div class="text-[15px] font-normal leading-relaxed rounded-2xl rounded-br-none px-4 py-3 bg-primary text-white shadow-md">
+                    A bit tired and crampy, but okay! Check out this cute video I found for our weekend project. 🧸
+                </div>
+<p class="text-[10px] text-slate-400 font-medium mr-1 text-right">10:45 AM</p>
+</div>
+<!-- Shared Video -->
+<div class="flex flex-col items-end gap-2 ml-auto w-[85%]">
+<div class="relative w-full aspect-video rounded-2xl overflow-hidden border-4 border-white dark:border-slate-800 shadow-lg group">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Peaceful nature landscape with flowers" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDuHDo6NX7JyMHnQIrIme6aLebmP-jnJvlhwyU0TyKeWhez70dsDIoXqrCVGC5zy7SSqhCxCidHf3H8kgDButLf9fevJn7qib1K_n1iMKV8ucwt3CSXxM7t_wG8ZNjNSAri-Y1U4a4hYdaQ5Zk0P6aVQMJnFAm37Ph8s66FiHd84-p3nE-d5wVK_TyCvhtR1iESXiYZeYjJfA0jU7bUHDxIfCrG85A0P5pUueHZ-hcf7ys0VR2DGAcFZ8y7NHycRveTp3BmYtHZk4c");'>
+</div>
+<div class="absolute inset-0 bg-black/20 flex items-center justify-center">
+<button class="size-14 flex items-center justify-center rounded-full bg-white/30 backdrop-blur-md text-white border border-white/40">
+<span class="material-symbols-outlined text-4xl fill-1">play_arrow</span>
+</button>
+</div>
+<div class="absolute bottom-0 inset-x-0 p-3 bg-gradient-to-t from-black/60 to-transparent">
+<div class="flex items-center gap-2">
+<div class="h-1 flex-1 rounded-full bg-white/30">
+<div class="h-1 w-1/3 rounded-full bg-primary"></div>
+</div>
+<span class="text-[10px] text-white font-bold">0:45 / 2:10</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Partner Voice Note -->
+<div class="flex items-end gap-2 max-w-[85%]">
+<div class="bg-accent-pink aspect-square bg-cover rounded-full size-8 shrink-0 mb-1" data-alt="Cute bunny profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC3IMjPAA7_OGwex_yTMP73WYwWVZTJaN0p6kgIBgtQRp25j23ZVvozR71-i5-BJgg2T9yibfg5TJddojE3OXJCmoflMKLPtXdm738RVnUk5TKCahdoRyo8dH38DsnvxKa3MMDdrY_Q8GbeNJ6TGT5tAPU-PlTeDQGQ3D7d3wGKpYGAiet9vHTTJfynkf9YTFzl_TxOEaY7nt3sLuDfcl7qq4qcbONz5colJvCoG7v4ssQGoCLYZ54xmAYwll8h5My7b1B73qzb8ls");'>
+</div>
+<div class="flex flex-col gap-1 w-full">
+<div class="flex items-center gap-3 rounded-2xl rounded-bl-none px-4 py-3 bg-white dark:bg-slate-800 shadow-sm border border-accent-pink/10">
+<button class="size-8 flex items-center justify-center rounded-full bg-primary text-white">
+<span class="material-symbols-outlined fill-1">play_arrow</span>
+</button>
+<div class="flex-1 flex items-center gap-1 h-8">
+<div class="w-1 h-3 bg-primary/40 rounded-full"></div>
+<div class="w-1 h-5 bg-primary/60 rounded-full"></div>
+<div class="w-1 h-4 bg-primary rounded-full"></div>
+<div class="w-1 h-6 bg-primary rounded-full"></div>
+<div class="w-1 h-2 bg-primary/40 rounded-full"></div>
+<div class="w-1 h-5 bg-primary/60 rounded-full"></div>
+<div class="w-1 h-4 bg-primary rounded-full"></div>
+<div class="w-1 h-7 bg-primary rounded-full"></div>
+<div class="w-1 h-3 bg-primary/40 rounded-full"></div>
+<div class="w-1 h-5 bg-primary/20 rounded-full"></div>
+</div>
+<span class="text-xs font-bold text-slate-500">0:12</span>
+</div>
+<p class="text-[10px] text-slate-400 font-medium ml-1">10:48 AM</p>
+</div>
+</div>
+<!-- User Response -->
+<div class="flex flex-col items-end gap-1 ml-auto max-w-[85%]">
+<div class="text-[15px] font-normal leading-relaxed rounded-2xl rounded-br-none px-4 py-3 bg-primary text-white shadow-md">
+                    Sending you lots of love! ❤️
+                </div>
+<p class="text-[10px] text-slate-400 font-medium mr-1 text-right">10:50 AM</p>
+</div>
+</div>
+<!-- Input Bar -->
+<div class="p-4 pb-8 bg-white dark:bg-background-dark border-t border-accent-pink/20">
+<div class="flex items-center gap-2 bg-accent-pink/20 dark:bg-slate-800/50 rounded-2xl p-2 px-3 border border-accent-pink/30">
+<button class="text-primary hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">add_circle</span>
+</button>
+<input class="flex-1 bg-transparent border-none focus:ring-0 text-[15px] placeholder:text-primary/50 text-slate-800 dark:text-slate-100" placeholder="Type a message..." type="text"/>
+<div class="flex items-center gap-2">
+<button class="text-primary hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">sentiment_satisfied</span>
+</button>
+<button class="size-10 flex items-center justify-center rounded-full bg-primary text-white shadow-lg shadow-primary/20 hover:bg-primary/90 transition-colors">
+<span class="material-symbols-outlined fill-1">mic</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</body></html>

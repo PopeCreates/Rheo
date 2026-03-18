@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Rheo - Boutique Gift Store</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#fecfd5",
+                "primary-dark": "#fdacb7",
+                "background-light": "#fdfbfc",
+                "background-dark": "#1a0d13",
+              },
+              fontFamily: {
+                "display": ["Plus Jakarta Sans", "sans-serif"]
+              },
+              borderRadius: {
+                "DEFAULT": "1rem",
+                "lg": "1.25rem",
+                "xl": "1.5rem",
+                "2xl": "2rem",
+                "full": "9999px"
+              },
+            },
+          },
+        }
+    </script>
+<style>
+        body {
+            min-height: 100dvh;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .dark .glass-nav {
+            background: rgba(26, 13, 19, 0.85);
+        }
+        .gift-card-shadow {
+            box-shadow: 0 10px 25px -5px rgba(254, 207, 213, 0.3), 0 8px 10px -6px rgba(254, 207, 213, 0.3);
+        }
+        .fill-1 {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 flex flex-col">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-30 glass-nav border-b border-primary/20">
+<div class="flex items-center justify-between px-5 py-4">
+<button class="flex items-center justify-center size-11 rounded-full bg-white dark:bg-slate-800 shadow-sm border border-primary/20 text-slate-600 dark:text-slate-300 active:scale-95 transition-transform">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<span class="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">Rheo</span>
+<button class="flex items-center justify-center size-11 rounded-full bg-white dark:bg-slate-800 shadow-sm border border-primary/20 text-slate-600 dark:text-slate-300 active:scale-95 transition-transform">
+<span class="material-symbols-outlined">search</span>
+</button>
+</div>
+</header>
+<main class="flex-1 overflow-y-auto pb-32">
+<!-- Boutique Hero Section -->
+<div class="px-6 pt-10 pb-8 text-center">
+<div class="relative inline-block mb-6">
+<div class="absolute -inset-4 bg-primary/20 rounded-full blur-xl animate-pulse"></div>
+<div class="relative flex items-center justify-center size-20 bg-primary rounded-3xl rotate-12 transition-transform hover:rotate-0 duration-300">
+<span class="material-symbols-outlined text-slate-800 text-4xl fill-1">card_giftcard</span>
+</div>
+</div>
+<h2 class="text-4xl font-extrabold leading-tight tracking-tight mb-3">Send a Treat</h2>
+<p class="text-slate-500 dark:text-slate-400 text-lg">Curated delights for your favorite people.</p>
+</div>
+<!-- Enhanced Category Filter -->
+<div class="flex gap-3 px-6 mb-8 overflow-x-auto no-scrollbar py-2">
+<button class="whitespace-nowrap px-6 py-2.5 rounded-full bg-slate-900 dark:bg-primary text-white dark:text-slate-900 text-sm font-bold shadow-lg shadow-slate-900/10 transition-all active:scale-95">All Treats</button>
+<button class="whitespace-nowrap px-6 py-2.5 rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-primary/30 text-sm font-semibold hover:border-primary transition-all active:scale-95">Sweet</button>
+<button class="whitespace-nowrap px-6 py-2.5 rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-primary/30 text-sm font-semibold hover:border-primary transition-all active:scale-95">Floral</button>
+<button class="whitespace-nowrap px-6 py-2.5 rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-primary/30 text-sm font-semibold hover:border-primary transition-all active:scale-95">Drinks</button>
+<button class="whitespace-nowrap px-6 py-2.5 rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-primary/30 text-sm font-semibold hover:border-primary transition-all active:scale-95">Wellness</button>
+</div>
+<!-- Boutique Gift Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6 px-6">
+<!-- Item 1: Chocolate -->
+<div class="group relative flex flex-col bg-white dark:bg-slate-800 rounded-[2rem] overflow-hidden gift-card-shadow transition-all hover:-translate-y-1">
+<div class="relative aspect-[4/5] w-full overflow-hidden">
+<div class="absolute inset-0 bg-center bg-cover transition-transform duration-500 group-hover:scale-110" data-alt="A luxurious assortment of dark and milk chocolate truffles" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC40PtgGwRrH53hwHYULPyNN47K6HrEbJ8iIZKxPBif4bCFbwPehZXMmHVqTTECVQqUfRVCEwEy71tvAl9mxKGpy1y8ErLbDR795p8o4l5e7sfSLtejNAteUToTigskdlF3D4mLOMypvn68p2Fd-NInVO8gTX9icfqQp-CYx4DaMFnpgCz4hJMWs3FJ9ezAVxRGDrX0iUG24JtZojkdM0TEYqA5azKZOXpz9aBARQsN37tubwozK5NA6h3zdDUxcG4MUmjBy-tAbnM");'></div>
+<div class="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-full">
+<span class="text-slate-900 font-bold text-sm">$12.00</span>
+</div>
+</div>
+<div class="p-5">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white mb-1">Send Chocolate 🍫</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm mb-4 italic">The ultimate sweet indulgence</p>
+<button class="w-full py-3 bg-primary hover:bg-primary-dark text-slate-900 font-bold rounded-2xl transition-colors active:scale-[0.98]">
+                    Select Treat
+                </button>
+</div>
+</div>
+<!-- Item 2: Flowers -->
+<div class="group relative flex flex-col bg-white dark:bg-slate-800 rounded-[2rem] overflow-hidden gift-card-shadow transition-all hover:-translate-y-1">
+<div class="relative aspect-[4/5] w-full overflow-hidden">
+<div class="absolute inset-0 bg-center bg-cover transition-transform duration-500 group-hover:scale-110" data-alt="A beautiful bouquet of fresh pink and white flowers" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDQ--zwOrx49dq5URsA2zZwkbPykK25kftXg4YAH9dso1vQ8BAleq-mThKsu4xGDCaItjM5eq4m6x0CdIxz57HbA9Zu9GneR6bd-vAdCKM25okQSdPm3hktT0ClGkbpV_k2OV49u5VPbsw-UQgTvdT6tSWoIHPZUqDRxdTuAZr9AGYaHtcjDzxFtnmGeYxGFLkx30d1zNXNsbpSbkK5H-_oA9o927WJqKCADrYuxhE4KsWelS7_J31WmONgHoGhX2f98sq7o1BxAIE");'></div>
+<div class="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-full">
+<span class="text-slate-900 font-bold text-sm">$35.00</span>
+</div>
+</div>
+<div class="p-5">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white mb-1">Send Flowers 💐</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm mb-4 italic">Fresh seasonal blooms</p>
+<button class="w-full py-3 bg-primary hover:bg-primary-dark text-slate-900 font-bold rounded-2xl transition-colors active:scale-[0.98]">
+                    Select Treat
+                </button>
+</div>
+</div>
+<!-- Item 3: Care Package -->
+<div class="group relative flex flex-col bg-white dark:bg-slate-800 rounded-[2rem] overflow-hidden gift-card-shadow transition-all hover:-translate-y-1">
+<div class="relative aspect-[4/5] w-full overflow-hidden">
+<div class="absolute inset-0 bg-center bg-cover transition-transform duration-500 group-hover:scale-110" data-alt="A cozy gift box with various comfort items" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAv1nDpRXqmISWV0A2LzeSAJrocANXpL0jd69P_ebCwt9mZXUYRvnkLyULpo5MJvJgdnrgns1abIaSEmf9I-7UixTn9pzDWPEuQbAAvmJszAkpBHjAjbtRNeUn0E403Qj8W-R38bsjBbL7hQYZTi6f4CfVz6wiIKuiL5CyL86EpbnTmEh778QJLzyc597wxgG4xMVzp1hGeu22akmsv6iZH5zAMs2hHKfjrs5Da8TYjMvBfo7OweW0y5EYN03m1qRRF_-BvYzjLVaU");'></div>
+<div class="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-full">
+<span class="text-slate-900 font-bold text-sm">$45.00</span>
+</div>
+</div>
+<div class="p-5">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white mb-1">Care Package 🎁</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm mb-4 italic">A hug in a boutique box</p>
+<button class="w-full py-3 bg-primary hover:bg-primary-dark text-slate-900 font-bold rounded-2xl transition-colors active:scale-[0.98]">
+                    Select Treat
+                </button>
+</div>
+</div>
+<!-- Item 4: Coffee -->
+<div class="group relative flex flex-col bg-white dark:bg-slate-800 rounded-[2rem] overflow-hidden gift-card-shadow transition-all hover:-translate-y-1">
+<div class="relative aspect-[4/5] w-full overflow-hidden">
+<div class="absolute inset-0 bg-center bg-cover transition-transform duration-500 group-hover:scale-110" data-alt="A steaming cup of artisan latte with heart art" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC8QJQqttLhaM24rR0XWlmSpDWLnduEd2o4vvqaXN9S4kPVK31Kkh5qFBaqIwjFzABsNakpTc5YuKUNmTZbI5uUVXfsjHNjNFegzoWVHDaM2gHi1w2NRtOXDQ5u5ospBXfU3bYwzU77tFmIh15KRqj2wO2Y2ykFRRaqrO2n-GVzt2-e2SdweNgYApdpt346RzJcIfbKu63w7Vq-j44nfVw8d7cm23f40_-IuDWfpwYlQWmoEKpgdZM1U91FYM2SvEfaBMm7e-8OfLY");'></div>
+<div class="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-full">
+<span class="text-slate-900 font-bold text-sm">$5.00</span>
+</div>
+</div>
+<div class="p-5">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white mb-1">Quick Coffee ☕</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm mb-4 italic">Artisan roast delivered</p>
+<button class="w-full py-3 bg-primary hover:bg-primary-dark text-slate-900 font-bold rounded-2xl transition-colors active:scale-[0.98]">
+                    Select Treat
+                </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Modern Bottom Navigation -->
+<nav class="fixed bottom-0 left-0 right-0 z-40 glass-nav border-t border-primary/20 px-6 pb-8 pt-4">
+<div class="flex justify-between items-center max-w-md mx-auto relative">
+<a class="flex flex-col items-center gap-1 group transition-all" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">home</span>
+<span class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.1em]">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1 group transition-all" href="#">
+<span class="material-symbols-outlined text-primary fill-1">card_giftcard</span>
+<span class="text-[10px] font-bold text-slate-900 dark:text-primary uppercase tracking-[0.1em]">Gifts</span>
+</a>
+<!-- Center Action Button -->
+<div class="absolute -top-12 left-1/2 -translate-x-1/2">
+<button class="flex items-center justify-center size-14 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-2xl shadow-xl shadow-primary/20 active:scale-90 transition-all">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+</div>
+<a class="flex flex-col items-center gap-1 group transition-all" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">receipt_long</span>
+<span class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.1em]">Orders</span>
+</a>
+<a class="flex flex-col items-center gap-1 group transition-all" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">person</span>
+<span class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.1em]">Profile</span>
+</a>
+</div>
+</nav>
+</body></html>

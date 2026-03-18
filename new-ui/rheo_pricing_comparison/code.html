@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Rheo - Upgrade to Premium</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400,100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f0428b",
+                        "accent-pink": "#fecfd5",
+                        "background-light": "#f8f6f7",
+                        "background-dark": "#221018",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .premium-card-gradient {
+            background: linear-gradient(135deg, #fff5f7 0%, #fecfd5 100%);
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(8px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-background-light dark:bg-background-dark group/design-root overflow-x-hidden max-w-md mx-auto shadow-2xl">
+<!-- Top Navigation -->
+<div class="flex items-center bg-white dark:bg-background-dark p-4 pb-2 justify-between sticky top-0 z-10">
+<div class="text-slate-900 dark:text-slate-100 flex size-10 shrink-0 items-center justify-center cursor-pointer">
+<span class="material-symbols-outlined">arrow_back</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center">Rheo Premium</h2>
+<div class="flex w-10 items-center justify-end">
+<button class="flex cursor-pointer items-center justify-center h-10 w-10 bg-transparent text-slate-900 dark:text-slate-100">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+</div>
+</div>
+<!-- Hero Illustration Area -->
+<div class="px-6 py-6 flex flex-col items-center text-center">
+<div class="w-32 h-32 mb-4 bg-accent-pink rounded-full flex items-center justify-center relative overflow-hidden" data-alt="Soft pink illustration of a cute bunny mascot smiling">
+<img alt="Rheo Bunny Mascot" class="w-24 h-24 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmQ4leNpesPdvpbbVdiGenyMl-YWv0s3fJU7vo3Ya5YzYEolfOweCKvfW-vr_niPHVsoNWzDgQGwgP2qxCTShic75LuZIt1tnHrWFjhhVP_ZleeF3IqGBM8-d1t20ztwN17UUar4hy6cHhD61h63jxrFCU0YipfYmbmWalkGbf3EACcp3tDiINBl9fxwPjfWuoVN34jcXhgvAdE2_HZNmNN-nYaupBK_fHaxfEVE6DLTuI5weQE24hHMDst5w7DGc3kLUUqx7WUwM"/>
+</div>
+<h1 class="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-2">Better Connection</h1>
+<p class="text-slate-500 dark:text-slate-400 text-sm px-8 leading-relaxed">Share your cycle journey with your partner and unlock deeper intimacy.</p>
+</div>
+<!-- Plan Comparison Tabs -->
+<div class="flex px-6 py-2">
+<div class="flex h-12 flex-1 items-center justify-center rounded-full bg-slate-200/50 dark:bg-slate-800/50 p-1">
+<label class="flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded-full px-2 has-[:checked]:bg-white dark:has-[:checked]:bg-slate-700 has-[:checked]:shadow-sm text-slate-500 dark:text-slate-400 has-[:checked]:text-primary text-sm font-semibold transition-all">
+<span>Free</span>
+<input class="hidden" name="plan-toggle" type="radio" value="Free"/>
+</label>
+<label class="flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded-full px-2 has-[:checked]:bg-white dark:has-[:checked]:bg-slate-700 has-[:checked]:shadow-sm text-slate-500 dark:text-slate-400 has-[:checked]:text-primary text-sm font-semibold transition-all">
+<span>Premium</span>
+<input checked="" class="hidden" name="plan-toggle" type="radio" value="Premium"/>
+</label>
+</div>
+</div>
+<!-- Content Area -->
+<div class="px-6 py-4 space-y-6">
+<!-- Free Section -->
+<section class="bg-white/50 dark:bg-white/5 rounded-xl p-5 border border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-2 mb-4">
+<span class="text-slate-400 text-sm font-bold uppercase tracking-wider">Free Plan</span>
+<div class="h-[1px] flex-1 bg-slate-100 dark:bg-slate-800"></div>
+</div>
+<ul class="space-y-4">
+<li class="flex items-center gap-3">
+<div class="flex items-center justify-center size-8 rounded-full bg-slate-100 dark:bg-slate-800">
+<span class="material-symbols-outlined text-[18px] text-slate-500">person_add</span>
+</div>
+<span class="text-slate-600 dark:text-slate-300 text-sm font-medium">Invite 1 Partner</span>
+</li>
+<li class="flex items-center gap-3">
+<div class="flex items-center justify-center size-8 rounded-full bg-slate-100 dark:bg-slate-800">
+<span class="material-symbols-outlined text-[18px] text-slate-500">chat_bubble</span>
+</div>
+<span class="text-slate-600 dark:text-slate-300 text-sm font-medium">Send basic text messages</span>
+</li>
+<li class="flex items-center gap-3">
+<div class="flex items-center justify-center size-8 rounded-full bg-slate-100 dark:bg-slate-800">
+<span class="material-symbols-outlined text-[18px] text-slate-500">mic</span>
+</div>
+<span class="text-slate-600 dark:text-slate-300 text-sm font-medium">10–15s voice notes</span>
+</li>
+</ul>
+</section>
+<!-- Premium Section -->
+<section class="premium-card-gradient dark:bg-primary/10 rounded-2xl p-6 border-2 border-primary/20 relative overflow-hidden shadow-lg">
+<!-- Decorative Badge -->
+<div class="absolute -right-4 -top-1 bg-primary text-white text-[10px] font-bold px-6 py-1 rotate-12 uppercase tracking-tighter">Recommended</div>
+<div class="flex items-center gap-2 mb-6">
+<span class="text-primary text-lg font-bold">Premium Features</span>
+<span class="material-symbols-outlined text-primary text-[20px] fill-1">auto_awesome</span>
+</div>
+<ul class="space-y-5">
+<li class="flex items-center gap-4">
+<div class="flex items-center justify-center size-10 rounded-xl bg-white dark:bg-slate-900 shadow-sm">
+<span class="material-symbols-outlined text-[22px] text-primary">videocam</span>
+</div>
+<div>
+<p class="text-slate-900 dark:text-slate-100 text-sm font-bold">Video Messages</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs">Share personal clips in real-time</p>
+</div>
+</li>
+<li class="flex items-center gap-4">
+<div class="flex items-center justify-center size-10 rounded-xl bg-white dark:bg-slate-900 shadow-sm">
+<span class="material-symbols-outlined text-[22px] text-primary">mic_none</span>
+</div>
+<div>
+<p class="text-slate-900 dark:text-slate-100 text-sm font-bold">Unlimited Voice Notes</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs">No time limits on your thoughts</p>
+</div>
+</li>
+<li class="flex items-center gap-4">
+<div class="flex items-center justify-center size-10 rounded-xl bg-white dark:bg-slate-900 shadow-sm">
+<span class="material-symbols-outlined text-[22px] text-primary">calendar_clock</span>
+</div>
+<div>
+<p class="text-slate-900 dark:text-slate-100 text-sm font-bold">Scheduled Care Messages</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs">Automated check-ins for your partner</p>
+</div>
+</li>
+<li class="flex items-center gap-4">
+<div class="flex items-center justify-center size-10 rounded-xl bg-white dark:bg-slate-900 shadow-sm">
+<span class="material-symbols-outlined text-[22px] text-primary">insights</span>
+</div>
+<div>
+<p class="text-slate-900 dark:text-slate-100 text-sm font-bold">Mood Insights for Partner</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs">Daily personalized empathy guide</p>
+</div>
+</li>
+</ul>
+<div class="mt-8 pt-4 border-t border-primary/10">
+<div class="flex items-center justify-between">
+<div>
+<span class="text-xs text-slate-500 dark:text-slate-400 line-through">$12.99</span>
+<div class="flex items-baseline gap-1">
+<span class="text-2xl font-bold text-slate-900 dark:text-slate-100">$4.99</span>
+<span class="text-xs text-slate-500 dark:text-slate-400">/month</span>
+</div>
+</div>
+<div class="text-xs font-bold text-primary bg-primary/10 px-3 py-1 rounded-full uppercase">Save 60%</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Footer / CTA -->
+<div class="p-6 mt-auto">
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-xl shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-2 group">
+<span>Upgrade to Premium</span>
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+<p class="text-center text-[10px] text-slate-400 mt-4 leading-relaxed">
+                By upgrading, you agree to Rheo's Terms of Service and Privacy Policy. Subscription renews automatically unless cancelled 24h before period ends.
+            </p>
+</div>
+</div>
+</body></html>

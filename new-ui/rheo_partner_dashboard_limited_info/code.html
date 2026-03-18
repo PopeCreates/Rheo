@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f0428b",
+                        "accent": "#fecfd5",
+                        "background-light": "#f8f6f7",
+                        "background-dark": "#221018",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen font-display">
+<!-- Header Section -->
+<header class="flex items-center justify-between p-6 bg-white dark:bg-slate-900/50 sticky top-0 z-10 border-b border-primary/10">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 bg-accent rounded-full flex items-center justify-center border-2 border-primary/20 overflow-hidden shadow-sm">
+<img alt="Cute bunny mascot" class="w-full h-full object-cover" data-alt="A cute white animated bunny mascot with pink ears" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANIjlvSZEoscyiUeyHHL6y7hcx5IC9hDpaDgmSkyZqruw5VCPnNdItZiM0XbC1NIscn9rwxLGs1eVoYbX9mQhio8pMR_UYyjPVnfMXHBV5aV_4TT9K_151jLJI64FYprQIUIveXdfwqM8zdhfGJb37k-PgxP1LKenHcDi57kQ1iZ4hJFYQ1pwbcoY9y018ez-NWz2m1ZbwUBI8QllbTmZZo1LNwMFZEgxBT6RGf79pj7Blz6FMA-YfSP_1yH_EZZ0OFRxeExNwY8s"/>
+</div>
+<div>
+<h1 class="text-lg font-bold tracking-tight text-slate-900 dark:text-white leading-tight">Rheo Partner</h1>
+<div class="flex items-center gap-1.5">
+<span class="flex h-2 w-2 rounded-full bg-primary animate-pulse"></span>
+<p class="text-xs font-semibold uppercase tracking-wider text-primary">Partner Mode Active</p>
+</div>
+</div>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-background-light dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined text-[24px]">notifications</span>
+</button>
+</header>
+<main class="max-w-md mx-auto pb-24">
+<!-- Status Cards -->
+<section class="p-6 grid grid-cols-2 gap-4">
+<div class="bg-accent/40 dark:bg-primary/10 p-5 rounded-xl border border-primary/5 shadow-sm">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium mb-1">Current Cycle</p>
+<p class="text-2xl font-bold text-slate-900 dark:text-white">Day 14</p>
+<div class="mt-2 h-1 w-full bg-white/50 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-1/2 rounded-full"></div>
+</div>
+</div>
+<div class="bg-accent/40 dark:bg-primary/10 p-5 rounded-xl border border-primary/5 shadow-sm">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium mb-1">Current Mood</p>
+<p class="text-2xl font-bold text-slate-900 dark:text-white">Feeling Calm</p>
+<p class="text-[10px] mt-2 text-primary font-bold uppercase tracking-widest">Ovulation Phase</p>
+</div>
+</section>
+<!-- Proactive Tip Card -->
+<section class="px-6 mb-8">
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border-l-4 border-primary shadow-sm flex gap-4">
+<div class="flex-shrink-0 w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">lightbulb</span>
+</div>
+<div>
+<h3 class="text-sm font-bold text-slate-900 dark:text-white mb-1 uppercase tracking-tighter">Proactive Tip from Rheo</h3>
+<p class="text-slate-600 dark:text-slate-300 leading-relaxed italic">"She might need some extra rest today. Maybe handle the dinner plans tonight?"</p>
+</div>
+</div>
+</section>
+<!-- Support Suggestions -->
+<section class="px-6 mb-8">
+<h2 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Support Suggestions</h2>
+<div class="flex flex-col gap-3">
+<button class="flex items-center justify-between w-full p-4 bg-white dark:bg-slate-900 rounded-xl border border-primary/10 hover:border-primary transition-colors group">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-accent rounded-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">cake</span>
+</div>
+<span class="font-semibold text-slate-800 dark:text-slate-200">Send a Treat</span>
+</div>
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary">chevron_right</span>
+</button>
+<button class="flex items-center justify-between w-full p-4 bg-white dark:bg-slate-900 rounded-xl border border-primary/10 hover:border-primary transition-colors group">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-accent rounded-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">mic</span>
+</div>
+<span class="font-semibold text-slate-800 dark:text-slate-200">Send a Voice Note</span>
+</div>
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary">chevron_right</span>
+</button>
+<button class="flex items-center justify-between w-full p-4 bg-white dark:bg-slate-900 rounded-xl border border-primary/10 hover:border-primary transition-colors group">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-accent rounded-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">chat_bubble</span>
+</div>
+<span class="font-semibold text-slate-800 dark:text-slate-200">Send a Message</span>
+</div>
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary">chevron_right</span>
+</button>
+</div>
+</section>
+<!-- Premium Boutique Card -->
+<section class="px-6">
+<div class="relative overflow-hidden bg-primary p-8 rounded-xl text-white shadow-lg shadow-primary/20">
+<div class="relative z-10">
+<h3 class="text-xl font-bold mb-2">Boutique Wellness</h3>
+<p class="text-white/80 text-sm mb-4">Upgrade to Premium for deeper partner insights and gift suggestions.</p>
+<button class="bg-white text-primary px-6 py-2 rounded-full font-bold text-sm">Explore More</button>
+</div>
+<div class="absolute -right-8 -bottom-8 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+<div class="absolute -left-8 -top-8 w-24 h-24 bg-white/10 rounded-full blur-2xl"></div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation -->
+<nav class="fixed bottom-0 left-0 right-0 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-t border-primary/10 px-4 pb-6 pt-3 z-50">
+<div class="max-w-md mx-auto flex justify-between items-center">
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary">calendar_today</span>
+<span class="text-[10px] font-bold text-slate-500 group-hover:text-primary uppercase tracking-tighter">Today</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary">leaderboard</span>
+<span class="text-[10px] font-bold text-slate-500 group-hover:text-primary uppercase tracking-tighter">Insights</span>
+</a>
+<a class="flex flex-col items-center gap-1 group text-primary" href="#">
+<span class="material-symbols-outlined fill-1">favorite</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Partner</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary">person</span>
+<span class="text-[10px] font-bold text-slate-500 group-hover:text-primary uppercase tracking-tighter">Profile</span>
+</a>
+</div>
+</nav>
+</body></html>

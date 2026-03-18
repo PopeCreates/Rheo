@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Rheo Onboarding - Selection</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#fecfd5",
+                        "background-light": "#f8f6f7",
+                        "background-dark": "#221018",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }</script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-background-light dark:bg-background-dark group/design-root overflow-x-hidden">
+<!-- Top App Bar -->
+<div class="flex items-center bg-background-light dark:bg-background-dark p-4 pb-2 justify-between">
+<div class="text-slate-900 dark:text-slate-100 flex size-12 shrink-0 items-center justify-center cursor-pointer hover:bg-primary/10 rounded-full transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-12">Welcome to Rheo</h2>
+</div>
+<!-- Progress Indicator -->
+<div class="flex flex-col gap-3 p-6">
+<div class="flex gap-6 justify-between">
+<p class="text-slate-600 dark:text-slate-400 text-sm font-medium leading-normal">Step 1 of 3</p>
+</div>
+<div class="rounded-full bg-primary/20 h-2 w-full overflow-hidden">
+<div class="h-full rounded-full bg-primary" style="width: 33%;"></div>
+</div>
+</div>
+<!-- Hero Heading -->
+<div class="px-6 pt-8 pb-4">
+<h2 class="text-slate-900 dark:text-slate-100 tracking-tight text-3xl font-extrabold leading-tight text-center">
+                How will you be using Rheo?
+            </h2>
+<p class="text-slate-500 dark:text-slate-400 text-center mt-2 text-base">Choose the profile that best fits your needs.</p>
+</div>
+<!-- Selection Cards Container -->
+<div class="flex flex-col gap-6 p-6 @container">
+<!-- Option 1: Cycle Tracker -->
+<div class="group flex flex-col items-stretch justify-start rounded-xl @xl:flex-row @xl:items-start shadow-sm hover:shadow-md transition-all border border-primary/10 bg-white dark:bg-slate-900 overflow-hidden cursor-pointer">
+<div class="w-full bg-primary/5 aspect-video bg-center bg-no-repeat bg-contain flex items-center justify-center p-8" data-alt="Illustration of a cute bunny holding a flower calendar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBPVd-rDA-IBPkFGi26YDe_FvgDvJJVqS2whLma2VaiSVg84ABUf3oKAiyu8qr8lnjJyxnUopHSLEhPVW-dLEYp10Wk61ja2EDy0xQCThh-powI6cO4q3wbzGWbG6O4VRZKXK8aDx0Kegvlu0HYfWtleSh-14GywwjHhj2pomw1cEkxd86bIB2X5qv03-V2Y0pVdaJfG6Bxy7rsO0cz7ilpKvo7RP710NfJkhuCSrCrDSNKXC0KqJGfPJuVp2QCQdLUwkLyi8emI7s");'>
+</div>
+<div class="flex w-full min-w-72 grow flex-col items-stretch justify-center gap-3 p-6">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-primary text-xl">calendar_today</span>
+<p class="text-slate-900 dark:text-slate-100 text-xl font-bold leading-tight tracking-tight">I track my cycle</p>
+</div>
+<p class="text-slate-600 dark:text-slate-400 text-sm font-normal leading-relaxed">
+                            Log your symptoms, track your period, and understand your body's unique rhythms with our cute bunny guide.
+                        </p>
+</div>
+<div class="flex items-center justify-end">
+<button class="flex min-w-[120px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-6 bg-primary text-sm font-semibold leading-normal hover:brightness-110 active:scale-95 transition-all text-slate-900">
+<span class="truncate">Select</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Option 2: Partner -->
+<div class="group flex flex-col items-stretch justify-start rounded-xl @xl:flex-row @xl:items-start shadow-sm hover:shadow-md transition-all border border-primary/10 bg-white dark:bg-slate-900 overflow-hidden cursor-pointer">
+<div class="w-full bg-primary/5 aspect-video bg-center bg-no-repeat bg-contain flex items-center justify-center p-8" data-alt="Illustration of a bunny mascot holding a supportive heart" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD5alRXUzAuw3Rl-0kHIYJuD-bYZTPhybqqAoWcYmNTf-jgum2rzmc8Lpfg0XgFI7i1x1t778a5VeM_n447oNn2Ad0jOMNgCDQZvtFkdwy2rdUhYlUIVNisIzO4mO-yF_uaThPcaD9rjk4NUeVRAn6cY-MKXqY1TSFCvg_duOYMnGn1CcRyQo4RIrAomuXHlESNg8W9n5s-nCdZgsIROsCyUAbLRf6DKgFyeS0xVUIYLMEjvvop1B2wopBeK2C10eQUY2IYHFrO8bk");'>
+</div>
+<div class="flex w-full min-w-72 grow flex-col items-stretch justify-center gap-3 p-6">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-primary text-xl">favorite</span>
+<p class="text-slate-900 dark:text-slate-100 text-xl font-bold leading-tight tracking-tight">I am a partner</p>
+</div>
+<p class="text-slate-600 dark:text-slate-400 text-sm font-normal leading-relaxed">
+                            Support your partner effectively. Stay informed about their cycle and get tips on how to be there for them.
+                        </p>
+</div>
+<div class="flex items-center justify-end">
+<button class="flex min-w-[120px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-6 bg-primary/10 text-sm font-semibold leading-normal hover:bg-primary/20 active:scale-95 transition-all text-slate-700">
+<span class="truncate">Select</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Help Link -->
+<div class="mt-auto p-6 text-center">
+<p class="text-slate-400 dark:text-slate-500 text-sm">
+                Not sure which one to choose? 
+                <a class="text-primary font-medium hover:underline" href="#">Learn more</a>
+</p>
+</div>
+<div class="h-8"></div>
+</div>
+</body></html>

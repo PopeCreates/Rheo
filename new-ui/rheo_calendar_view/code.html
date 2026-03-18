@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Rheo - Cycle Calendar</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f0428b",
+                        "background-light": "#f8f6f7",
+                        "background-dark": "#221018",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex h-auto min-h-screen w-full max-w-md mx-auto flex-col bg-white dark:bg-background-dark shadow-2xl overflow-x-hidden">
+<!-- Header -->
+<div class="flex items-center bg-white dark:bg-background-dark p-4 pb-2 justify-between sticky top-0 z-10 border-b border-primary/10">
+<div class="text-slate-900 dark:text-slate-100 flex size-12 shrink-0 items-center justify-start">
+<span class="material-symbols-outlined cursor-pointer hover:bg-primary/10 p-2 rounded-full transition-colors">arrow_back_ios</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-tight flex-1 text-center uppercase tracking-[0.1em]">Rheo Calendar</h2>
+<div class="flex w-12 items-center justify-end">
+<button class="flex items-center justify-center rounded-xl h-12 bg-transparent text-slate-900 dark:text-slate-100 p-0">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+</div>
+<!-- Month Selector -->
+<div class="flex items-center justify-between px-6 py-6">
+<button class="p-2 hover:bg-primary/5 rounded-full transition-colors">
+<span class="material-symbols-outlined text-primary">chevron_left</span>
+</button>
+<div class="text-center">
+<p class="text-primary text-xs font-bold uppercase tracking-widest mb-1">Current Cycle</p>
+<p class="text-slate-900 dark:text-slate-100 text-xl font-bold leading-tight">October 2023</p>
+</div>
+<button class="p-2 hover:bg-primary/5 rounded-full transition-colors">
+<span class="material-symbols-outlined text-primary">chevron_right</span>
+</button>
+</div>
+<!-- Calendar Grid -->
+<div class="px-4 mb-4">
+<div class="bg-white dark:bg-background-dark border border-primary/10 rounded-xl p-2 shadow-sm">
+<div class="grid grid-cols-7 mb-2">
+<p class="text-primary/60 text-[11px] font-bold flex h-8 w-full items-center justify-center">SUN</p>
+<p class="text-primary/60 text-[11px] font-bold flex h-8 w-full items-center justify-center">MON</p>
+<p class="text-primary/60 text-[11px] font-bold flex h-8 w-full items-center justify-center">TUE</p>
+<p class="text-primary/60 text-[11px] font-bold flex h-8 w-full items-center justify-center">WED</p>
+<p class="text-primary/60 text-[11px] font-bold flex h-8 w-full items-center justify-center">THU</p>
+<p class="text-primary/60 text-[11px] font-bold flex h-8 w-full items-center justify-center">FRI</p>
+<p class="text-primary/60 text-[11px] font-bold flex h-8 w-full items-center justify-center">SAT</p>
+</div>
+<div class="grid grid-cols-7 gap-y-1">
+<!-- Week 1 (Starts Sunday) -->
+<button class="h-14 w-full text-slate-400 text-sm font-medium">1</button>
+<button class="h-14 w-full text-slate-400 text-sm font-medium">2</button>
+<button class="h-14 w-full text-slate-400 text-sm font-medium">3</button>
+<button class="h-14 w-full text-slate-900 dark:text-slate-100 text-sm font-medium relative">
+<div class="flex size-full items-center justify-center rounded-full">4</div>
+</button>
+<!-- Period Days (5-9) -->
+<button class="h-14 w-full bg-primary/20 text-slate-900 dark:text-slate-100 text-sm font-bold relative first:rounded-l-full">
+<div class="flex size-full items-center justify-center bg-primary text-white rounded-full scale-90">5</div>
+</button>
+<button class="h-14 w-full bg-primary/20 text-slate-900 dark:text-slate-100 text-sm font-bold">
+<div class="flex size-full items-center justify-center">6</div>
+<div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-0.5">
+<span class="material-symbols-outlined text-[10px] text-primary" style="font-variation-settings: 'FILL' 1">cruelty_free</span>
+</div>
+</button>
+<button class="h-14 w-full bg-primary/20 text-slate-900 dark:text-slate-100 text-sm font-bold last:rounded-r-full">
+<div class="flex size-full items-center justify-center">7</div>
+</button>
+<!-- Week 2 -->
+<button class="h-14 w-full bg-primary/20 text-slate-900 dark:text-slate-100 text-sm font-bold rounded-l-full">
+<div class="flex size-full items-center justify-center">8</div>
+</button>
+<button class="h-14 w-full bg-primary/20 text-slate-900 dark:text-slate-100 text-sm font-bold rounded-r-full">
+<div class="flex size-full items-center justify-center">9</div>
+</button>
+<button class="h-14 w-full text-slate-900 dark:text-slate-100 text-sm font-medium">10</button>
+<button class="h-14 w-full text-slate-900 dark:text-slate-100 text-sm font-medium relative">
+<div class="flex size-full items-center justify-center">11</div>
+<div class="absolute bottom-2 left-1/2 -translate-x-1/2"><div class="size-1.5 rounded-full bg-orange-400"></div></div>
+</button>
+<button class="h-14 w-full text-slate-900 dark:text-slate-100 text-sm font-medium">12</button>
+<button class="h-14 w-full text-slate-900 dark:text-slate-100 text-sm font-medium">13</button>
+<button class="h-14 w-full text-slate-900 dark:text-slate-100 text-sm font-medium relative">
+<div class="flex size-full items-center justify-center">14</div>
+<div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-0.5">
+<span class="material-symbols-outlined text-[10px] text-primary" style="font-variation-settings: 'FILL' 1">cruelty_free</span>
+</div>
+</button>
+<!-- Ovulation Window (15-20) -->
+<button class="h-14 w-full bg-primary/5 text-slate-900 dark:text-slate-100 text-sm font-medium rounded-l-full">
+<div class="flex size-full items-center justify-center">15</div>
+</button>
+<button class="h-14 w-full bg-primary/5 text-slate-900 dark:text-slate-100 text-sm font-medium">
+<div class="flex size-full items-center justify-center">16</div>
+</button>
+<button class="h-14 w-full bg-primary/5 text-slate-900 dark:text-slate-100 text-sm font-medium relative">
+<div class="flex size-full items-center justify-center border-2 border-primary/40 rounded-full bg-white dark:bg-background-dark scale-90">17</div>
+<div class="absolute bottom-2 left-1/2 -translate-x-1/2"><div class="size-1.5 rounded-full bg-blue-400"></div></div>
+</button>
+<button class="h-14 w-full bg-primary/5 text-slate-900 dark:text-slate-100 text-sm font-medium">
+<div class="flex size-full items-center justify-center">18</div>
+</button>
+<button class="h-14 w-full bg-primary/5 text-slate-900 dark:text-slate-100 text-sm font-medium">
+<div class="flex size-full items-center justify-center">19</div>
+</button>
+<button class="h-14 w-full bg-primary/5 text-slate-900 dark:text-slate-100 text-sm font-medium rounded-r-full">
+<div class="flex size-full items-center justify-center">20</div>
+</button>
+<button class="h-14 w-full text-slate-900 dark:text-slate-100 text-sm font-medium">21</button>
+<!-- Rest of Month -->
+<button class="h-14 w-full text-slate-900 dark:text-slate-100 text-sm font-medium">22</button>
+<button class="h-14 w-full text-slate-900 dark:text-slate-100 text-sm font-medium relative">
+<div class="flex size-full items-center justify-center">23</div>
+<div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-0.5">
+<span class="material-symbols-outlined text-[10px] text-primary" style="font-variation-settings: 'FILL' 1">cruelty_free</span>
+</div>
+</button>
+<button class="h-14 w-full text-slate-900 dark:text-slate-100 text-sm font-medium">24</button>
+<button class="h-14 w-full text-slate-900 dark:text-slate-100 text-sm font-medium">25</button>
+<button class="h-14 w-full text-slate-900 dark:text-slate-100 text-sm font-medium">26</button>
+<button class="h-14 w-full text-slate-900 dark:text-slate-100 text-sm font-medium">27</button>
+<button class="h-14 w-full text-slate-900 dark:text-slate-100 text-sm font-medium relative">
+<div class="flex size-full items-center justify-center">28</div>
+<div class="absolute bottom-2 left-1/2 -translate-x-1/2"><div class="size-1.5 rounded-full bg-primary"></div></div>
+</button>
+<button class="h-14 w-full text-slate-900 dark:text-slate-100 text-sm font-medium">29</button>
+<button class="h-14 w-full text-slate-900 dark:text-slate-100 text-sm font-medium">30</button>
+<button class="h-14 w-full text-slate-900 dark:text-slate-100 text-sm font-medium">31</button>
+</div>
+</div>
+</div>
+<!-- Legend Section -->
+<div class="px-6 py-4">
+<h4 class="text-slate-900 dark:text-slate-100 text-xs font-bold uppercase tracking-widest mb-4">Calendar Legend</h4>
+<div class="grid grid-cols-2 gap-4">
+<div class="flex items-center gap-3">
+<div class="size-4 rounded-full bg-primary"></div>
+<span class="text-xs text-slate-600 dark:text-slate-400 font-medium">Period Days</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="size-4 rounded-full bg-primary/20"></div>
+<span class="text-xs text-slate-600 dark:text-slate-400 font-medium">Period Window</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="size-4 rounded-full bg-primary/10 border border-primary/30"></div>
+<span class="text-xs text-slate-600 dark:text-slate-400 font-medium">Ovulation Window</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-sm text-primary" style="font-variation-settings: 'FILL' 1">cruelty_free</span>
+<span class="text-xs text-slate-600 dark:text-slate-400 font-medium">Mood Logged</span>
+</div>
+</div>
+</div>
+<!-- Add Entry Button -->
+<div class="px-6 pb-20 pt-4">
+<button class="w-full bg-primary text-white py-4 rounded-xl font-bold text-base shadow-lg shadow-primary/20 flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined">add</span>
+                Add Daily Entry
+            </button>
+</div>
+<!-- Bottom Nav Bar -->
+<div class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md flex gap-2 border-t border-primary/10 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md px-4 pb-4 pt-2 z-20">
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">today</span>
+<p class="text-[10px] font-bold uppercase tracking-tighter">Today</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">calendar_month</span>
+<p class="text-[10px] font-bold uppercase tracking-tighter">Calendar</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">insights</span>
+<p class="text-[10px] font-bold uppercase tracking-tighter">Insights</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">person</span>
+<p class="text-[10px] font-bold uppercase tracking-tighter">Profile</p>
+</a>
+</div>
+</div>
+</body></html>

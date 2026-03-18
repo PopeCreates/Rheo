@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#fecfd5",
+                "background-light": "#f8f6f7",
+                "background-dark": "#221018",
+              },
+              fontFamily: {
+                "display": ["Plus Jakarta Sans"]
+              },
+              borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+            },
+          },
+        }</script>
+<title>Rheo Onboarding - Invite Partner</title>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="relative flex h-auto min-h-screen w-full flex-col max-w-md mx-auto overflow-x-hidden">
+<!-- Top Navigation -->
+<div class="flex items-center p-4 pb-2 justify-between">
+<button class="text-slate-900 dark:text-slate-100 flex size-12 shrink-0 items-center justify-center hover:bg-primary/10 rounded-full transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-12">Invite Partner</h2>
+</div>
+<!-- Illustration Section -->
+<div class="px-6 py-4">
+<div class="flex items-center justify-center rounded-lg bg-primary/40 text-slate-900 shrink-0 size-10">
+<img alt="A cute bunny holding a heart illustration" class="w-full h-full object-cover" data-alt="A cute white bunny holding a large pink heart illustration" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLDwFqOGBIK-SvVsdJugdZY3RODai5GwHRWo9sobPE_W00MortFXwz5VpQXbdaYyVCFoKFWCel-k446unrpp8KwWLruU-Cq73uQwMUXiE0MBBLo-06gFCfsV-dRPZ41k26GwYP67SguXNDr05C7azQulD0I3yNUqFyeFhRkdUrMqkbbFjQ_2qnDOHW7DsftAIxrPDxn5TwQTXrIfQS5sl49o3E7hhOa6a7ssCeSb_CbPgsn56Ra-I3VmACzybEXTN79H_xOLih8rY"/>
+<!-- Abstract Overlay for style -->
+<div class="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent"></div>
+</div>
+</div>
+<!-- Header Text -->
+<div class="px-6 text-center">
+<h2 class="text-slate-900 dark:text-slate-100 tracking-light text-[28px] font-bold leading-tight pb-2 pt-4">Better together</h2>
+<p class="text-slate-600 dark:text-slate-400 text-base font-normal leading-normal px-4">Invite your partner to start your journey with Rheo and sync your experiences.</p>
+</div>
+<!-- Sharing Options -->
+<div class="flex flex-col gap-3 px-6 mt-8">
+<!-- Copy Link -->
+<div class="flex items-center gap-4 bg-white dark:bg-slate-800/50 p-4 rounded-xl border border-primary/10 hover:border-primary/30 transition-all cursor-pointer group">
+<div class="flex items-center justify-center rounded-lg bg-primary/40 text-slate-900 shrink-0 size-10"><span class="material-symbols-outlined">link</span></div>
+<p class="text-slate-900 dark:text-slate-100 text-base font-semibold flex-1">Copy invite link</p>
+<div class="text-slate-400 group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined">content_copy</span>
+</div>
+</div>
+<!-- SMS -->
+<div class="flex items-center gap-4 bg-white dark:bg-slate-800/50 p-4 rounded-xl border border-primary/10 hover:border-primary/30 transition-all cursor-pointer group">
+<div class="flex items-center justify-center rounded-lg bg-primary/40 text-slate-900 shrink-0 size-10"><span class="material-symbols-outlined">link</span></div>
+<p class="text-slate-900 dark:text-slate-100 text-base font-semibold flex-1">Invite via SMS</p>
+<div class="text-slate-400 group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</div>
+</div>
+<!-- WhatsApp -->
+<div class="flex items-center gap-4 bg-white dark:bg-slate-800/50 p-4 rounded-xl border border-primary/10 hover:border-primary/30 transition-all cursor-pointer group">
+<div class="flex items-center justify-center rounded-lg bg-primary/40 text-slate-900 shrink-0 size-10"><span class="material-symbols-outlined">link</span></div>
+<p class="text-slate-900 dark:text-slate-100 text-base font-semibold flex-1">Invite via WhatsApp</p>
+<div class="text-slate-400 group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</div>
+</div>
+<!-- Email -->
+<div class="flex items-center gap-4 bg-white dark:bg-slate-800/50 p-4 rounded-xl border border-primary/10 hover:border-primary/30 transition-all cursor-pointer group">
+<div class="flex items-center justify-center rounded-lg bg-primary/40 text-slate-900 shrink-0 size-10"><span class="material-symbols-outlined">link</span></div>
+<p class="text-slate-900 dark:text-slate-100 text-base font-semibold flex-1">Invite via Email</p>
+<div class="text-slate-400 group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- Footer Actions -->
+<div class="mt-auto p-6 flex flex-col items-center gap-4">
+<button class="w-full bg-primary font-bold py-4 rounded-xl shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all text-slate-900">
+                Send Invitation
+            </button>
+<button class="text-slate-500 dark:text-slate-400 font-medium hover:text-primary transition-colors py-2">
+                Skip for now
+            </button>
+</div>
+<!-- Spacer for mobile safe area -->
+<div class="h-6"></div>
+</div>
+</body></html>

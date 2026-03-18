@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Rheo Period Tracker</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f0428b",
+                        "secondary": "#fecfd5",
+                        "background-light": "#f8f6f7",
+                        "background-dark": "#221018",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .cycle-ring {
+            background: conic-gradient(from 0deg, #f0428b 75%, #fecfd5 75%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display min-h-screen flex flex-col">
+<!-- Header -->
+<header class="flex items-center justify-between px-6 py-4 bg-white dark:bg-background-dark/50 sticky top-0 z-10">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-3xl">water_drop</span>
+<h1 class="text-xl font-bold tracking-tight">Rheo</h1>
+</div>
+<div class="flex gap-3">
+<button class="p-2 rounded-full bg-secondary/30 text-primary">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 rounded-full bg-secondary/30 text-primary">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+</header>
+<main class="flex-1 overflow-y-auto pb-24">
+<!-- AI Assistant Proactive Card -->
+<div class="p-4">
+<div class="relative bg-primary/10 dark:bg-primary/20 rounded-xl p-5 border border-primary/20 overflow-hidden">
+<div class="flex gap-4 items-start relative z-10">
+<div class="w-16 h-16 rounded-full bg-white dark:bg-slate-800 flex items-center justify-center border-2 border-primary/30 shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Cute white bunny mascot illustration" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZdEHC0IdVo3-UQS56NCkuxRlU5LRJ_gsSE8KZ0mCFmcR-kldYzXlN29vwpgFqg2uyJIvvlECz9lbPopVdKW6KZvayxcftm_i2PHjYva83JueYa9KEavUO3GEI-l3LoYo-PYFDC-GWxiWw_wbDhkjABEbYZDA-wAL0RtbDLVpM6rTsbWkjGqOMPmnm13BNayL1rH2kgd388efCCLQE-rf_n7P7g038Uau_rCqkP9yHfEFWmB3CnupmgS7bchaAHOmUCsfvlkPFEUc"/>
+</div>
+<div class="flex-1">
+<h3 class="font-bold text-primary mb-1">Rheo Assistant</h3>
+<p class="text-sm leading-relaxed text-slate-700 dark:text-slate-300">
+                            Your cycle is starting soon! I've prepared some tips to help you stay comfortable during the next few days.
+                        </p>
+<button class="mt-3 bg-primary text-white px-4 py-1.5 rounded-lg text-xs font-bold hover:bg-primary/90 transition-colors">
+                            View Tips
+                        </button>
+</div>
+</div>
+<!-- Subtle decorative background element -->
+<div class="absolute -right-4 -bottom-4 opacity-10">
+<span class="material-symbols-outlined text-8xl text-primary">auto_awesome</span>
+</div>
+</div>
+</div>
+<!-- Cycle Status Visualization -->
+<div class="flex flex-col items-center py-6 px-4">
+<div class="relative w-64 h-64 flex items-center justify-center">
+<!-- Outer Progress Ring -->
+<div class="absolute inset-0 rounded-full border-[12px] border-secondary opacity-30"></div>
+<div class="absolute inset-0 rounded-full border-[12px] border-primary border-t-transparent border-r-transparent rotate-45"></div>
+<!-- Inner Content -->
+<div class="text-center">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium uppercase tracking-widest">Day</p>
+<h2 class="text-6xl font-extrabold text-primary my-1">21</h2>
+<p class="text-slate-600 dark:text-slate-300 font-semibold">Luteal Phase</p>
+</div>
+<!-- Floating AI Insight Pulse -->
+<button class="absolute bottom-0 right-4 bg-white dark:bg-slate-800 shadow-lg rounded-full px-4 py-2 flex items-center gap-2 border border-primary/20 scale-100 hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-primary text-sm">lightbulb</span>
+<span class="text-xs font-bold text-primary">AI Insights</span>
+</button>
+</div>
+<div class="mt-8 text-center bg-white dark:bg-background-dark/40 px-6 py-3 rounded-full border border-secondary/50">
+<p class="text-sm text-slate-600 dark:text-slate-400">
+                    Period predicted in <span class="text-primary font-bold">5 days</span>
+</p>
+</div>
+</div>
+<!-- Daily Logging Section -->
+<div class="px-6 mt-4">
+<div class="flex items-center justify-between mb-4">
+<h2 class="text-lg font-bold">Daily Logging</h2>
+<span class="text-primary text-sm font-semibold">Today, Oct 24</span>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<!-- Moods -->
+<div class="bg-white dark:bg-slate-800/50 p-4 rounded-xl border border-secondary/30">
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-primary text-xl">mood</span>
+<span class="font-bold text-sm">Mood</span>
+</div>
+<div class="flex gap-2 flex-wrap">
+<button class="w-8 h-8 rounded-full bg-secondary/50 flex items-center justify-center text-lg">😊</button>
+<button class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-lg">😌</button>
+<button class="w-8 h-8 rounded-full bg-secondary/50 flex items-center justify-center text-lg">😔</button>
+<button class="p-1 rounded-full border border-dashed border-primary/50 text-primary">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+</div>
+<!-- Symptoms -->
+<div class="bg-white dark:bg-slate-800/50 p-4 rounded-xl border border-secondary/30">
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-primary text-xl">pulmonology</span>
+<span class="font-bold text-sm">Symptoms</span>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="bg-secondary/30 text-primary text-[10px] px-2 py-1 rounded-full font-bold uppercase">Cramps</span>
+<span class="bg-primary/10 text-primary text-[10px] px-2 py-1 rounded-full font-bold uppercase">Bloating</span>
+<button class="p-1 rounded-full border border-dashed border-primary/50 text-primary">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Health Stats Mini Card -->
+<div class="mt-4 bg-white dark:bg-slate-800/50 p-4 rounded-xl border border-secondary/30 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">water_full</span>
+</div>
+<div>
+<p class="text-xs text-slate-500 font-medium">Water Intake</p>
+<p class="text-sm font-bold">1.2L / 2.0L</p>
+</div>
+</div>
+<div class="w-24 h-2 bg-secondary rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[60%]"></div>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating AI Chat Bubble -->
+<button class="fixed bottom-24 right-6 w-14 h-14 bg-primary text-white rounded-full shadow-xl flex items-center justify-center z-50 hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">chat_bubble</span>
+<div class="absolute -top-1 -right-1 w-4 h-4 bg-white rounded-full flex items-center justify-center border-2 border-primary">
+<div class="w-2 h-2 bg-green-500 rounded-full"></div>
+</div>
+</button>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 right-0 bg-white dark:bg-background-dark border-t border-secondary/20 px-6 pb-6 pt-3 flex justify-between items-center z-40">
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined fill-[1]">home</span>
+<span class="text-[10px] font-bold">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-[10px] font-bold">Insights</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="text-[10px] font-bold">Calendar</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-bold">Profile</span>
+</a>
+</nav>
+</body></html>

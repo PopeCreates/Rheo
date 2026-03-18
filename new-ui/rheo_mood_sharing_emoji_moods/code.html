@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Rheo - Mood Tracker</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f0428b",
+                        "background-light": "#f8f6f7",
+                        "background-dark": "#221018",
+                        "soft-pink": "#fecfd5",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<!-- Header -->
+<header class="flex items-center bg-white/80 dark:bg-background-dark/80 backdrop-blur-md sticky top-0 z-10 p-4 justify-between border-b border-primary/10">
+<div class="flex size-10 items-center justify-center rounded-full bg-primary/10 text-primary">
+<span class="material-symbols-outlined">chevron_left</span>
+</div>
+<h2 class="text-xl font-bold leading-tight tracking-tight text-primary">Rheo</h2>
+<div class="flex size-10 items-center justify-center rounded-full bg-primary/10 text-primary">
+<span class="material-symbols-outlined">help_outline</span>
+</div>
+</header>
+<main class="flex-1 overflow-y-auto pb-24"><!-- Bunny Mascot & Title -->
+<div class="flex flex-col items-center p-6 gap-3">
+<div class="relative">
+<div class="bg-soft-pink/30 rounded-full p-2 animate-pulse absolute -inset-1"></div>
+<div class="relative bg-white dark:bg-slate-800 rounded-full w-24 h-24 flex items-center justify-center border-4 border-soft-pink overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Cute white bunny mascot character named Leo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLiCYQYxy6YZJW-ffLBY2SvhhNMh9EU4ZFLctT7Cq2KPP3_f8-K3X87Ux1QVKjtGxR9rzQp3TJ9wx7WkvipEZEdyyHG3dac_R-yhPRA7gXwOxA2_j-aCNeCscm3bjUs6uo97BX7hvT31mX2uaHYA-Gma6ehS7lcEV-Q3HIFg_UdEvtoW-L9RZliki_mK7Xprclc5z7H8YpNd8Hq7OmsWCChVbS6AKSQp433s1Ahl4uFmxrraT9rUha4_8MaMk8joUTFZSjY2zdlxA"/>
+</div>
+</div>
+<div class="text-center">
+<h1 class="text-xl font-bold text-slate-900 dark:text-white">Share your mood with Leo</h1>
+<p class="text-sm text-slate-500 dark:text-slate-400">How are you feeling today, friend?</p>
+</div>
+</div>
+<!-- Large Glass Bottle Container -->
+<div class="px-6 flex justify-center mb-6">
+<div class="relative w-48 h-64 bg-white/40 dark:bg-white/5 border-4 border-white/60 backdrop-blur-lg rounded-b-[4rem] rounded-t-2xl shadow-xl flex items-end justify-center pb-8 overflow-hidden">
+<!-- Glass highlights -->
+<div class="absolute top-4 left-4 w-4 h-24 bg-white/20 rounded-full blur-sm"></div>
+<!-- Mood Balls inside bottle -->
+<div class="relative w-full h-full flex flex-wrap justify-center content-end gap-2 p-4">
+<div class="w-12 h-12 rounded-full bg-yellow-300 shadow-lg flex items-center justify-center animate-bounce" style="animation-delay: 0.1s"><span class="text-2xl">😊</span></div>
+<div class="w-12 h-12 rounded-full bg-blue-300 shadow-lg flex items-center justify-center animate-bounce" style="animation-delay: 0.3s"><span class="text-2xl">😴</span></div>
+<div class="w-12 h-12 rounded-full bg-green-300 shadow-lg flex items-center justify-center animate-bounce" style="animation-delay: 0.5s"><span class="text-2xl">🧘</span></div>
+<div class="w-10 h-10 rounded-full bg-orange-300 shadow-lg flex items-center justify-center animate-pulse"><span class="text-xl">😤</span></div>
+</div>
+<!-- Liquid effect at bottom -->
+<div class="absolute bottom-0 w-full h-1/4 bg-primary/5 blur-xl"></div>
+</div>
+</div>
+<!-- Mood Selection Grid -->
+<div class="px-6">
+<div class="grid grid-cols-3 gap-4 mb-8">
+<button class="flex flex-col items-center gap-2">
+<div class="w-16 h-16 rounded-full bg-yellow-300 shadow-md flex items-center justify-center border-4 border-white hover:scale-105 transition"><span class="text-3xl">😊</span></div>
+<span class="text-xs font-semibold text-slate-600 dark:text-slate-300">Happy</span>
+</button>
+<button class="flex flex-col items-center gap-2">
+<div class="w-16 h-16 rounded-full bg-blue-300 shadow-md flex items-center justify-center border-4 border-primary hover:scale-105 transition"><span class="text-3xl">😴</span></div>
+<span class="text-xs font-semibold text-primary">Tired</span>
+</button>
+<button class="flex flex-col items-center gap-2">
+<div class="w-16 h-16 rounded-full bg-green-300 shadow-md flex items-center justify-center border-4 border-white hover:scale-105 transition"><span class="text-3xl">🧘</span></div>
+<span class="text-xs font-semibold text-slate-600 dark:text-slate-300">Calm</span>
+</button>
+<button class="flex flex-col items-center gap-2">
+<div class="w-16 h-16 rounded-full bg-orange-300 shadow-md flex items-center justify-center border-4 border-white hover:scale-105 transition"><span class="text-3xl">😤</span></div>
+<span class="text-xs font-semibold text-slate-600 dark:text-slate-300">Irritated</span>
+</button>
+<button class="flex flex-col items-center gap-2">
+<div class="w-16 h-16 rounded-full bg-indigo-300 shadow-md flex items-center justify-center border-4 border-white hover:scale-105 transition"><span class="text-3xl">☹️</span></div>
+<span class="text-xs font-semibold text-slate-600 dark:text-slate-300">Sad</span>
+</button>
+<button class="flex flex-col items-center gap-2">
+<div class="w-16 h-16 rounded-full bg-slate-300 shadow-md flex items-center justify-center border-4 border-white hover:scale-105 transition"><span class="text-3xl">😐</span></div>
+<span class="text-xs font-semibold text-slate-600 dark:text-slate-300">Neutral</span>
+</button>
+</div>
+</div>
+<!-- Action Button -->
+<div class="px-6 pb-8">
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-xl shadow-lg shadow-primary/20 flex items-center justify-center gap-2 transition-transform active:scale-95">
+<span class="material-symbols-outlined">favorite</span>
+        Send to Partner
+    </button>
+</div></main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full border-t border-primary/10 bg-white/90 dark:bg-background-dark/90 backdrop-blur-md px-4 pb-6 pt-2 z-20">
+<div class="flex gap-2 max-w-md mx-auto">
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<p class="text-[10px] font-medium">Calendar</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<p class="text-[10px] font-medium">Insights</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-primary" href="#">
+<div class="bg-primary/10 rounded-full p-2 mb-1">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">favorite</span>
+</div>
+<p class="text-[10px] font-bold">Mood</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined">spa</span>
+<p class="text-[10px] font-medium">Care</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined">settings</span>
+<p class="text-[10px] font-medium">Settings</p>
+</a>
+</div>
+</nav>
+<!-- Decorative background elements -->
+<div class="fixed top-20 left-4 w-12 h-12 bg-soft-pink/20 rounded-full -z-10 blur-xl"></div>
+<div class="fixed bottom-40 right-4 w-24 h-24 bg-primary/10 rounded-full -z-10 blur-2xl"></div>
+<div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-soft-pink/5 rounded-full -z-20 blur-3xl"></div>
+</body></html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f0428b",
+                        "background-light": "#f8f6f7",
+                        "background-dark": "#221018",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display antialiased text-slate-900 dark:text-slate-100">
+<div class="relative flex min-h-screen w-full flex-col max-w-md mx-auto bg-background-light dark:bg-background-dark overflow-x-hidden">
+<!-- Header -->
+<header class="flex items-center bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md sticky top-0 z-10 p-4 justify-between border-b border-primary/10">
+<div class="text-primary flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-primary/10 transition-colors cursor-pointer" data-icon="ArrowLeft">
+<span class="material-symbols-outlined">arrow_back</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-tight flex-1 text-center pr-10">Rheo Boutique</h2>
+</header>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col px-4 pb-24">
+<div class="pt-8 pb-6 text-center">
+<h1 class="text-slate-900 dark:text-slate-100 text-3xl font-bold leading-tight mb-2">Choose Your Bunny</h1>
+<p class="text-slate-600 dark:text-slate-400 text-base">Pick a mascot to match your vibe and personalize your Rheo experience.</p>
+</div>
+<!-- Mascot Grid -->
+<div class="grid grid-cols-2 gap-4 pb-8">
+<!-- Pink Bunny Card -->
+<div class="group relative flex flex-col bg-white dark:bg-slate-800 rounded-xl overflow-hidden border-2 border-primary shadow-sm hover:shadow-md transition-all cursor-pointer">
+<div class="aspect-square w-full bg-primary/10 flex items-center justify-center relative">
+<div class="w-full h-full bg-cover bg-center" data-alt="A cute pink bunny mascot illustration" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAWaWC-f9QqEtgDMqv0PWO9_xrAap-Ay7328hLCI27CX8s9niNkE5spEuqFkZWEzhXCDtnefXg6VVB1b3U6ox71a9so0NzZptXKAWCSpEfOokYHXfTQ66VXsEee9KfS9AqWmB0Hd0nRAzCKFihgVP5KP38t3KM9lrCOcWwLSA80BBHf0892qOMC-IXILTCn2j7n3YAxBhLGl9nM_8DiKH7NXENI63NlqzVddATRsO15IvpE6Bffwx2CUEc85ycNb-uWfgTsVUvPcEo')"></div>
+<div class="absolute top-2 right-2 size-6 rounded-full bg-primary border-2 border-white dark:border-slate-800"></div>
+</div>
+<div class="p-3 text-center">
+<p class="text-slate-900 dark:text-slate-100 font-bold text-sm">Pink Bunny</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs">Soft &amp; Playful</p>
+</div>
+</div>
+<!-- Blue Bunny Card -->
+<div class="group relative flex flex-col bg-white dark:bg-slate-800 rounded-xl overflow-hidden border-2 border-transparent hover:border-blue-400/50 shadow-sm hover:shadow-md transition-all cursor-pointer">
+<div class="aspect-square w-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center relative">
+<div class="w-full h-full bg-cover bg-center" data-alt="A cute blue bunny mascot illustration" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuALXf4zkyyKx9RpA1ICRhhOImQKw5ll8ir6iYGk1LQYy0NYRGAB9xapw5K9FkjhXNTVbl1BObizKTkJuz9IJTUGaFyfaCg9zPRglMoQaynMjZmsemJX0noCcaFFUWED1h92v7pxQ6t-hOVstzjOfIEn8YhgVvpN3rRVPSBj_CWtnjEhjFIUM6mvn-oWNbzmQXtF21XEpTcNHfL2ZppuLxXA-zj5ZtyZzsXYCF2nJxFAPbQUdgUurGpK6qAy6B39q1SMPk4Il2Q3BkI')"></div>
+<div class="absolute top-2 right-2 size-6 rounded-full bg-blue-400 border-2 border-white dark:border-slate-800"></div>
+</div>
+<div class="p-3 text-center">
+<p class="text-slate-900 dark:text-slate-100 font-bold text-sm">Blue Bunny</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs">Calm &amp; Serene</p>
+</div>
+</div>
+<!-- Lavender Bunny Card -->
+<div class="group relative flex flex-col bg-white dark:bg-slate-800 rounded-xl overflow-hidden border-2 border-transparent hover:border-purple-400/50 shadow-sm hover:shadow-md transition-all cursor-pointer">
+<div class="aspect-square w-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center relative">
+<div class="w-full h-full bg-cover bg-center" data-alt="A cute lavender bunny mascot illustration" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAxBxON4owk3jeWJYILu5yIof76OkMlQMjptGkkR4s2CpkEuq1jUNQ8ClvwR2SoryB0fFsVemJRixc9WUjczYl8rMIltoiDwNQWqL-TTJ6YbfFtKK-OgRuniW1DpV0dS09dC1Wbrk4VmM9M_AqoBN8gdy3wG1PcPX6kV9p5XY0hUUVVmWpQOIirHl3twAa_xEd2X2EXKdWQXPiKURlhTNpZnyXVc-Kc--DOfSGWid0S0gwSzzmM4TTxypWDF-RJFld6S6jyaS7eY1s')"></div>
+<div class="absolute top-2 right-2 size-6 rounded-full bg-purple-400 border-2 border-white dark:border-slate-800"></div>
+</div>
+<div class="p-3 text-center">
+<p class="text-slate-900 dark:text-slate-100 font-bold text-sm">Lavender Bunny</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs">Dreamy &amp; Sweet</p>
+</div>
+</div>
+<!-- Golden Bunny Card -->
+<div class="group relative flex flex-col bg-white dark:bg-slate-800 rounded-xl overflow-hidden border-2 border-transparent hover:border-amber-400/50 shadow-sm hover:shadow-md transition-all cursor-pointer">
+<div class="aspect-square w-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center relative">
+<div class="w-full h-full bg-cover bg-center" data-alt="A cute golden bunny mascot illustration" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBH5N9gHTQqK2pe7vLEkrlaEu-Q4A-XhgaQJTixldALxSIPNpxeWFzcw_Pu5QVGMmErbQkmvemkPRKPifRSFpoKez65XKpVvHZyxwtk1j0qgCYLyxqleK20jWQzv6cpY8kv1Stv9xEOfLhneuVUTPQMr-6WC-UR7WMiEekQ2XSm5-YzbAQdzGR-vFhziff7yF5TTKQ38MZReTQHUD2nug3CjBaW_VWyL3w582y9UlEKh4T6RRuqrTVS2BOkQThwgG8u2DKhD_RCc_w')"></div>
+<div class="absolute top-2 right-2 size-6 rounded-full bg-amber-400 border-2 border-white dark:border-slate-800"></div>
+</div>
+<div class="p-3 text-center">
+<p class="text-slate-900 dark:text-slate-100 font-bold text-sm">Golden Bunny</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs">Luxury &amp; Glow</p>
+</div>
+</div>
+</div>
+<!-- Footer Action -->
+<div class="fixed bottom-0 left-0 right-0 max-w-md mx-auto p-4 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-lg">
+<button class="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-xl h-14 px-5 bg-primary text-white text-base font-bold leading-normal tracking-wide shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all">
+<span class="truncate">Select Theme</span>
+</button>
+</div>
+</main>
+<div class="h-10"></div>
+</div>
+</body></html>

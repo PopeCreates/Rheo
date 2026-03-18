@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#f0428b",
+                "background-light": "#f8f6f7",
+                "background-dark": "#221018",
+              },
+              fontFamily: {
+                "display": ["Plus Jakarta Sans"]
+              },
+              borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+            },
+          },
+        }
+    </script>
+<title>Rheo - Voice Message</title>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<div class="relative flex h-screen w-full max-w-md mx-auto flex-col bg-background-light dark:bg-background-dark overflow-hidden shadow-2xl">
+<div class="flex items-center p-6 justify-between">
+<button class="flex size-10 items-center justify-center rounded-full bg-white dark:bg-slate-800 shadow-sm text-slate-700 dark:text-slate-200">
+<span class="material-symbols-outlined">close</span>
+</button>
+<h2 class="text-lg font-bold leading-tight tracking-tight flex-1 text-center pr-10">Voice Message</h2>
+</div>
+<div class="flex-1 flex flex-col items-center justify-center px-8">
+<div class="mb-8 relative">
+<div class="w-48 h-48 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center overflow-hidden border-4 border-white dark:border-slate-800 shadow-lg">
+<img alt="Cute bunny mascot wearing headphones" class="w-full h-full object-cover" data-alt="Cute cartoon bunny mascot wearing pink headphones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCb-2VBpzk1YcG09Jbx3BY0Ctbb3tRD0xaGe87OaLqDoK94yJCIVE_NK-TDexOtlnVIQXT2bcv0itZC-EqIxMPdL0uyFt8t5kZ5GOUPHNUKkicSWu9v5EUukb-j7iWN64Oy9Wg5xESVlj7wrKOQzzsUF5yrvv0Vf5niD1eqwAGTxXlqR5_NHzU_cKtusIBY0e4JPKlJJOU4lylDwAfZY-QizLoCleteQDkLLi0cKy96bX57gl8_lHefwrEzPN0chXaycgrqiG_LLm8"/>
+</div>
+<div class="absolute -bottom-2 -right-2 bg-primary p-2 rounded-full text-white shadow-md">
+<span class="material-symbols-outlined text-sm">headset</span>
+</div>
+</div>
+<div class="text-center mb-12">
+<h1 class="text-5xl font-bold tracking-tight text-slate-900 dark:text-slate-100 mb-2">00:42</h1>
+<p class="text-primary font-semibold animate-pulse">Recording...</p>
+</div>
+<div class="w-full h-24 flex items-center justify-center gap-1 mb-12 px-4">
+<div class="w-1.5 h-8 bg-primary/40 rounded-full"></div>
+<div class="w-1.5 h-12 bg-primary/50 rounded-full"></div>
+<div class="w-1.5 h-16 bg-primary/60 rounded-full"></div>
+<div class="w-1.5 h-20 bg-primary/80 rounded-full"></div>
+<div class="w-1.5 h-14 bg-primary rounded-full"></div>
+<div class="w-1.5 h-24 bg-primary rounded-full"></div>
+<div class="w-1.5 h-16 bg-primary rounded-full"></div>
+<div class="w-1.5 h-20 bg-primary/80 rounded-full"></div>
+<div class="w-1.5 h-12 bg-primary/60 rounded-full"></div>
+<div class="w-1.5 h-8 bg-primary/40 rounded-full"></div>
+<div class="w-1.5 h-10 bg-primary/30 rounded-full"></div>
+<div class="w-1.5 h-14 bg-primary/50 rounded-full"></div>
+<div class="w-1.5 h-6 bg-primary/20 rounded-full"></div>
+</div>
+<div class="relative flex items-center justify-center mb-16">
+<div class="absolute w-28 h-28 bg-primary/20 rounded-full animate-ping"></div>
+<button class="relative flex size-24 items-center justify-center rounded-full bg-primary text-white shadow-xl hover:scale-105 transition-transform duration-200">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1">stop_circle</span>
+</button>
+</div>
+</div>
+<div class="p-8 pb-12 bg-white dark:bg-slate-900 rounded-t-xl border-t border-primary/10">
+<div class="grid grid-cols-3 gap-4">
+<button class="flex flex-col items-center gap-2 group">
+<div class="size-12 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500 group-hover:bg-red-50 group-hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</div>
+<span class="text-xs font-bold uppercase tracking-wider text-slate-500 group-hover:text-red-500">Cancel</span>
+</button>
+<button class="flex flex-col items-center gap-2 group">
+<div class="size-12 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500 group-hover:bg-primary/10 group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined">play_arrow</span>
+</div>
+<span class="text-xs font-bold uppercase tracking-wider text-slate-500 group-hover:text-primary">Preview</span>
+</button>
+<button class="flex flex-col items-center gap-2 group">
+<div class="size-12 rounded-full bg-primary flex items-center justify-center text-white shadow-lg shadow-primary/30 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">send</span>
+</div>
+<span class="text-xs font-bold uppercase tracking-wider text-primary">Send</span>
+</button>
+</div>
+</div>
+</div>
+</body></html>

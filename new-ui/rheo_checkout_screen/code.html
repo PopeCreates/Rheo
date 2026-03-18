@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Rheo - Checkout</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#f0428b",
+                "accent-pink": "#fecfd5",
+                "background-light": "#fdf8f9",
+                "background-dark": "#221018",
+              },
+              fontFamily: {
+                "display": ["Plus Jakarta Sans"]
+              },
+              borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+            },
+          },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="max-w-md mx-auto min-h-screen flex flex-col pb-8">
+<!-- TopAppBar -->
+<header class="sticky top-0 z-10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-4 py-4 flex items-center justify-between border-b border-primary/10">
+<button class="text-primary p-2 hover:bg-primary/10 rounded-full transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="text-lg font-bold tracking-tight">Checkout</h1>
+<div class="w-10"></div> <!-- Spacer for symmetry -->
+</header>
+<main class="flex-1 px-4 py-6 space-y-8">
+<!-- Bunny Mascot Greeting -->
+<div class="bg-accent-pink/40 dark:bg-primary/10 rounded-xl p-4 flex items-center gap-4 border border-accent-pink dark:border-primary/20">
+<div class="w-16 h-16 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center overflow-hidden border-2 border-primary/20 shrink-0">
+<img class="w-12 h-12 object-contain" data-alt="A cute pink bunny mascot waving" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYSXfo0qzqCUJ3a7Axu7nRSDMRhmNPRvKBa6mdEeLY5Bwho2kO3KDeAQ8kly46Phd6QMOfNS21AGLc7LuK0jIsm31QoUoWHgOz8LalgObhQltbvzS47XCaUzmKk083UBOitHIMXHIDt7qwpE5Z5I1HZmJX7EGG261HrOdpIapURBEdU0AeQnbsQjv6zO03D3H_PjXJZ9JCzWk06A9CCG7wzA2iCbWWiCrk6jFJR25w_KEbmrPiQYZkRm72NrBP9Mm74mi1gZKjVk0"/>
+</div>
+<div>
+<p class="text-primary font-bold text-sm">Rheo says:</p>
+<p class="text-slate-800 dark:text-slate-200 text-base font-medium leading-tight">Your gift is ready to hop away!</p>
+</div>
+</div>
+<!-- Order Summary Section -->
+<section>
+<div class="flex items-center justify-between mb-3">
+<h3 class="text-lg font-bold">Order Summary</h3>
+<span class="text-xs font-semibold text-primary px-2 py-1 bg-primary/10 rounded-full">1 Item</span>
+</div>
+<div class="bg-white dark:bg-slate-900/50 rounded-xl p-3 border border-primary/10 flex items-center gap-4 shadow-sm">
+<div class="bg-accent-pink/30 rounded-lg size-16 shrink-0 bg-cover bg-center" data-alt="Soft pink care package with ribbons" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBo49pxN0Fkd1XVvp0pK_aiF3ZKTFI3bXHhQokmouYOIOvu_LR29GZ2rCmdX5KozFoa4kiGm4AzX2zar5_td1DyHFC1Qt6bIPc_rCUQ05Wfm8kOY3gtlZ7o1ci54BuZDe4LkyomKeZnthCknAhKfkiThWKiD7kGoioNq6LzWTB0UZG7EFn3CVt2DUSdzjybhtTHKWjOQGslLrG02eEFwlsNHobVTFlLzpn6I46XUenmMsA3aS3Wsaf7NimAFe4dqgCY9fBNTSpVdDE');"></div>
+<div class="flex-1">
+<p class="font-bold text-slate-900 dark:text-slate-100">Cozy Care Package</p>
+<p class="text-sm text-slate-500 dark:text-slate-400">Sweet Dreams Collection</p>
+</div>
+<div class="text-right">
+<p class="font-bold text-primary">$45.00</p>
+<p class="text-xs text-slate-400">Qty: 1</p>
+</div>
+</div>
+</section>
+<!-- Delivery Address Section -->
+<section>
+<h3 class="text-lg font-bold mb-3">Delivery Address</h3>
+<div class="bg-white dark:bg-slate-900/50 rounded-xl p-4 border border-primary/10 shadow-sm space-y-4">
+<div>
+<label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Full Name</label>
+<input class="w-full bg-background-light dark:bg-background-dark border-primary/10 rounded-lg px-4 py-3 focus:ring-primary focus:border-primary text-sm" placeholder="Enter full name" type="text" value="Jane Doe"/>
+</div>
+<div>
+<label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Shipping Address</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-primary text-xl">location_on</span>
+<input class="w-full bg-background-light dark:bg-background-dark border-primary/10 rounded-lg pl-10 pr-4 py-3 focus:ring-primary focus:border-primary text-sm" placeholder="Search address" type="text" value="123 Blossom Lane, Petal City"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Payment Methods Section -->
+<section>
+<h3 class="text-lg font-bold mb-3">Payment Method</h3>
+<div class="space-y-3">
+<!-- Apple Pay -->
+<div class="flex items-center justify-between bg-white dark:bg-slate-900/50 p-4 rounded-xl border border-primary/10 cursor-pointer hover:border-primary/30 transition-all">
+<div class="flex items-center gap-3">
+<div class="w-10 h-6 bg-black rounded flex items-center justify-center">
+<span class="text-white text-[10px] font-bold">Apple Pay</span>
+</div>
+<span class="font-medium">Apple Pay</span>
+</div>
+<input class="text-primary focus:ring-primary" name="payment" type="radio"/>
+</div>
+<!-- Credit Card (Selected State) -->
+<div class="bg-white dark:bg-slate-900/50 p-4 rounded-xl border-2 border-primary shadow-md space-y-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-6 bg-slate-100 rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-600 text-lg">credit_card</span>
+</div>
+<span class="font-bold">Credit/Debit Card</span>
+</div>
+<input checked="" class="text-primary focus:ring-primary" name="payment" type="radio"/>
+</div>
+<div class="space-y-3">
+<div>
+<input class="w-full bg-background-light dark:bg-background-dark border-primary/10 rounded-lg px-4 py-3 focus:ring-primary focus:border-primary text-sm" placeholder="Card Number" type="text" value="**** **** **** 4242"/>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<input class="bg-background-light dark:bg-background-dark border-primary/10 rounded-lg px-4 py-3 focus:ring-primary focus:border-primary text-sm" placeholder="MM/YY" type="text" value="12/26"/>
+<input class="bg-background-light dark:bg-background-dark border-primary/10 rounded-lg px-4 py-3 focus:ring-primary focus:border-primary text-sm" placeholder="CVV" type="password" value="***"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Totals -->
+<section class="pt-4 border-t border-primary/10">
+<div class="space-y-2">
+<div class="flex justify-between text-slate-500 text-sm">
+<span>Subtotal</span>
+<span>$45.00</span>
+</div>
+<div class="flex justify-between text-slate-500 text-sm">
+<span>Shipping</span>
+<span class="text-green-500 font-medium">Free</span>
+</div>
+<div class="flex justify-between text-slate-900 dark:text-slate-100 font-bold text-lg pt-2">
+<span>Total</span>
+<span>$45.00</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Action Button -->
+<footer class="p-4 bg-background-light dark:bg-background-dark">
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-xl shadow-lg shadow-primary/20 flex items-center justify-center gap-2 transition-transform active:scale-95">
+<span>Place Order</span>
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+<p class="text-center text-[10px] text-slate-400 mt-4 px-8 leading-relaxed">
+                By tapping "Place Order" you agree to Rheo's Terms of Service and Privacy Policy.
+            </p>
+</footer>
+</div>
+</body></html>

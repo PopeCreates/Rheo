@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f0428b",
+                        "accent-pink": "#fecfd5",
+                        "background-light": "#f8f6f7",
+                        "background-dark": "#221018",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>body {
+    font-family: "Plus Jakarta Sans", sans-serif
+    }
+.bunny-bg {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuB8gbj1HnqBmmaPHV8jLjjOWCW3cv_-ZdAvHgzPJlcOo6JyeQyZrW1F_BeRg_pVgp96FP5FKG4IDSA0-aK5tW0vlBaunba3EvExqThfayPyplXA5r1BrJfDfOauQ49HQbF-gt8VahL6pC6VZQ-YhYRAXvOjH4NuXRa0w0YqRpwSbX3IBAAfvx_XU1DgCupGrdLKTRDqybhCP3kdlEBYoui3B5OVFB6F0y2iZG7hNDtCdvpn7ZEy8UgjEfkHAUcHb_OUqQb5zvJJ48g);
+    background-size: cover;
+    background-position: center;
+    opacity: 0.05
+    }</style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative max-w-md mx-auto min-h-screen flex flex-col bg-white dark:bg-background-dark shadow-xl overflow-hidden">
+<!-- Header -->
+<header class="flex items-center px-4 py-6 justify-between bg-white dark:bg-background-dark border-b border-accent-pink/20">
+<button class="flex size-10 items-center justify-center rounded-full bg-accent-pink/30 text-primary">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="text-xl font-bold flex-1 text-center pr-10">Manage Partners</h1>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto relative">
+<!-- Subtle Decorative Bunny Background -->
+<div class="absolute inset-0 bunny-bg pointer-events-none" data-alt="Subtle artistic bunny illustration in soft pink"></div>
+<div class="relative p-4 space-y-6">
+<!-- Add New Partner CTA -->
+<div class="bg-accent-pink/20 rounded-xl p-6 border border-accent-pink/40 text-center">
+<div class="size-16 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4 text-primary shadow-sm">
+<span class="material-symbols-outlined text-4xl">cruelty_free</span>
+</div>
+<h2 class="text-lg font-bold mb-1">Add a New Connection</h2>
+<p class="text-slate-500 dark:text-slate-400 text-sm mb-4">Share your Rheo journey with a partner or healthcare provider.</p>
+<button class="w-full flex items-center justify-center gap-2 bg-primary text-white h-12 rounded-xl font-bold hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined">person_add</span>
+                        Add New Partner
+                    </button>
+</div>
+<!-- Connected Partners List -->
+<section>
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-lg font-bold">Connected Partners</h3>
+<span class="text-xs font-medium px-2.5 py-1 bg-accent-pink/40 text-primary rounded-full">2 Active</span>
+</div>
+<div class="space-y-4">
+<!-- Partner Card 1 -->
+<div class="bg-white dark:bg-slate-800/50 p-4 rounded-xl border border-accent-pink/20 shadow-sm flex flex-col gap-4">
+<div class="flex items-center gap-4">
+<div class="relative">
+<div class="size-14 bg-accent-pink/30 rounded-full flex items-center justify-center overflow-hidden border-2 border-primary/10">
+<span class="material-symbols-outlined text-primary text-3xl">pets</span>
+</div>
+<div class="absolute bottom-0 right-0 size-4 bg-green-500 border-2 border-white dark:border-slate-800 rounded-full"></div>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-base">James Miller</h4>
+<p class="text-slate-500 dark:text-slate-400 text-xs">Active since Feb 2024</p>
+</div>
+<button class="text-slate-400 hover:text-primary">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 h-10 text-sm font-semibold bg-accent-pink/20 text-primary rounded-lg hover:bg-accent-pink/30 transition-colors">
+                                    Manage Permissions
+                                </button>
+<button class="flex size-10 items-center justify-center text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors border border-slate-100 dark:border-slate-700">
+<span class="material-symbols-outlined">person_remove</span>
+</button>
+</div>
+</div>
+<!-- Partner Card 2 -->
+<div class="bg-white dark:bg-slate-800/50 p-4 rounded-xl border border-accent-pink/20 shadow-sm flex flex-col gap-4 opacity-90">
+<div class="flex items-center gap-4">
+<div class="relative">
+<div class="size-14 bg-accent-pink/30 rounded-full flex items-center justify-center overflow-hidden border-2 border-primary/10">
+<img alt="Dr. Sarah Chen" class="w-full h-full object-cover" data-alt="Portrait of a female doctor smiling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKQHTDNEEkT9JcXr1lslrnh3OOOO8zg2vPGQnDw6xKxE-BKpqd1QIcCWLPtjbmzzvui_CB-93oeFE7jvhOxK4edvgHJg2MyVgMS41ZX7ZcOXkMb2XahmyPw7t8bJ_S7_KHcE0V5tPuxB-onYLMpiBozrloIJaI3qC0c3FUuNQkkJCyEIFUYH-8NVyK1Yp76a1Ggypf6GyjkfO8RGEgeeb0-Srg2v5B3kHrhEVz3bUr1hGGYpAX4I9Z4ajaAX1tSFJ4GEimGroZIw4"/>
+</div>
+<div class="absolute bottom-0 right-0 size-4 bg-slate-300 border-2 border-white dark:border-slate-800 rounded-full"></div>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-base">Dr. Sarah Chen</h4>
+<p class="text-slate-500 dark:text-slate-400 text-xs">Provider • Linked Oct 2023</p>
+</div>
+<button class="text-slate-400 hover:text-primary">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 h-10 text-sm font-semibold bg-accent-pink/20 text-primary rounded-lg hover:bg-accent-pink/30 transition-colors">
+                                    Manage Permissions
+                                </button>
+<button class="flex size-10 items-center justify-center text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors border border-slate-100 dark:border-slate-700">
+<span class="material-symbols-outlined">person_remove</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Security Tip -->
+<div class="flex gap-3 p-4 bg-background-light dark:bg-slate-800 rounded-xl items-start">
+<span class="material-symbols-outlined text-primary">security</span>
+<div class="flex-1">
+<h5 class="text-sm font-bold">Privacy Control</h5>
+<p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Partners can only see the information you choose to share. You can revoke access at any time.</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="flex border-t border-accent-pink/20 bg-white dark:bg-background-dark px-4 pb-6 pt-2">
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">home</span>
+<p class="text-[10px] font-medium">Home</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">group</span>
+<p class="text-[10px] font-medium">Partners</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+<p class="text-[10px] font-medium">Insights</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">settings</span>
+<p class="text-[10px] font-medium">Settings</p>
+</a>
+</nav>
+</div>
+</body></html>

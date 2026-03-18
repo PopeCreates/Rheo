@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Rheo - Privacy Mode</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "background": "#f8f6f7",
+              "on-primary": "#ffffff",
+              "on-tertiary-fixed": "#002202",
+              "surface-dim": "#edd4d9",
+              "inverse-on-surface": "#f8f6f7",
+              "surface-container-low": "#ffffff",
+              "error-container": "#fee2e2",
+              "tertiary": "#006c10",
+              "primary-container": "#fecfd5",
+              "surface-variant": "#ffffff",
+              "surface-container-lowest": "#ffffff",
+              "primary-fixed": "#ffd9e2",
+              "surface-bright": "#ffffff",
+              "outline-variant": "#f0428b",
+              "on-secondary-fixed": "#3e001d",
+              "secondary-fixed": "#ffd9e2",
+              "on-tertiary-container": "#f8fff0",
+              "secondary-fixed-dim": "#ffb1c7",
+              "on-secondary": "#ffffff",
+              "on-secondary-container": "#792345",
+              "on-error-container": "#991b1b",
+              "on-tertiary": "#ffffff",
+              "on-primary-container": "#f0428b",
+              "on-background": "#0f172a",
+              "surface-container-highest": "#f0428b",
+              "surface": "#f8f6f7",
+              "on-surface": "#0f172a",
+              "tertiary-container": "#008818",
+              "on-secondary-fixed-variant": "#7d2649",
+              "on-surface-variant": "#64748b",
+              "error": "#ef4444",
+              "secondary-container": "#fe8eb3",
+              "inverse-primary": "#ffb1c7",
+              "inverse-surface": "#221018",
+              "on-error": "#ffffff",
+              "outline": "#fecfd5",
+              "surface-container": "#ffffff",
+              "surface-tint": "#f0428b",
+              "primary-fixed-dim": "#ffb1c7",
+              "primary": "#f0428b",
+              "secondary": "#9b3e60",
+              "on-primary-fixed-variant": "#8e0049",
+              "on-primary-fixed": "#3e001d",
+              "tertiary-fixed-dim": "#60e05a",
+              "on-tertiary-fixed-variant": "#00530a",
+              "surface-container-high": "#fecfd5",
+              "tertiary-fixed": "#7dfe73"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Plus Jakarta Sans"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "1rem", "2xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md shadow-sm flex items-center justify-between px-6 h-16">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-slate-400">menu</span>
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold tracking-tight text-[20px] text-[#f0428b]">Rheo</h1>
+</div>
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center overflow-hidden border border-primary/20">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="Close up of a smiling woman profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbJB2vrL6TbObKRgOI-Cx0A76AdFEMkdhr45APk7UkjAE3cbY2kjjYxl5vtT2CrmphhgY3xtWRnNBw04AtqlExLToFl7t1CMiaogVUv44Gabx5_lm0o-PVJkyZpXMhjA5t3t19BjsetXsf6ZIgcWk3Eru8lMWPzg7SPeypnsjCKzNjAvUC2C0FgqvyPB0c6wce4qr8CZsbHGoS5XQ0pBfq5Ir6Roe8d2Su5Ia9KFzMgXjjkbpau60vQGAn7VEfFrTpKfuxf6I_RGg"/>
+</div>
+</header>
+<main class="pt-24 px-6 max-w-md mx-auto">
+<!-- Mascot Section -->
+<div class="flex flex-col items-center justify-center mb-10">
+<div class="relative w-48 h-48 bg-primary-container/30 rounded-full flex items-center justify-center">
+<div class="absolute inset-0 bg-primary/5 rounded-full animate-pulse"></div>
+<!-- Secretive Bunny Placeholder -->
+<div class="relative z-10 flex flex-col items-center">
+<img alt="Secretive Bunny" class="w-32 h-32 object-contain mix-blend-multiply" data-alt="A cute illustrated pink rabbit with sunglasses doing a shhh gesture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkcJ6eWK4fU2yVclbnYfAU4FwvmtC184cY3s_2_BgQWtEJ4uF2GQrbVA5KWH_etBL_gdF6tKHDg5PgvNsQCr1rGEWsxPMGZvyqn98S0cYbVSN0WzViJmdjPr5WvjLN0omQh3lBycbvzbuZXvMi8DlDiA_UfUsrnpQVYJcRrN9cz7Gd-nIqcFPWtN7bTbj4QU-pW1K5cMjulsAU0GZ5XTtGl1n8iNETm9ZMJBSyvDF0mWXTVu1aRCass0RyjqLm3Wfuy0YXqgTAqa8"/>
+<div class="mt-2 bg-white px-4 py-1 rounded-full shadow-sm">
+<span class="text-[12px] font-bold text-primary tracking-widest uppercase">Stealth Mode</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Privacy Toggle Card -->
+<div class="bg-surface-container rounded-2xl shadow-sm p-8 flex flex-col items-center text-center mb-6">
+<h2 class="text-xl font-bold tracking-tight mb-2">Privacy Mode</h2>
+<p class="text-on-surface-variant text-sm mb-8 px-4">Privacy Mode temporarily stops all syncing with your partners. They won't see your mood, cycle status, or symptoms until you turn it back off.</p>
+<!-- Large Toggle -->
+<button class="relative w-20 h-10 bg-slate-200 rounded-full transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary/20">
+<div class="absolute left-1 top-1 w-8 h-8 bg-white rounded-full shadow-md transition-transform duration-300"></div>
+</button>
+<span class="mt-4 text-sm font-semibold text-slate-400">Tap to Enable</span>
+</div>
+<!-- Active State Logic (Simulation) -->
+<!-- In a real app, clicking the toggle would switch the card below to visible -->
+<div class="hidden bg-primary/5 border border-primary/10 rounded-2xl p-6 text-center mb-6">
+<div class="flex items-center justify-center gap-2 text-primary font-bold mb-1">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span>Privacy Mode is ON</span>
+</div>
+<p class="text-primary/80 text-[13px]">All data sharing is currently paused.</p>
+</div>
+<!-- Duration Selector -->
+<div class="space-y-3 mb-12">
+<h3 class="text-[12px] font-bold text-slate-400 uppercase tracking-widest px-2">Auto-Off Timer</h3>
+<div class="bg-surface-container rounded-xl p-4 flex items-center justify-between border-2 border-primary">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">schedule</span>
+<span class="font-semibold text-sm">Hide updates for 7 days</span>
+</div>
+<div class="w-5 h-5 rounded-full border-2 border-primary flex items-center justify-center">
+<div class="w-2.5 h-2.5 bg-primary rounded-full"></div>
+</div>
+</div>
+<div class="bg-surface-container rounded-xl p-4 flex items-center justify-between border-2 border-transparent hover:border-primary/10 transition-colors">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400">do_not_disturb_on</span>
+<span class="font-semibold text-sm text-on-surface">Hide until I turn it off</span>
+</div>
+<div class="w-5 h-5 rounded-full border-2 border-slate-200"></div>
+</div>
+</div>
+<!-- Information/Tip -->
+<div class="bg-secondary-fixed/30 rounded-2xl p-4 flex gap-4">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">info</span>
+<p class="text-[13px] text-on-secondary-container leading-relaxed">
+                While in Privacy Mode, your historical data remains safe but hidden from shared circles. Your personal tracking continues locally on this device.
+            </p>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full h-20 bg-white/80 backdrop-blur-md flex justify-around items-center px-4 pb-safe shadow-[0_-4px_20px_0_rgba(240,66,139,0.1)] rounded-t-[2rem] z-50">
+<div class="flex flex-col items-center justify-center text-slate-400 transition-colors">
+<span class="material-symbols-outlined">home</span>
+<span class="font-['Plus_Jakarta_Sans'] font-bold text-[10px] uppercase tracking-wider mt-1">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 transition-colors">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-['Plus_Jakarta_Sans'] font-bold text-[10px] uppercase tracking-wider mt-1">Insights</span>
+</div>
+<!-- Active Tab: Privacy -->
+<div class="flex flex-col items-center justify-center bg-[#f0428b]/10 text-[#f0428b] rounded-2xl px-4 py-1">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">visibility_off</span>
+<span class="font-['Plus_Jakarta_Sans'] font-bold text-[10px] uppercase tracking-wider mt-1">Privacy</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 transition-colors">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-['Plus_Jakarta_Sans'] font-bold text-[10px] uppercase tracking-wider mt-1">Settings</span>
+</div>
+</nav>
+</body></html>

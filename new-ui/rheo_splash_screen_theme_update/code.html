@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#fecfd5",
+              "background-light": "#fff9fb",
+              "background-dark": "#1a0b12",
+            },
+            fontFamily: {
+              "display": ["Plus Jakarta Sans", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.75rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }</script>
+<title>Rheo - Period Tracker</title>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="relative flex h-screen w-full flex-col items-center justify-center overflow-hidden">
+<!-- Top Status Bar Simulation -->
+<div class="absolute top-0 w-full flex items-center justify-between p-6">
+<div class="text-[#fecfd5]">9:41</div>
+<div class="flex gap-2">
+<span class="text-[#fecfd5]">signal_cellular_alt</span>
+<span class="text-[#fecfd5]">wifi</span>
+<span class="text-[#fecfd5]">battery_full</span>
+</div>
+</div>
+<!-- Main Content Area -->
+<div class="flex flex-col items-center justify-center max-w-sm w-full px-8">
+<!-- Minimalist Bunny Mascot Container -->
+<div class="w-64 h-64 relative mb-12 flex items-center justify-center">
+<!-- Decorative Soft Glow -->
+<div class="absolute inset-0 bg-primary/10 rounded-full blur-3xl"></div>
+<!-- Mascot Image -->
+<div class="relative w-full h-full bg-center bg-no-repeat bg-contain" data-alt="Minimalist cute pink and white bunny illustration" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBAzt-YTkdN415GOSrZNhBLj6hGI5BOYW_JfpfCeuRlEbyJhKB1DsBEmMavHfX0dgSQj3XTU4NRTaosd-ZGXssnZfsn14Ew2gpyrvAstYIzqJzIw7U1xD-Pv8lN34NoWXrHInkfRsyxzdECprxU2lwDgRXREOs836XsEFil-aOssNfT26O0kMy6E3LtPAqRacAZzdimUzmb_tYj6skcJVVVAzTCB7oaJCGz53KkyPMV3U_yHdSeTOPDlguPdsnAclcVFKfZGAilhe0");'>
+</div>
+</div>
+<!-- Branding -->
+<div class="text-center">
+<h1 class="text-slate-900 dark:text-slate-100 tracking-tight text-6xl font-extrabold leading-tight mb-2 text-[#1a0b12] dark:text-[#fff9fb]">
+                    Rheo
+                </h1>
+<p class="text-[#fecfd5]">In sync with your flow</p>
+</div>
+<!-- Loading / Progress Section -->
+<div class="w-full max-w-[240px] flex flex-col gap-4">
+<div class="flex justify-center items-center gap-2">
+<span class="text-[#fecfd5]">favorite</span>
+<p class="text-slate-600 dark:text-slate-400 text-sm font-medium">Hopping into your cycle...</p>
+</div>
+<!-- Progress Bar -->
+<div class="w-full h-3 bg-primary/10 rounded-full overflow-hidden border border-primary/5">
+<div class="h-full bg-primary rounded-full" style="width: 45%;"></div>
+</div>
+</div>
+</div>
+<!-- Footer Accent -->
+<div class="absolute bottom-12 flex flex-col items-center gap-4">
+<div class="flex gap-1">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<div class="w-2 h-2 rounded-full bg-primary/30"></div>
+<div class="w-2 h-2 rounded-full bg-primary/30"></div>
+</div>
+</div>
+<!-- Decorative Floating Elements -->
+<div class="absolute top-20 left-10 text-primary/20">
+<span class="material-symbols-outlined text-4xl">cloud</span>
+</div>
+<div class="absolute bottom-32 right-12 text-primary/20">
+<span class="material-symbols-outlined text-5xl">pets</span>
+</div>
+<div class="absolute top-1/2 -left-8 text-primary/10 rotate-12">
+<span class="material-symbols-outlined text-[120px]">bubble_chart</span>
+</div>
+</div>
+</body></html>

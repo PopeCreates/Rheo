@@ -3,12 +3,13 @@ import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Header } from "@/components/ui/Header";
+import { Colors } from "@/constants/colors";
 import type { GiftCategory } from "@/types/interface";
 
-const tabs: { id: GiftCategory; label: string }[] = [
-  { id: "flowers", label: "Floral Arrangements" },
-  { id: "chocolates", label: "Artisan Chocolates" },
-  { id: "wellness", label: "Wellness" },
+const tabs: { id: GiftCategory; label: string; icon: string }[] = [
+  { id: "flowers", label: "Flowers", icon: "local-florist" },
+  { id: "chocolates", label: "Treats", icon: "cookie" },
+  { id: "wellness", label: "Wellness", icon: "spa" },
 ];
 
 const gifts = [
@@ -68,88 +69,84 @@ export default function GiftSelectionScreen() {
   const filtered = gifts.filter((g) => g.category === activeTab);
 
   return (
-    <View className="flex-1 bg-surface pt-12">
+    <View className="flex-1 bg-background-light pt-12">
       <Header
-        title="Gift Selection"
+        title="Gift Store"
         showBack
         rightAction={
-          <TouchableOpacity className="w-11 h-11 items-center justify-center">
-            <MaterialIcons name="shopping-bag" size={24} color="#181114" />
+          <TouchableOpacity className="w-10 h-10 rounded-xl bg-rose-50 items-center justify-center">
+            <MaterialIcons name="shopping-bag" size={20} color={Colors.rose[500]} />
           </TouchableOpacity>
         }
       />
 
-      <ScrollView className="px-4" showsVerticalScrollIndicator={false}>
-        <Text className="text-3xl font-extrabold text-content mt-4 tracking-tight leading-9">
-          Thoughtful gestures for her
+      <ScrollView className="px-5" showsVerticalScrollIndicator={false} contentContainerClassName="pb-32">
+        <Text className="text-2xl font-extrabold text-slate-800 mt-4 tracking-tight">
+          Show you care
         </Text>
-        <View className="flex-row items-center gap-2 mt-2 mb-6">
-          <MaterialIcons name="event" size={18} color="#8c5f75" />
-          <Text className="text-sm text-content-secondary">
-            Day 26: A little something to brighten her day
-          </Text>
-        </View>
+        <Text className="text-sm text-slate-500 mt-1">
+          Thoughtful gifts to brighten their day
+        </Text>
 
         {/* Tabs */}
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerClassName="gap-0"
-        >
+        <View className="flex-row gap-2 mt-6">
           {tabs.map((t) => {
             const active = activeTab === t.id;
             return (
               <TouchableOpacity
                 key={t.id}
-                className={`px-1 pb-3 mr-6 ${
-                  active ? "border-b-2 border-brand" : ""
+                className={`flex-1 flex-row items-center justify-center gap-2 py-3 rounded-xl border ${
+                  active ? "bg-primary border-primary" : "bg-white border-slate-100"
                 }`}
                 onPress={() => setActiveTab(t.id)}
+                style={active ? {
+                  shadowColor: Colors.primary,
+                  shadowOpacity: 0.3,
+                  shadowRadius: 8,
+                  shadowOffset: { width: 0, height: 2 },
+                } : undefined}
               >
-                <Text
-                  className={`text-base font-bold ${
-                    active ? "text-content" : "text-content-secondary"
-                  }`}
-                >
+                <MaterialIcons 
+                  name={t.icon as any} 
+                  size={18} 
+                  color={active ? Colors.rose[900] : Colors.slate[400]} 
+                />
+                <Text className={`text-sm font-bold ${active ? "text-rose-900" : "text-slate-500"}`}>
                   {t.label}
                 </Text>
               </TouchableOpacity>
             );
           })}
-        </ScrollView>
+        </View>
 
         {/* Grid */}
-        <View className="flex-row flex-wrap gap-4 mt-6">
+        <View className="flex-row flex-wrap gap-3 mt-6">
           {filtered.map((g) => (
             <View
               key={g.id}
-              className="bg-white rounded-2xl overflow-hidden border border-line w-[47%]"
+              className="bg-white rounded-2xl overflow-hidden border border-slate-100 w-[48%]"
+              style={{
+                shadowColor: Colors.black,
+                shadowOpacity: 0.05,
+                shadowRadius: 8,
+                shadowOffset: { width: 0, height: 2 },
+              }}
             >
-              <View className="w-full h-40 bg-surface-soft items-center justify-center">
-                <MaterialIcons
-                  name={g.icon as any}
-                  size={52}
-                  color="#f90680"
-                />
+              <View className="w-full h-32 bg-rose-50/50 items-center justify-center">
+                <MaterialIcons name={g.icon as any} size={44} color={Colors.rose[400]} />
               </View>
               <View className="p-3">
-                <Text className="text-base font-bold text-content">
-                  {g.name}
-                </Text>
-                <Text className="text-xs text-content-secondary mt-0.5">
-                  {g.desc}
-                </Text>
+                <Text className="text-sm font-bold text-slate-800">{g.name}</Text>
+                <Text className="text-xs text-slate-400 mt-0.5">{g.desc}</Text>
                 <View className="flex-row items-center justify-between mt-3">
-                  <Text className="text-lg font-extrabold text-brand">
-                    ${g.price.toFixed(2)}
+                  <Text className="text-base font-extrabold text-rose-500">
+                    ${g.price}
                   </Text>
                   <TouchableOpacity
-                    className="bg-brand rounded-full px-4 py-2"
+                    className="bg-slate-900 rounded-lg px-3 py-1.5"
                     onPress={() => router.push("/partner/gift-reveal")}
                   >
-                    <Text className="text-xs font-bold text-white">
-                      Order Now
-                    </Text>
+                    <Text className="text-xs font-bold text-white">Add</Text>
                   </TouchableOpacity>
                 </View>
               </View>
@@ -158,19 +155,23 @@ export default function GiftSelectionScreen() {
         </View>
 
         {/* Personalized Suggestion */}
-        <TouchableOpacity className="bg-white rounded-2xl flex-row items-center p-4 mt-6 mb-10 border border-line">
-          <View className="w-12 h-12 rounded-full bg-brand-light items-center justify-center mr-3">
-            <MaterialIcons name="auto-awesome" size={22} color="#f90680" />
+        <TouchableOpacity 
+          className="bg-white rounded-2xl flex-row items-center p-4 mt-6 border border-slate-100"
+          style={{
+            shadowColor: Colors.black,
+            shadowOpacity: 0.05,
+            shadowRadius: 8,
+            shadowOffset: { width: 0, height: 2 },
+          }}
+        >
+          <View className="w-12 h-12 rounded-xl bg-indigo-50 items-center justify-center mr-3">
+            <MaterialIcons name="auto-awesome" size={22} color={Colors.indigo[500]} />
           </View>
           <View className="flex-1">
-            <Text className="text-xs text-content-secondary">
-              Personalized Suggestion
-            </Text>
-            <Text className="text-base font-bold text-content">
-              The "Comfort" Bundle
-            </Text>
+            <Text className="text-xs text-slate-400 font-medium">AI Suggestion</Text>
+            <Text className="text-base font-bold text-slate-800">The "Comfort" Bundle</Text>
           </View>
-          <MaterialIcons name="chevron-right" size={24} color="#8c5f75" />
+          <MaterialIcons name="chevron-right" size={22} color={Colors.slate[300]} />
         </TouchableOpacity>
       </ScrollView>
     </View>

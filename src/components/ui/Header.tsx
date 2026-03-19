@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import type { HeaderProps } from "@/types/interface";
+import { Colors } from "@/constants/colors";
 
 export function Header({
   title,
@@ -14,14 +15,20 @@ export function Header({
   const router = useRouter();
 
   return (
-    <View className="px-4 py-2">
+    <View className="px-5 py-3">
       <View className="flex-row items-center justify-between">
         {showBack ? (
           <TouchableOpacity
-            className="w-11 h-11 items-center justify-center"
+            className="w-11 h-11 items-center justify-center rounded-full bg-white border border-slate-100"
             onPress={() => router.back()}
+            style={{
+              shadowColor: Colors.black,
+              shadowOpacity: 0.05,
+              shadowRadius: 4,
+              shadowOffset: { width: 0, height: 2 },
+            }}
           >
-            <MaterialIcons name="arrow-back-ios" size={22} color="#181114" />
+            <MaterialIcons name="arrow-back-ios" size={18} color={Colors.text} />
           </TouchableOpacity>
         ) : (
           <View className="w-11" />
@@ -29,16 +36,16 @@ export function Header({
 
         <View className="flex-1 items-center">
           {stepText ? (
-            <Text className="text-sm font-semibold text-content uppercase tracking-widest">
+            <Text className="text-xs font-bold text-slate-400 uppercase tracking-widest">
               {stepText}
             </Text>
           ) : title ? (
-            <Text className="text-lg font-bold text-content text-center">
+            <Text className="text-lg font-extrabold text-slate-800 text-center">
               {title}
             </Text>
           ) : null}
           {subtitle && (
-            <Text className="text-xs font-bold text-brand uppercase tracking-widest mt-0.5">
+            <Text className="text-xs font-bold text-rose-500 uppercase tracking-widest mt-0.5">
               {subtitle}
             </Text>
           )}

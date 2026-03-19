@@ -1,8 +1,8 @@
 # Rheo — Relationship-Aware Period Tracker
 
-Rheo is a privacy-first period tracking application designed to help women understand their cycle while enabling partners to provide meaningful and respectful support.
+Rheo is a privacy-first period tracking application designed to help women understand their cycle while enabling partners, friends and families to provide meaningful and respectful support.
 
-Unlike traditional period trackers, Rheo introduces a relationship layer that allows controlled sharing of cycle-related information, improving communication and emotional awareness between partners.
+Unlike traditional period trackers, Rheo introduces a relationship layer that allows controlled sharing of cycle-related information, improving communication and emotional awareness between partners, friends and families.
 
 ---
 
@@ -10,7 +10,7 @@ Unlike traditional period trackers, Rheo introduces a relationship layer that al
 
 Rheo transforms period tracking from a personal activity into a shared experience, without compromising user control or privacy.
 
-The platform allows users to track their cycle, log daily experiences, and selectively share insights with trusted partners.
+The platform allows users to track their cycle, log daily experiences, and selectively share insights with trusted partners, friends and families.
 
 ---
 
@@ -26,7 +26,7 @@ The platform allows users to track their cycle, log daily experiences, and selec
 
 ### Partner Sharing
 
-* Invite partners through a secure link
+* Invite partners, friends and families through a secure link
 * Share selected information based on user-defined permissions
 * Maintain full control over what is visible
 
@@ -49,7 +49,7 @@ The platform allows users to track their cycle, log daily experiences, and selec
 
 ### Gifting
 
-* Partners can send supportive gestures within the app
+* Partners, friends and families can send supportive gestures within the app
 * Designed to encourage care and engagement
 
 ---
@@ -65,7 +65,7 @@ The platform allows users to track their cycle, log daily experiences, and selec
 
 * Granular control over shared data
 * Ability to update permissions at any time
-* Option to remove or block partners
+* Option to remove or block partners, friends and families.
 * Temporary privacy mode to restrict visibility
 
 ---
@@ -95,7 +95,7 @@ Rheo is designed to evolve beyond tracking into a broader support platform, with
 
 * Relationship-aware health experiences
 * Personalized insights
-* Improved communication between users and partners
+* Improved communication between users and partners, friends and families.
 
 ---
 

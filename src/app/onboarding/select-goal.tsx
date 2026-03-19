@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { IconCircle } from "@/components/ui/IconCircle";
 import { useApp } from "@/context/AppContext";
+import { Colors } from "@/constants/colors";
 import type { GoalOption, AppGoal } from "@/types/interface";
 
 const goals: GoalOption[] = [
@@ -27,15 +28,15 @@ export default function SelectGoalScreen() {
   };
 
   return (
-    <View className="flex-1 bg-surface pt-12">
-      <Header showBack stepText="Step 3 of 5" />
-      <ProgressDots total={5} current={2} />
+    <View className="flex-1 bg-background-light pt-12">
+      <Header showBack stepText="Step 2 of 4" />
+      <ProgressDots total={4} current={1} />
 
-      <ScrollView className="flex-1 px-4" showsVerticalScrollIndicator={false}>
-        <Text className="text-3xl font-bold text-content text-center pt-8 tracking-tight">
+      <ScrollView className="flex-1 px-5" showsVerticalScrollIndicator={false}>
+        <Text className="text-3xl font-extrabold text-slate-800 text-center pt-8 tracking-tight">
           {"What's your goal?"}
         </Text>
-        <Text className="text-base text-[#896175] text-center mt-2 px-8">
+        <Text className="text-base text-slate-500 text-center mt-2 px-4">
           {"We'll customize your experience based on your needs."}
         </Text>
 
@@ -45,10 +46,14 @@ export default function SelectGoalScreen() {
               <Card selected={selected === goal.id}>
                 <View className="flex-row items-center justify-between gap-4">
                   <View className="flex-1 gap-1">
-                    <Text className="text-lg font-bold text-content">{goal.title}</Text>
-                    <Text className="text-sm text-[#896175]">{goal.subtitle}</Text>
+                    <Text className="text-lg font-bold text-slate-800">{goal.title}</Text>
+                    <Text className="text-sm text-slate-500">{goal.subtitle}</Text>
                   </View>
-                  <IconCircle name={goal.icon as keyof typeof MaterialIcons.glyphMap} />
+                  <IconCircle 
+                    name={goal.icon as keyof typeof MaterialIcons.glyphMap}
+                    color={selected === goal.id ? Colors.rose[500] : Colors.slate[400]}
+                    bgClassName={selected === goal.id ? "bg-rose-50" : "bg-slate-100"}
+                  />
                 </View>
               </Card>
             </TouchableOpacity>

@@ -15,6 +15,7 @@
     "expo-file-system": "19.0.21"
   },
   "dependencies": {
+    "@expo-google-fonts/plus-jakarta-sans": "^0.2.3",
     "@expo/vector-icons": "^15.0.3",
     "@hookform/resolvers": "^5.2.2",
     "@react-native-async-storage/async-storage": "2.2.0",

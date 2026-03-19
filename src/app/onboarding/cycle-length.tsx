@@ -6,6 +6,7 @@ import { Header } from "@/components/ui/Header";
 import { ProgressDots } from "@/components/ui/ProgressDots";
 import { Button } from "@/components/ui/Button";
 import { useApp } from "@/context/AppContext";
+import { Colors } from "@/constants/colors";
 
 export default function CycleLengthScreen() {
   const router = useRouter();
@@ -20,44 +21,54 @@ export default function CycleLengthScreen() {
   };
 
   return (
-    <View className="flex-1 bg-surface pt-12">
-      <Header showBack />
-      <View className="items-center -mt-10 mb-2">
-        <Text className="text-[10px] font-semibold text-brand-muted uppercase tracking-[2px]">
-          Personalization
-        </Text>
-      </View>
-      <ProgressDots total={5} current={3} />
+    <View className="flex-1 bg-background-light pt-12">
+      <Header showBack stepText="Step 3 of 4" />
+      <ProgressDots total={4} current={2} />
 
       <View className="flex-1 px-6">
-        <Text className="text-3xl font-bold text-content text-center pt-6 tracking-tight">
+        <Text className="text-3xl font-extrabold text-slate-800 text-center pt-6 tracking-tight">
           How long is your cycle usually?
         </Text>
-        <Text className="text-base text-content/70 text-center mt-2 leading-6 px-4">
+        <Text className="text-base text-slate-500 text-center mt-2 leading-6 px-4">
           Knowing your cycle length helps us predict your fertile window and next period accurately.
         </Text>
 
         {/* Value Display */}
         <View className="items-center justify-center py-12">
-          <View className="bg-white rounded-2xl px-10 py-6 items-center border border-line-light shadow-lg shadow-brand/5">
-            <Text className="text-5xl font-bold text-brand tracking-tight">{cycleLength}</Text>
-            <Text className="text-lg font-semibold text-brand-muted uppercase tracking-[3px]">Days</Text>
+          <View 
+            className="bg-white rounded-3xl px-12 py-8 items-center border border-slate-100"
+            style={{
+              shadowColor: Colors.rose[200],
+              shadowOpacity: 0.4,
+              shadowRadius: 16,
+              shadowOffset: { width: 0, height: 4 },
+            }}
+          >
+            <Text className="text-6xl font-extrabold text-rose-500 tracking-tight">{cycleLength}</Text>
+            <Text className="text-sm font-bold text-slate-400 uppercase tracking-[3px] mt-2">Days</Text>
           </View>
         </View>
 
         {/* Custom Slider */}
         <View className="px-4 relative">
-          <View className="h-2 bg-[#e6dbe0] rounded-full relative">
-            <View className="absolute left-0 top-0 h-2 bg-brand rounded-full" style={{ width: `${pct}%` as any }} />
+          <View className="h-3 bg-rose-100 rounded-full relative">
+            <View className="absolute left-0 top-0 h-3 bg-primary rounded-full" style={{ width: `${pct}%` as any }} />
             <View
-              className="absolute -top-3 w-8 h-8 rounded-full bg-brand"
-              style={{ left: `${pct}%` as any, marginLeft: -16 }}
+              className="absolute -top-2.5 w-8 h-8 rounded-full bg-white border-4 border-primary"
+              style={{ 
+                left: `${pct}%` as any, 
+                marginLeft: -16,
+                shadowColor: Colors.primary,
+                shadowOpacity: 0.3,
+                shadowRadius: 6,
+                shadowOffset: { width: 0, height: 2 },
+              }}
             />
           </View>
-          <View className="flex-row justify-between mt-4">
-            <Text className="text-[10px] text-content/40 font-medium">21 Days</Text>
-            <Text className="text-[10px] text-content/40 font-medium">30 Days</Text>
-            <Text className="text-[10px] text-content/40 font-medium">45 Days</Text>
+          <View className="flex-row justify-between mt-6">
+            <Text className="text-xs text-slate-400 font-semibold">21 Days</Text>
+            <Text className="text-xs text-slate-400 font-semibold">30 Days</Text>
+            <Text className="text-xs text-slate-400 font-semibold">45 Days</Text>
           </View>
           {Platform.OS === "web" && (
             <input
@@ -71,7 +82,7 @@ export default function CycleLengthScreen() {
           )}
         </View>
 
-        <Text className="text-xs text-content/50 italic text-center mt-8">
+        <Text className="text-sm text-slate-400 text-center mt-10">
           {"Don't worry, you can always change this later in settings."}
         </Text>
       </View>
@@ -80,7 +91,7 @@ export default function CycleLengthScreen() {
         <Button
           title="Continue"
           onPress={handleContinue}
-          icon={<MaterialIcons name="arrow-forward" size={20} color="#fff" />}
+          icon={<MaterialIcons name="arrow-forward" size={20} color={Colors.rose[900]} />}
         />
       </View>
     </View>

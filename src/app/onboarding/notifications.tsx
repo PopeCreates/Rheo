@@ -5,6 +5,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { ProgressDots } from "@/components/ui/ProgressDots";
 import { Button } from "@/components/ui/Button";
 import { useApp } from "@/context/AppContext";
+import { Colors } from "@/constants/colors";
 
 export default function NotificationsScreen() {
   const router = useRouter();
@@ -23,20 +24,42 @@ export default function NotificationsScreen() {
   };
 
   return (
-    <View className="flex-1 bg-white pt-14">
-      <ProgressDots total={5} current={4} />
+    <View className="flex-1 bg-background-light pt-14">
+      <ProgressDots total={4} current={3} />
 
       {/* Hero */}
-      <View className="flex-1 items-center justify-center">
-        <View className="w-72 h-72 rounded-full bg-brand-light/50 items-center justify-center">
-          {/* Dashed ring */}
-          <View className="absolute w-67.5 h-67.5 rounded-full border-2 border-dashed border-brand-light" />
+      <View className="flex-1 items-center justify-center px-8">
+        <View 
+          className="w-64 h-64 rounded-full bg-primary/20 items-center justify-center"
+          style={{
+            shadowColor: Colors.primary,
+            shadowOpacity: 0.3,
+            shadowRadius: 30,
+            shadowOffset: { width: 0, height: 0 },
+          }}
+        >
           {/* Icon card */}
-          <View className="w-48 h-48 rounded-4xl bg-white items-center justify-center shadow-xl">
-            <MaterialIcons name="notifications-active" size={80} color="#f90680" />
+          <View 
+            className="w-40 h-40 rounded-3xl bg-white items-center justify-center"
+            style={{
+              shadowColor: Colors.black,
+              shadowOpacity: 0.1,
+              shadowRadius: 20,
+              shadowOffset: { width: 0, height: 8 },
+            }}
+          >
+            <MaterialIcons name="notifications-active" size={72} color={Colors.rose[400]} />
             {/* Badge */}
-            <View className="absolute -top-3 -right-2 w-12 h-12 rounded-full bg-brand items-center justify-center shadow-lg shadow-brand/30 rotate-12">
-              <MaterialIcons name="card-giftcard" size={22} color="#fff" />
+            <View 
+              className="absolute -top-2 -right-2 w-10 h-10 rounded-full bg-primary items-center justify-center"
+              style={{
+                shadowColor: Colors.primary,
+                shadowOpacity: 0.4,
+                shadowRadius: 8,
+                shadowOffset: { width: 0, height: 2 },
+              }}
+            >
+              <MaterialIcons name="pets" size={20} color={Colors.rose[900]} />
             </View>
           </View>
         </View>
@@ -44,19 +67,23 @@ export default function NotificationsScreen() {
 
       {/* Text */}
       <View className="px-8 pb-6">
-        <Text className="text-3xl font-bold text-content text-center tracking-tight">
-          Never be surprised again.
+        <Text className="text-3xl font-extrabold text-slate-800 text-center tracking-tight">
+          Stay in the loop
         </Text>
-        <Text className="text-lg text-content/60 text-center mt-4 leading-7">
-          Enable notifications for period predictions and health tips tailored for you.
+        <Text className="text-base text-slate-500 text-center mt-3 leading-relaxed">
+          Get gentle reminders for your cycle predictions and personalized wellness tips from your bunny companion.
         </Text>
       </View>
 
       {/* Actions */}
       <View className="px-8 pb-12 gap-3">
-        <Button title="Enable Notifications" onPress={handleEnable} />
+        <Button 
+          title="Enable Notifications" 
+          onPress={handleEnable}
+          icon={<MaterialIcons name="notifications" size={20} color={Colors.rose[900]} />}
+        />
         <TouchableOpacity className="items-center py-3" onPress={handleSkip}>
-          <Text className="text-base font-medium text-content/40">Maybe Later</Text>
+          <Text className="text-base font-medium text-slate-400">Maybe Later</Text>
         </TouchableOpacity>
       </View>
     </View>

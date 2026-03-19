@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/Button";
 import { ToggleSwitch } from "@/components/ui/ToggleSwitch";
 import { useApp } from "@/context/AppContext";
 import { getMonthDays } from "@/utils/cycle";
+import { Colors } from "@/constants/colors";
 
 const DAYS = ["S", "M", "T", "W", "T", "F", "S"];
 
@@ -47,35 +48,42 @@ export default function LastPeriodScreen() {
   };
 
   return (
-    <View className="flex-1 bg-surface pt-12">
-      <Header showBack stepText="Step 2 of 5" />
-      <ProgressDots total={5} current={1} />
+    <View className="flex-1 bg-background-light pt-12">
+      <Header showBack stepText="Step 1 of 4" />
+      <ProgressDots total={4} current={0} />
 
       <ScrollView className="flex-1 px-6" showsVerticalScrollIndicator={false}>
-        <Text className="text-3xl font-bold text-content text-center pt-8 tracking-tight">
+        <Text className="text-3xl font-extrabold text-slate-800 text-center pt-8 tracking-tight">
           When did your last period start?
         </Text>
-        <Text className="text-base text-content/60 text-center mt-3 leading-6">
+        <Text className="text-base text-slate-500 text-center mt-3 leading-6">
           Select the first day of your most recent cycle to help us track your health.
         </Text>
 
         {/* Calendar */}
-        <View className="bg-brand-light/50 rounded-2xl p-4 mt-6 border border-line-light">
+        <View className="bg-white rounded-3xl p-5 mt-6 border border-slate-100"
+          style={{
+            shadowColor: Colors.rose[200],
+            shadowOpacity: 0.3,
+            shadowRadius: 12,
+            shadowOffset: { width: 0, height: 4 },
+          }}
+        >
           <View className="flex-row items-center justify-between mb-4">
-            <TouchableOpacity onPress={prevMonth} className="p-2">
-              <MaterialIcons name="chevron-left" size={28} color="#f90680" />
+            <TouchableOpacity onPress={prevMonth} className="p-2 rounded-full bg-rose-50">
+              <MaterialIcons name="chevron-left" size={24} color={Colors.rose[500]} />
             </TouchableOpacity>
-            <Text className="text-lg font-bold text-content">
+            <Text className="text-lg font-bold text-slate-800">
               {monthNames[currentMonth]} {currentYear}
             </Text>
-            <TouchableOpacity onPress={nextMonth} className="p-2">
-              <MaterialIcons name="chevron-right" size={28} color="#f90680" />
+            <TouchableOpacity onPress={nextMonth} className="p-2 rounded-full bg-rose-50">
+              <MaterialIcons name="chevron-right" size={24} color={Colors.rose[500]} />
             </TouchableOpacity>
           </View>
 
           <View className="flex-row mb-2">
             {DAYS.map((d, i) => (
-              <Text key={i} className="flex-1 text-center text-xs font-bold text-content/40 tracking-widest">
+              <Text key={i} className="flex-1 text-center text-xs font-bold text-slate-400 tracking-widest">
                 {d}
               </Text>
             ))}
@@ -94,8 +102,16 @@ export default function LastPeriodScreen() {
                   className="w-[14.28%] h-12 items-center justify-center"
                   onPress={() => { setSelectedDay(day); setDontRemember(false); }}
                 >
-                  <View className={`w-10 h-10 rounded-full items-center justify-center ${isSelected ? "bg-brand shadow-lg shadow-brand/40" : ""}`}>
-                    <Text className={`text-sm font-medium ${isSelected ? "text-white" : "text-content"}`}>
+                  <View 
+                    className={`w-10 h-10 rounded-full items-center justify-center ${isSelected ? "bg-primary" : ""}`}
+                    style={isSelected ? {
+                      shadowColor: Colors.primary,
+                      shadowOpacity: 0.4,
+                      shadowRadius: 8,
+                      shadowOffset: { width: 0, height: 2 },
+                    } : undefined}
+                  >
+                    <Text className={`text-sm font-semibold ${isSelected ? "text-rose-900" : "text-slate-700"}`}>
                       {day}
                     </Text>
                   </View>
@@ -106,10 +122,12 @@ export default function LastPeriodScreen() {
         </View>
 
         {/* Don't remember */}
-        <View className="flex-row items-center justify-between bg-brand-light/50 rounded-2xl px-6 py-4 mt-8 border border-brand-light/50">
+        <View className="flex-row items-center justify-between bg-white rounded-2xl px-5 py-4 mt-6 border border-slate-100">
           <View className="flex-row items-center gap-3">
-            <MaterialIcons name="help-outline" size={22} color="rgba(249,6,128,0.6)" />
-            <Text className="text-base font-medium text-content">{"I don't remember"}</Text>
+            <View className="w-10 h-10 rounded-xl bg-rose-50 items-center justify-center">
+              <MaterialIcons name="help-outline" size={20} color={Colors.rose[400]} />
+            </View>
+            <Text className="text-base font-semibold text-slate-700">{"I don't remember"}</Text>
           </View>
           <ToggleSwitch value={dontRemember} onToggle={setDontRemember} />
         </View>
@@ -119,7 +137,7 @@ export default function LastPeriodScreen() {
         <Button
           title="Next"
           onPress={handleNext}
-          icon={<MaterialIcons name="arrow-forward" size={20} color="#fff" />}
+          icon={<MaterialIcons name="arrow-forward" size={20} color={Colors.rose[900]} />}
         />
       </View>
     </View>

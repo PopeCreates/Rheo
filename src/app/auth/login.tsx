@@ -3,6 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform
 import { useRouter } from "expo-router";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Button } from "@/components/ui/Button";
+import { Colors } from "@/constants/colors";
 
 export default function LoginScreen() {
   const router = useRouter();
@@ -17,7 +18,7 @@ export default function LoginScreen() {
 
   return (
     <KeyboardAvoidingView
-      className="flex-1 bg-surface"
+      className="flex-1 bg-background-light"
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
       <ScrollView
@@ -26,13 +27,22 @@ export default function LoginScreen() {
         keyboardShouldPersistTaps="handled"
       >
         {/* Back */}
-        <TouchableOpacity className="mt-14 w-11 h-11 items-center justify-center" onPress={() => router.back()}>
-          <MaterialIcons name="arrow-back-ios" size={22} color="#181114" />
+        <TouchableOpacity 
+          className="mt-14 w-11 h-11 rounded-full bg-white border border-slate-100 items-center justify-center" 
+          onPress={() => router.back()}
+          style={{
+            shadowColor: Colors.black,
+            shadowOpacity: 0.05,
+            shadowRadius: 4,
+            shadowOffset: { width: 0, height: 2 },
+          }}
+        >
+          <MaterialIcons name="arrow-back-ios" size={18} color={Colors.slate[800]} />
         </TouchableOpacity>
 
         <View className="mt-8">
-          <Text className="text-3xl font-extrabold text-content tracking-tight">Welcome back</Text>
-          <Text className="text-base text-content-secondary mt-2">
+          <Text className="text-3xl font-extrabold text-slate-800 tracking-tight">Welcome back</Text>
+          <Text className="text-base text-slate-500 mt-2">
             Log in to continue tracking your cycle.
           </Text>
         </View>
@@ -40,11 +50,11 @@ export default function LoginScreen() {
         {/* Form */}
         <View className="mt-10 gap-4">
           <View>
-            <Text className="text-sm font-bold text-content mb-2">Email</Text>
+            <Text className="text-sm font-bold text-slate-700 mb-2">Email</Text>
             <TextInput
-              className="bg-white rounded-2xl border border-line px-4 h-14 text-base text-content"
+              className="bg-white rounded-xl border border-slate-200 px-4 h-14 text-base text-slate-800"
               placeholder="your@email.com"
-              placeholderTextColor="rgba(24,17,20,0.3)"
+              placeholderTextColor={Colors.slate[400]}
               value={email}
               onChangeText={setEmail}
               keyboardType="email-address"
@@ -53,24 +63,24 @@ export default function LoginScreen() {
           </View>
 
           <View>
-            <Text className="text-sm font-bold text-content mb-2">Password</Text>
-            <View className="flex-row items-center bg-white rounded-2xl border border-line px-4 h-14">
+            <Text className="text-sm font-bold text-slate-700 mb-2">Password</Text>
+            <View className="flex-row items-center bg-white rounded-xl border border-slate-200 px-4 h-14">
               <TextInput
-                className="flex-1 text-base text-content"
+                className="flex-1 text-base text-slate-800"
                 placeholder="Enter your password"
-                placeholderTextColor="rgba(24,17,20,0.3)"
+                placeholderTextColor={Colors.slate[400]}
                 value={password}
                 onChangeText={setPassword}
                 secureTextEntry={!showPassword}
               />
               <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-                <MaterialIcons name={showPassword ? "visibility" : "visibility-off"} size={22} color="#8c5f75" />
+                <MaterialIcons name={showPassword ? "visibility" : "visibility-off"} size={22} color={Colors.slate[400]} />
               </TouchableOpacity>
             </View>
           </View>
 
           <TouchableOpacity className="self-end">
-            <Text className="text-sm font-semibold text-brand">Forgot password?</Text>
+            <Text className="text-sm font-semibold text-rose-500">Forgot password?</Text>
           </TouchableOpacity>
         </View>
 
@@ -80,15 +90,15 @@ export default function LoginScreen() {
 
         {/* Divider */}
         <View className="flex-row items-center my-8">
-          <View className="flex-1 h-px bg-line" />
-          <Text className="px-4 text-xs text-content/40 font-medium">OR</Text>
-          <View className="flex-1 h-px bg-line" />
+          <View className="flex-1 h-px bg-slate-200" />
+          <Text className="px-4 text-xs text-slate-400 font-medium uppercase tracking-widest">or</Text>
+          <View className="flex-1 h-px bg-slate-200" />
         </View>
 
         {/* Social */}
-        <TouchableOpacity className="flex-row items-center justify-center h-14 rounded-full border-2 border-line gap-3">
-          <MaterialIcons name="g-mobiledata" size={24} color="#181114" />
-          <Text className="font-bold text-content">Continue with Google</Text>
+        <TouchableOpacity className="flex-row items-center justify-center h-14 rounded-xl border-2 border-slate-200 gap-3 bg-white">
+          <MaterialIcons name="login" size={20} color={Colors.slate[600]} />
+          <Text className="font-bold text-slate-700">Continue with Google</Text>
         </TouchableOpacity>
 
         {/* Sign up link */}
@@ -97,9 +107,9 @@ export default function LoginScreen() {
           className="items-center pb-10"
           onPress={() => router.push("/auth/signup")}
         >
-          <Text className="text-sm text-content/60 font-semibold">
+          <Text className="text-sm text-slate-400 font-medium">
             {"Don't have an account? "}
-            <Text className="text-brand">Sign Up</Text>
+            <Text className="text-rose-500 font-semibold">Sign Up</Text>
           </Text>
         </TouchableOpacity>
       </ScrollView>

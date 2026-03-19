@@ -1,20 +1,120 @@
-# Expo Router and Tailwind CSS
+# Rheo — Relationship-Aware Period Tracker
 
-Use [Expo Router](https://docs.expo.dev/router/introduction/) with [Nativewind](https://www.nativewind.dev/v4/overview/) styling.
+Rheo is a privacy-first period tracking application designed to help women understand their cycle while enabling partners to provide meaningful and respectful support.
 
-## Launch your own
+Unlike traditional period trackers, Rheo introduces a relationship layer that allows controlled sharing of cycle-related information, improving communication and emotional awareness between partners.
 
-[![Launch with Expo](https://github.com/expo/examples/blob/master/.gh-assets/launch.svg?raw=true)](https://launch.expo.dev/?github=https://github.com/expo/examples/tree/master/with-tailwindcss)
+---
 
-## 🚀 How to use
+## Overview
 
-```sh
-npx create-expo-app -e with-tailwindcss
-```
+Rheo transforms period tracking from a personal activity into a shared experience, without compromising user control or privacy.
 
-## Deploy
+The platform allows users to track their cycle, log daily experiences, and selectively share insights with trusted partners.
 
-Deploy on all platforms with Expo Application Services (EAS).
+---
 
-- Deploy the website: `npx eas-cli deploy` — [Learn more](https://docs.expo.dev/eas/hosting/get-started/)
-- Deploy on iOS and Android using: `npx eas-cli build` — [Learn more](https://expo.dev/eas)
+## Key Features
+
+### Cycle Tracking
+
+* Log period start and end dates
+* Track daily mood and symptoms
+* Monitor cycle patterns over time
+
+---
+
+### Partner Sharing
+
+* Invite partners through a secure link
+* Share selected information based on user-defined permissions
+* Maintain full control over what is visible
+
+---
+
+### Partner Experience
+
+* View shared cycle updates
+* Receive contextual insights to better understand the user’s state
+* Engage through supportive actions
+
+---
+
+### Messaging
+
+* Send and receive messages within the app
+* Includes voice and video messaging capabilities
+
+---
+
+### Gifting
+
+* Partners can send supportive gestures within the app
+* Designed to encourage care and engagement
+
+---
+
+### Insights
+
+* Identify patterns in mood and symptoms
+* Gain a clearer understanding of cycle behavior over time
+
+---
+
+### Privacy and Control
+
+* Granular control over shared data
+* Ability to update permissions at any time
+* Option to remove or block partners
+* Temporary privacy mode to restrict visibility
+
+---
+
+## Privacy Approach
+
+Rheo is built with a privacy-first philosophy:
+
+* Users control all shared information
+* Data visibility is permission-based
+* Only essential information is shared by default
+* Sensitive data is never exposed without explicit consent
+
+---
+
+## Use Cases
+
+* Individuals tracking their menstrual cycle
+* Couples seeking better communication and understanding
+* Users who want structured insights into their health patterns
+
+---
+
+## Product Direction
+
+Rheo is designed to evolve beyond tracking into a broader support platform, with a focus on:
+
+* Relationship-aware health experiences
+* Personalized insights
+* Improved communication between users and partners
+
+---
+
+## Getting Started
+
+This repository contains the product definition and will evolve alongside development.
+
+Further setup instructions and implementation details will be added as the project progresses.
+
+---
+
+## Contributing
+
+Contributions, feedback, and suggestions are welcome.
+
+Please open an issue or submit a pull request.
+
+---
+
+## License
+
+MIT License

@@ -1,19 +1,45 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform, ScrollView } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform, ScrollView, ActivityIndicator, Alert } from "react-native";
 import { useRouter } from "expo-router";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Button } from "@/components/ui/Button";
 import { Colors } from "@/constants/colors";
+import { useAuth } from "@/context/AuthContext";
 
 export default function LoginScreen() {
   const router = useRouter();
+  const { signIn, loading, error, clearError } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleLogin = () => {
-    // TODO: Implement actual auth
-    router.replace("/(tabs)");
+  const handleLogin = async () => {
+    if (!email || !password) {
+      Alert.alert("Missing Fields", "Please enter both email and password.");
+      return;
+    }
+
+    try {
+      await signIn(email, password);
+      router.replace("/(tabs)");
+    } catch (err) {
+      // Error is handled by AuthContext
+    }
+  };
+
+  const handleForgotPassword = () => {
+    if (email) {
+      Alert.alert(
+        "Reset Password",
+        `We'll send a password reset link to ${email}`,
+        [
+          { text: "Cancel", style: "cancel" },
+          { text: "Send", onPress: () => {} }, // TODO: Implement password reset
+        ]
+      );
+    } else {
+      Alert.alert("Enter Email", "Please enter your email address first.");
+    }
   };
 
   return (
@@ -47,6 +73,13 @@ export default function LoginScreen() {
           </Text>
         </View>
 
+        {/* Error Message */}
+        {error && (
+          <View className="mt-4 p-4 bg-rose-50 rounded-xl border border-rose-200">
+            <Text className="text-sm text-rose-600">{error}</Text>
+          </View>
+        )}
+
         {/* Form */}
         <View className="mt-10 gap-4">
           <View>
@@ -56,9 +89,14 @@ export default function LoginScreen() {
               placeholder="your@email.com"
               placeholderTextColor={Colors.slate[400]}
               value={email}
-              onChangeText={setEmail}
+              onChangeText={(text) => {
+                setEmail(text);
+                clearError();
+              }}
               keyboardType="email-address"
               autoCapitalize="none"
+              autoComplete="email"
+              editable={!loading}
             />
           </View>
 
@@ -70,8 +108,13 @@ export default function LoginScreen() {
                 placeholder="Enter your password"
                 placeholderTextColor={Colors.slate[400]}
                 value={password}
-                onChangeText={setPassword}
+                onChangeText={(text) => {
+                  setPassword(text);
+                  clearError();
+                }}
                 secureTextEntry={!showPassword}
+                autoComplete="password"
+                editable={!loading}
               />
               <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
                 <MaterialIcons name={showPassword ? "visibility" : "visibility-off"} size={22} color={Colors.slate[400]} />
@@ -79,13 +122,19 @@ export default function LoginScreen() {
             </View>
           </View>
 
-          <TouchableOpacity className="self-end">
+          <TouchableOpacity className="self-end" onPress={handleForgotPassword}>
             <Text className="text-sm font-semibold text-rose-500">Forgot password?</Text>
           </TouchableOpacity>
         </View>
 
         <View className="mt-8">
-          <Button title="Log In" onPress={handleLogin} />
+          <Button 
+            title={loading ? "" : "Log In"} 
+            onPress={handleLogin}
+            disabled={loading}
+          >
+            {loading && <ActivityIndicator color={Colors.rose[900]} />}
+          </Button>
         </View>
 
         {/* Divider */}
@@ -95,8 +144,12 @@ export default function LoginScreen() {
           <View className="flex-1 h-px bg-slate-200" />
         </View>
 
-        {/* Social */}
-        <TouchableOpacity className="flex-row items-center justify-center h-14 rounded-xl border-2 border-slate-200 gap-3 bg-white">
+        {/* Social - TODO: Implement Google Sign-In */}
+        <TouchableOpacity 
+          className="flex-row items-center justify-center h-14 rounded-xl border-2 border-slate-200 gap-3 bg-white"
+          disabled={loading}
+          style={{ opacity: loading ? 0.5 : 1 }}
+        >
           <MaterialIcons name="login" size={20} color={Colors.slate[600]} />
           <Text className="font-bold text-slate-700">Continue with Google</Text>
         </TouchableOpacity>
@@ -106,6 +159,7 @@ export default function LoginScreen() {
         <TouchableOpacity
           className="items-center pb-10"
           onPress={() => router.push("/auth/signup")}
+          disabled={loading}
         >
           <Text className="text-sm text-slate-400 font-medium">
             {"Don't have an account? "}

@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useAuth } from "./AuthContext";
+import { dailyLogsService, cravingsService, userService } from "@/services/firestore";
 import type {
   AppState,
   AppContextType,
@@ -21,69 +23,144 @@ const defaultState: AppState = {
   onboardingData: defaultOnboarding,
   dailyLogs: [],
   cravings: [],
-  partners: [
-    {
-      id: "1",
-      name: "John Doe",
-      role: "partner",
-      moodSharing: true,
-      periodAlerts: true,
-    },
-  ],
-  userName: "Sarah",
+  partners: [],
+  userName: "Guest",
 };
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export function AppProvider({ children }: { children: ReactNode }) {
+  const { user, userData, loading: authLoading } = useAuth();
   const [state, setState] = useState<AppState>(defaultState);
+  const [loading, setLoading] = useState(true);
 
+  // Sync state from Firebase when user/userData changes
   useEffect(() => {
-    loadState();
-  }, []);
+    if (authLoading) return;
 
-  useEffect(() => {
-    saveState();
-  }, [state]);
+    if (user && userData) {
+      // User is logged in - use Firebase data
+      setState((prev) => ({
+        ...prev,
+        userName: userData.displayName || user.email?.split("@")[0] || "User",
+        onboardingComplete: userData.onboardingComplete,
+        onboardingData: {
+          ...defaultOnboarding,
+          ...userData.onboardingData,
+        },
+      }));
 
-  const loadState = async () => {
+      // Subscribe to daily logs
+      const unsubLogs = dailyLogsService.subscribe(user.uid, (logs) => {
+        setState((prev) => ({
+          ...prev,
+          dailyLogs: logs.map((log) => ({
+            date: log.date,
+            mood: log.mood,
+            flow: log.flow,
+            symptoms: log.symptoms,
+            notes: log.notes,
+          })),
+        }));
+      });
+
+      // Subscribe to cravings
+      const unsubCravings = cravingsService.subscribe(user.uid, (cravings) => {
+        setState((prev) => ({
+          ...prev,
+          cravings: cravings.map((c) => ({
+            id: c.id,
+            item: c.item,
+            category: c.category,
+            notes: c.notes,
+            addedToList: c.fulfilled,
+          })),
+        }));
+      });
+
+      setLoading(false);
+
+      return () => {
+        unsubLogs();
+        unsubCravings();
+      };
+    } else {
+      // No user - load from AsyncStorage (offline mode)
+      loadLocalState();
+    }
+  }, [user, userData, authLoading]);
+
+  // Load state from AsyncStorage (for offline/guest mode)
+  const loadLocalState = async () => {
     try {
-      const stored = await AsyncStorage.getItem("hercircle_state");
-      if (stored) setState(JSON.parse(stored));
+      const stored = await AsyncStorage.getItem("rheo_state");
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        setState((prev) => ({ ...prev, ...parsed }));
+      }
     } catch {
       /* use defaults */
     }
+    setLoading(false);
   };
 
-  const saveState = async () => {
+  // Save to AsyncStorage when not logged in
+  useEffect(() => {
+    if (!user && !authLoading) {
+      saveLocalState();
+    }
+  }, [state, user, authLoading]);
+
+  const saveLocalState = async () => {
     try {
-      await AsyncStorage.setItem("hercircle_state", JSON.stringify(state));
+      await AsyncStorage.setItem("rheo_state", JSON.stringify(state));
     } catch {
       /* silent */
     }
   };
 
-  const setOnboardingData = (data: Partial<OnboardingData>) => {
+  const setOnboardingData = async (data: Partial<OnboardingData>) => {
     setState((prev) => ({
       ...prev,
       onboardingData: { ...prev.onboardingData, ...data },
     }));
+
+    // Sync to Firebase if logged in
+    if (user) {
+      try {
+        await userService.updateOnboardingData(user.uid, data);
+      } catch (err) {
+        console.error("Error syncing onboarding data:", err);
+      }
+    }
   };
 
-  const completeOnboarding = () => {
+  const completeOnboarding = async () => {
+    const lastPeriodDate =
+      state.onboardingData.lastPeriodDate ||
+      new Date(Date.now() - 12 * 86_400_000).toISOString().split("T")[0];
+
     setState((prev) => ({
       ...prev,
       onboardingComplete: true,
       onboardingData: {
         ...prev.onboardingData,
-        lastPeriodDate:
-          prev.onboardingData.lastPeriodDate ||
-          new Date(Date.now() - 12 * 86_400_000).toISOString().split("T")[0],
+        lastPeriodDate,
       },
     }));
+
+    // Sync to Firebase if logged in
+    if (user) {
+      try {
+        await userService.updateOnboardingData(user.uid, { lastPeriodDate });
+        await userService.completeOnboarding(user.uid);
+      } catch (err) {
+        console.error("Error completing onboarding:", err);
+      }
+    }
   };
 
-  const saveDailyLog = (log: DailyLog) => {
+  const saveDailyLog = async (log: DailyLog) => {
     setState((prev) => {
       const idx = prev.dailyLogs.findIndex((l) => l.date === log.date);
       const logs = [...prev.dailyLogs];
@@ -91,6 +168,20 @@ export function AppProvider({ children }: { children: ReactNode }) {
       else logs.push(log);
       return { ...prev, dailyLogs: logs };
     });
+
+    // Sync to Firebase if logged in
+    if (user) {
+      try {
+        await dailyLogsService.upsert(user.uid, log.date, {
+          mood: log.mood,
+          flow: log.flow,
+          symptoms: log.symptoms,
+          notes: log.notes,
+        });
+      } catch (err) {
+        console.error("Error saving daily log:", err);
+      }
+    }
   };
 
   const getTodayLog = (): DailyLog | undefined => {
@@ -98,19 +189,57 @@ export function AppProvider({ children }: { children: ReactNode }) {
     return state.dailyLogs.find((l) => l.date === today);
   };
 
-  const addCraving = (craving: Craving) =>
+  const addCraving = async (craving: Craving) => {
     setState((p) => ({ ...p, cravings: [...p.cravings, craving] }));
 
-  const removeCraving = (id: string) =>
+    // Sync to Firebase if logged in
+    if (user) {
+      try {
+        await cravingsService.add(user.uid, {
+          item: craving.item,
+          category: (craving.category as "food" | "activity" | "gift" | "other") || "other",
+          notes: craving.notes,
+          fulfilled: craving.addedToList || false,
+        });
+      } catch (err) {
+        console.error("Error adding craving:", err);
+      }
+    }
+  };
+
+  const removeCraving = async (id: string) => {
     setState((p) => ({ ...p, cravings: p.cravings.filter((c) => c.id !== id) }));
 
-  const toggleCravingList = (id: string) =>
+    // Sync to Firebase if logged in
+    if (user) {
+      try {
+        await cravingsService.delete(id);
+      } catch (err) {
+        console.error("Error removing craving:", err);
+      }
+    }
+  };
+
+  const toggleCravingList = async (id: string) => {
+    const craving = state.cravings.find((c) => c.id === id);
+    if (!craving) return;
+
     setState((p) => ({
       ...p,
       cravings: p.cravings.map((c) =>
         c.id === id ? { ...c, addedToList: !c.addedToList } : c
       ),
     }));
+
+    // Sync to Firebase if logged in
+    if (user) {
+      try {
+        await cravingsService.update(id, { fulfilled: !craving.addedToList });
+      } catch (err) {
+        console.error("Error toggling craving:", err);
+      }
+    }
+  };
 
   const addPartner = (partner: Partner) =>
     setState((p) => ({ ...p, partners: [...p.partners, partner] }));

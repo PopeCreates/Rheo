@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform, ScrollView, ActivityIndicator } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform, ScrollView, ActivityIndicator, Image } from "react-native";
 import { useRouter } from "expo-router";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Button } from "@/components/ui/Button";
@@ -8,7 +8,8 @@ import { useAuth } from "@/context/AuthContext";
 
 export default function SignUpScreen() {
   const router = useRouter();
-  const { signUp, loading, error, clearError } = useAuth();
+  const { signUp, signInWithGoogle, signInWithApple, loading, error, clearError } = useAuth();
+  const [socialLoading, setSocialLoading] = useState<"google" | "apple" | null>(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -30,6 +31,30 @@ export default function SignUpScreen() {
   const handleInputChange = (setter: (value: string) => void) => (text: string) => {
     setter(text);
     clearError();
+  };
+
+  const handleGoogleSignUp = async () => {
+    try {
+      setSocialLoading("google");
+      await signInWithGoogle();
+      router.replace("/onboarding/welcome");
+    } catch (err) {
+      // Error handled in AuthContext
+    } finally {
+      setSocialLoading(null);
+    }
+  };
+
+  const handleAppleSignUp = async () => {
+    try {
+      setSocialLoading("apple");
+      await signInWithApple();
+      router.replace("/onboarding/welcome");
+    } catch (err) {
+      // Error handled in AuthContext
+    } finally {
+      setSocialLoading(null);
+    }
   };
 
   return (
@@ -132,6 +157,52 @@ export default function SignUpScreen() {
         <Text className="text-xs text-slate-400 text-center mt-4 leading-5 px-4">
           By signing up, you agree to our Terms of Service and Privacy Policy
         </Text>
+
+        {/* Divider */}
+        <View className="flex-row items-center my-6">
+          <View className="flex-1 h-px bg-slate-200" />
+          <Text className="px-4 text-xs text-slate-400 font-medium uppercase tracking-widest">or</Text>
+          <View className="flex-1 h-px bg-slate-200" />
+        </View>
+
+        {/* Google Sign-Up */}
+        <TouchableOpacity 
+          className="flex-row items-center justify-center h-14 rounded-xl border-2 border-slate-200 gap-3 bg-white"
+          onPress={handleGoogleSignUp}
+          disabled={loading || socialLoading !== null}
+          style={{ opacity: loading || socialLoading !== null ? 0.5 : 1 }}
+        >
+          {socialLoading === "google" ? (
+            <ActivityIndicator color={Colors.slate[600]} />
+          ) : (
+            <>
+              <Image 
+                source={{ uri: "https://www.google.com/favicon.ico" }} 
+                style={{ width: 20, height: 20 }} 
+              />
+              <Text className="font-bold text-slate-700">Sign up with Google</Text>
+            </>
+          )}
+        </TouchableOpacity>
+
+        {/* Apple Sign-Up (iOS only) */}
+        {Platform.OS === "ios" && (
+          <TouchableOpacity 
+            className="flex-row items-center justify-center h-14 rounded-xl gap-3 bg-black mt-3"
+            onPress={handleAppleSignUp}
+            disabled={loading || socialLoading !== null}
+            style={{ opacity: loading || socialLoading !== null ? 0.5 : 1 }}
+          >
+            {socialLoading === "apple" ? (
+              <ActivityIndicator color={Colors.white} />
+            ) : (
+              <>
+                <MaterialIcons name="apple" size={22} color={Colors.white} />
+                <Text className="font-bold text-white">Sign up with Apple</Text>
+              </>
+            )}
+          </TouchableOpacity>
+        )}
 
         <View className="flex-1" />
         <TouchableOpacity 

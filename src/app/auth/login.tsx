@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform, ScrollView, ActivityIndicator, Alert } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform, ScrollView, ActivityIndicator, Alert, Image } from "react-native";
 import { useRouter } from "expo-router";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Button } from "@/components/ui/Button";
@@ -8,7 +8,8 @@ import { useAuth } from "@/context/AuthContext";
 
 export default function LoginScreen() {
   const router = useRouter();
-  const { signIn, loading, error, clearError } = useAuth();
+  const { signIn, signInWithGoogle, signInWithApple, loading, error, clearError } = useAuth();
+  const [socialLoading, setSocialLoading] = useState<"google" | "apple" | null>(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -39,6 +40,30 @@ export default function LoginScreen() {
       );
     } else {
       Alert.alert("Enter Email", "Please enter your email address first.");
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      setSocialLoading("google");
+      await signInWithGoogle();
+      router.replace("/(tabs)");
+    } catch (err) {
+      // Error handled in AuthContext
+    } finally {
+      setSocialLoading(null);
+    }
+  };
+
+  const handleAppleSignIn = async () => {
+    try {
+      setSocialLoading("apple");
+      await signInWithApple();
+      router.replace("/(tabs)");
+    } catch (err) {
+      // Error handled in AuthContext
+    } finally {
+      setSocialLoading(null);
     }
   };
 
@@ -144,15 +169,44 @@ export default function LoginScreen() {
           <View className="flex-1 h-px bg-slate-200" />
         </View>
 
-        {/* Social - TODO: Implement Google Sign-In */}
+        {/* Google Sign-In */}
         <TouchableOpacity 
           className="flex-row items-center justify-center h-14 rounded-xl border-2 border-slate-200 gap-3 bg-white"
-          disabled={loading}
-          style={{ opacity: loading ? 0.5 : 1 }}
+          onPress={handleGoogleSignIn}
+          disabled={loading || socialLoading !== null}
+          style={{ opacity: loading || socialLoading !== null ? 0.5 : 1 }}
         >
-          <MaterialIcons name="login" size={20} color={Colors.slate[600]} />
-          <Text className="font-bold text-slate-700">Continue with Google</Text>
+          {socialLoading === "google" ? (
+            <ActivityIndicator color={Colors.slate[600]} />
+          ) : (
+            <>
+              <Image 
+                source={{ uri: "https://www.google.com/favicon.ico" }} 
+                style={{ width: 20, height: 20 }} 
+              />
+              <Text className="font-bold text-slate-700">Continue with Google</Text>
+            </>
+          )}
         </TouchableOpacity>
+
+        {/* Apple Sign-In (iOS only) */}
+        {Platform.OS === "ios" && (
+          <TouchableOpacity 
+            className="flex-row items-center justify-center h-14 rounded-xl gap-3 bg-black mt-3"
+            onPress={handleAppleSignIn}
+            disabled={loading || socialLoading !== null}
+            style={{ opacity: loading || socialLoading !== null ? 0.5 : 1 }}
+          >
+            {socialLoading === "apple" ? (
+              <ActivityIndicator color={Colors.white} />
+            ) : (
+              <>
+                <MaterialIcons name="apple" size={22} color={Colors.white} />
+                <Text className="font-bold text-white">Continue with Apple</Text>
+              </>
+            )}
+          </TouchableOpacity>
+        )}
 
         {/* Sign up link */}
         <View className="flex-1" />

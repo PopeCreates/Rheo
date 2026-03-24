@@ -1,19 +1,12 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { Platform } from "react-native";
-import auth, { FirebaseAuthTypes } from "@react-native-firebase/auth";
-import firestore from "@react-native-firebase/firestore";
-import { GoogleSignin } from "@react-native-google-signin/google-signin";
-import { appleAuth } from "@invertase/react-native-apple-authentication";
-import { COLLECTIONS, type FirestoreUser } from "@/lib/firebase";
-
-// Configure Google Sign-In
-GoogleSignin.configure({
-  webClientId: process.env.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID,
-});
+import { Session, User, AuthError } from "@supabase/supabase-js";
+import { supabase } from "@/lib/supabase";
+import type { Profile } from "@/types/database";
 
 interface AuthContextType {
-  user: FirebaseAuthTypes.User | null;
-  userData: FirestoreUser | null;
+  user: User | null;
+  session: Session | null;
+  profile: Profile | null;
   loading: boolean;
   error: string | null;
   signUp: (email: string, password: string, displayName: string) => Promise<void>;
@@ -22,80 +15,130 @@ interface AuthContextType {
   signInWithApple: () => Promise<void>;
   signOut: () => Promise<void>;
   resetPassword: (email: string) => Promise<void>;
-  updateProfile: (data: Partial<FirestoreUser>) => Promise<void>;
+  updateProfile: (data: Partial<Profile>) => Promise<void>;
   clearError: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+export function useAuth() {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
+  return context;
+}
+
+function getAuthErrorMessage(error: AuthError): string {
+  const message = error.message.toLowerCase();
+  
+  if (message.includes("invalid login credentials")) {
+    return "Invalid email or password. Please try again.";
+  }
+  if (message.includes("email not confirmed")) {
+    return "Please check your email and confirm your account.";
+  }
+  if (message.includes("user already registered")) {
+    return "An account with this email already exists.";
+  }
+  if (message.includes("invalid email")) {
+    return "Please enter a valid email address.";
+  }
+  if (message.includes("weak password") || message.includes("at least")) {
+    return "Password should be at least 6 characters.";
+  }
+  
+  return error.message || "An unexpected error occurred.";
+}
+
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null);
-  const [userData, setUserData] = useState<FirestoreUser | null>(null);
+  const [user, setUser] = useState<User | null>(null);
+  const [session, setSession] = useState<Session | null>(null);
+  const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Listen to auth state changes
-  useEffect(() => {
-    const unsubscribeAuth = auth().onAuthStateChanged(async (firebaseUser) => {
-      setUser(firebaseUser);
-      
-      if (firebaseUser) {
-        // Subscribe to user document
-        const unsubscribeUser = firestore()
-          .collection(COLLECTIONS.USERS)
-          .doc(firebaseUser.uid)
-          .onSnapshot(
-            (doc) => {
-              if (doc.exists) {
-                setUserData({ uid: doc.id, ...doc.data() } as FirestoreUser);
-              }
-              setLoading(false);
-            },
-            (err) => {
-              console.error("Error fetching user data:", err);
-              setLoading(false);
-            }
-          );
-        
-        return () => unsubscribeUser();
-      } else {
-        setUserData(null);
-        setLoading(false);
+  // Fetch user profile from Supabase
+  const fetchProfile = async (userId: string) => {
+    try {
+      const { data, error: profileError } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("id", userId)
+        .single();
+
+      if (profileError && profileError.code !== "PGRST116") {
+        console.error("Error fetching profile:", profileError);
       }
+      
+      setProfile(data);
+    } catch (err) {
+      console.error("Error fetching profile:", err);
+    }
+  };
+
+  // Listen for auth state changes
+  useEffect(() => {
+    // Get initial session
+    supabase.auth.getSession().then(({ data: { session: initialSession } }) => {
+      setSession(initialSession);
+      setUser(initialSession?.user ?? null);
+      
+      if (initialSession?.user) {
+        fetchProfile(initialSession.user.id);
+      }
+      
+      setLoading(false);
     });
 
-    return () => unsubscribeAuth();
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (event, newSession) => {
+        setSession(newSession);
+        setUser(newSession?.user ?? null);
+
+        if (newSession?.user) {
+          await fetchProfile(newSession.user.id);
+        } else {
+          setProfile(null);
+        }
+
+        if (event === "SIGNED_OUT") {
+          setProfile(null);
+        }
+      }
+    );
+
+    return () => {
+      subscription.unsubscribe();
+    };
   }, []);
 
   const signUp = async (email: string, password: string, displayName: string) => {
     try {
       setLoading(true);
       setError(null);
-      
-      // Create auth user
-      const { user: newUser } = await auth().createUserWithEmailAndPassword(email, password);
-      
-      // Update display name
-      await newUser.updateProfile({ displayName });
-      
-      // Create user document in Firestore
-      const now = firestore.Timestamp.now();
-      const userDoc: Omit<FirestoreUser, "uid"> = {
+
+      const { data, error: signUpError } = await supabase.auth.signUp({
         email,
-        displayName,
-        createdAt: now,
-        updatedAt: now,
-        onboardingComplete: false,
-        onboardingData: {},
-      };
-      
-      await firestore()
-        .collection(COLLECTIONS.USERS)
-        .doc(newUser.uid)
-        .set(userDoc);
-        
+        password,
+        options: {
+          data: {
+            display_name: displayName,
+          },
+        },
+      });
+
+      if (signUpError) {
+        setError(getAuthErrorMessage(signUpError));
+        throw signUpError;
+      }
+
+      // Profile will be auto-created by database trigger
     } catch (err: any) {
-      setError(getAuthErrorMessage(err.code));
+      if (!error) {
+        setError(err.message || "Failed to sign up");
+      }
       throw err;
     } finally {
       setLoading(false);
@@ -106,9 +149,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       setLoading(true);
       setError(null);
-      await auth().signInWithEmailAndPassword(email, password);
+
+      const { error: signInError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (signInError) {
+        setError(getAuthErrorMessage(signInError));
+        throw signInError;
+      }
     } catch (err: any) {
-      setError(getAuthErrorMessage(err.code));
+      if (!error) {
+        setError(err.message || "Failed to sign in");
+      }
       throw err;
     } finally {
       setLoading(false);
@@ -120,48 +174,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setLoading(true);
       setError(null);
 
-      // Check for Play Services
-      await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
+      const { error: googleError } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: {
+          redirectTo: "rheo://",
+          skipBrowserRedirect: true,
+        },
+      });
 
-      // Get user info
-      const signInResult = await GoogleSignin.signIn();
-
-      // Get the ID token
-      const idToken = signInResult?.data?.idToken;
-      if (!idToken) {
-        throw new Error("No ID token found");
-      }
-
-      // Create a Google credential with the token
-      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-
-      // Sign in to Firebase with the credential
-      const { user: firebaseUser } = await auth().signInWithCredential(googleCredential);
-
-      // Check if user document exists, if not create one
-      const userDoc = await firestore()
-        .collection(COLLECTIONS.USERS)
-        .doc(firebaseUser.uid)
-        .get();
-
-      if (!userDoc.exists) {
-        const now = firestore.Timestamp.now();
-        await firestore()
-          .collection(COLLECTIONS.USERS)
-          .doc(firebaseUser.uid)
-          .set({
-            email: firebaseUser.email,
-            displayName: firebaseUser.displayName || "User",
-            photoURL: firebaseUser.photoURL,
-            createdAt: now,
-            updatedAt: now,
-            onboardingComplete: false,
-            onboardingData: {},
-          });
+      if (googleError) {
+        setError(getAuthErrorMessage(googleError));
+        throw googleError;
       }
     } catch (err: any) {
-      if (err.code !== "SIGN_IN_CANCELLED") {
-        setError(getAuthErrorMessage(err.code) || err.message);
+      if (!error) {
+        setError(err.message || "Failed to sign in with Google");
       }
       throw err;
     } finally {
@@ -174,63 +201,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setLoading(true);
       setError(null);
 
-      // Check if Apple Auth is available (iOS only)
-      if (Platform.OS !== "ios" || !appleAuth.isSupported) {
-        throw new Error("Apple Sign-In is only available on iOS devices");
-      }
-
-      // Start Apple Sign-In flow
-      const appleAuthRequestResponse = await appleAuth.performRequest({
-        requestedOperation: appleAuth.Operation.LOGIN,
-        requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
+      const { error: appleError } = await supabase.auth.signInWithOAuth({
+        provider: "apple",
+        options: {
+          redirectTo: "rheo://",
+          skipBrowserRedirect: true,
+        },
       });
 
-      // Ensure we have the identity token
-      const { identityToken, nonce } = appleAuthRequestResponse;
-      if (!identityToken) {
-        throw new Error("Apple Sign-In failed - no identity token returned");
-      }
-
-      // Create a Firebase credential from the Apple token
-      const appleCredential = auth.AppleAuthProvider.credential(identityToken, nonce);
-
-      // Sign in to Firebase
-      const { user: firebaseUser } = await auth().signInWithCredential(appleCredential);
-
-      // Get full name from Apple response (only available on first sign-in)
-      const fullName = appleAuthRequestResponse.fullName;
-      const displayName = fullName
-        ? `${fullName.givenName || ""} ${fullName.familyName || ""}`.trim()
-        : firebaseUser.displayName || "User";
-
-      // Check if user document exists, if not create one
-      const userDoc = await firestore()
-        .collection(COLLECTIONS.USERS)
-        .doc(firebaseUser.uid)
-        .get();
-
-      if (!userDoc.exists) {
-        const now = firestore.Timestamp.now();
-        await firestore()
-          .collection(COLLECTIONS.USERS)
-          .doc(firebaseUser.uid)
-          .set({
-            email: firebaseUser.email || appleAuthRequestResponse.email,
-            displayName,
-            createdAt: now,
-            updatedAt: now,
-            onboardingComplete: false,
-            onboardingData: {},
-          });
-
-        // Update Firebase Auth profile if we have a name
-        if (displayName && displayName !== "User") {
-          await firebaseUser.updateProfile({ displayName });
-        }
+      if (appleError) {
+        setError(getAuthErrorMessage(appleError));
+        throw appleError;
       }
     } catch (err: any) {
-      if (err.code !== appleAuth.Error.CANCELED) {
-        setError(err.message || "Apple Sign-In failed");
+      if (!error) {
+        setError(err.message || "Failed to sign in with Apple");
       }
       throw err;
     } finally {
@@ -241,9 +226,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const signOut = async () => {
     try {
       setLoading(true);
-      await auth().signOut();
+      setError(null);
+
+      const { error: signOutError } = await supabase.auth.signOut();
+
+      if (signOutError) {
+        setError(getAuthErrorMessage(signOutError));
+        throw signOutError;
+      }
+
+      setProfile(null);
     } catch (err: any) {
-      setError(err.message);
+      if (!error) {
+        setError(err.message || "Failed to sign out");
+      }
       throw err;
     } finally {
       setLoading(false);
@@ -254,29 +250,57 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       setLoading(true);
       setError(null);
-      await auth().sendPasswordResetEmail(email);
+
+      const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: "rheo://reset-password",
+      });
+
+      if (resetError) {
+        setError(getAuthErrorMessage(resetError));
+        throw resetError;
+      }
     } catch (err: any) {
-      setError(getAuthErrorMessage(err.code));
+      if (!error) {
+        setError(err.message || "Failed to send reset password email");
+      }
       throw err;
     } finally {
       setLoading(false);
     }
   };
 
-  const updateProfile = async (data: Partial<FirestoreUser>) => {
-    if (!user) throw new Error("Not authenticated");
-    
+  const updateProfile = async (data: Partial<Profile>) => {
+    if (!user) {
+      setError("You must be logged in to update your profile");
+      return;
+    }
+
     try {
-      await firestore()
-        .collection(COLLECTIONS.USERS)
-        .doc(user.uid)
+      setLoading(true);
+      setError(null);
+
+      const { error: updateError } = await supabase
+        .from("profiles")
         .update({
           ...data,
-          updatedAt: firestore.Timestamp.now(),
-        });
+          updated_at: new Date().toISOString(),
+        })
+        .eq("id", user.id);
+
+      if (updateError) {
+        setError(updateError.message);
+        throw updateError;
+      }
+
+      // Refresh profile
+      await fetchProfile(user.id);
     } catch (err: any) {
-      setError(err.message);
+      if (!error) {
+        setError(err.message || "Failed to update profile");
+      }
       throw err;
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -286,7 +310,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     <AuthContext.Provider
       value={{
         user,
-        userData,
+        session,
+        profile,
         loading,
         error,
         signUp,
@@ -302,34 +327,4 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       {children}
     </AuthContext.Provider>
   );
-}
-
-export function useAuth() {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error("useAuth must be used within an AuthProvider");
-  }
-  return context;
-}
-
-// Helper function to get user-friendly error messages
-function getAuthErrorMessage(code: string): string {
-  switch (code) {
-    case "auth/email-already-in-use":
-      return "This email is already registered. Try signing in instead.";
-    case "auth/invalid-email":
-      return "Please enter a valid email address.";
-    case "auth/weak-password":
-      return "Password should be at least 6 characters.";
-    case "auth/user-not-found":
-      return "No account found with this email.";
-    case "auth/wrong-password":
-      return "Incorrect password. Please try again.";
-    case "auth/too-many-requests":
-      return "Too many attempts. Please try again later.";
-    case "auth/network-request-failed":
-      return "Network error. Please check your connection.";
-    default:
-      return "An error occurred. Please try again.";
-  }
 }

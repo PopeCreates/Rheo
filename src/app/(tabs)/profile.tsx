@@ -21,7 +21,7 @@ const menuItems = [
 export default function ProfileScreen() {
   const router = useRouter();
   const { userName, onboardingData, dailyLogs } = useApp();
-  const { user, signOut, loading } = useAuth();
+  const { user, profile, signOut, loading } = useAuth();
 
   const handleSignOut = () => {
     Alert.alert(
@@ -45,8 +45,8 @@ export default function ProfileScreen() {
     );
   };
 
-  const displayName = user?.displayName || userName;
-  const email = user?.email || "";
+  const displayName = user?.user_metadata?.display_name || profile?.display_name || userName;
+  const email = user?.email || profile?.email || "";
 
   return (
     <View className="flex-1 bg-background-light">

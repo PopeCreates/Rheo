@@ -6,7 +6,8 @@
     "icon": "./assets/images/markme-logo3.png",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.devfoma.rheo"
     },
     "web": {
       "output": "static",

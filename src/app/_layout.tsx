@@ -11,6 +11,7 @@ import {
   PlusJakartaSans_800ExtraBold,
 } from "@expo-google-fonts/plus-jakarta-sans";
 import * as SplashScreen from "expo-splash-screen";
+import { AuthProvider } from "../context/AuthContext";
 import { AppProvider } from "../context/AppContext";
 import { Colors } from "../constants/colors";
 import "../global.css";
@@ -49,15 +50,17 @@ export default function RootLayout() {
   }
 
   return (
-    <AppProvider>
-      <StatusBar style="dark" />
-      <Stack
-        screenOptions={{
-          headerShown: false,
-          contentStyle: { backgroundColor: Colors.backgroundLight },
-          animation: "slide_from_right",
-        }}
-      />
-    </AppProvider>
+    <AuthProvider>
+      <AppProvider>
+        <StatusBar style="dark" />
+        <Stack
+          screenOptions={{
+            headerShown: false,
+            contentStyle: { backgroundColor: Colors.backgroundLight },
+            animation: "slide_from_right",
+          }}
+        />
+      </AppProvider>
+    </AuthProvider>
   );
 }

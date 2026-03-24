@@ -8,8 +8,8 @@ import { useAuth } from "@/context/AuthContext";
 
 export default function LoginScreen() {
   const router = useRouter();
-  const { signIn, signInWithGoogle, signInWithApple, loading, error, clearError } = useAuth();
-  const [socialLoading, setSocialLoading] = useState<"google" | "apple" | null>(null);
+  const { signIn, signInWithGoogle, signInWithTwitter, loading, error, clearError } = useAuth();
+  const [socialLoading, setSocialLoading] = useState<"google" | "twitter" | null>(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -55,10 +55,10 @@ export default function LoginScreen() {
     }
   };
 
-  const handleAppleSignIn = async () => {
+  const handleTwitterSignIn = async () => {
     try {
-      setSocialLoading("apple");
-      await signInWithApple();
+      setSocialLoading("twitter");
+      await signInWithTwitter();
       router.replace("/(tabs)");
     } catch (err) {
       // Error handled in AuthContext
@@ -189,24 +189,22 @@ export default function LoginScreen() {
           )}
         </TouchableOpacity>
 
-        {/* Apple Sign-In (iOS only) */}
-        {Platform.OS === "ios" && (
-          <TouchableOpacity 
-            className="flex-row items-center justify-center h-14 rounded-xl gap-3 bg-black mt-3"
-            onPress={handleAppleSignIn}
-            disabled={loading || socialLoading !== null}
-            style={{ opacity: loading || socialLoading !== null ? 0.5 : 1 }}
-          >
-            {socialLoading === "apple" ? (
-              <ActivityIndicator color={Colors.white} />
-            ) : (
-              <>
-                <MaterialIcons name="apple" size={22} color={Colors.white} />
-                <Text className="font-bold text-white">Continue with Apple</Text>
-              </>
-            )}
-          </TouchableOpacity>
-        )}
+        {/* X (Twitter) Sign-In */}
+        <TouchableOpacity 
+          className="flex-row items-center justify-center h-14 rounded-xl gap-3 bg-black mt-3"
+          onPress={handleTwitterSignIn}
+          disabled={loading || socialLoading !== null}
+          style={{ opacity: loading || socialLoading !== null ? 0.5 : 1 }}
+        >
+          {socialLoading === "twitter" ? (
+            <ActivityIndicator color={Colors.white} />
+          ) : (
+            <>
+              <Text className="font-bold text-white text-lg">𝕏</Text>
+              <Text className="font-bold text-white">Continue with X</Text>
+            </>
+          )}
+        </TouchableOpacity>
 
         {/* Sign up link */}
         <View className="flex-1" />

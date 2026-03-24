@@ -12,7 +12,7 @@ interface AuthContextType {
   signUp: (email: string, password: string, displayName: string) => Promise<void>;
   signIn: (email: string, password: string) => Promise<void>;
   signInWithGoogle: () => Promise<void>;
-  signInWithTwitter: () => Promise<void>;
+  signInWithTwitter: () => Promise<void>; // X (Twitter) OAuth
   signOut: () => Promise<void>;
   resetPassword: (email: string) => Promise<void>;
   updateProfile: (data: Partial<Profile>) => Promise<void>;
@@ -317,7 +317,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         signUp,
         signIn,
         signInWithGoogle,
-        signInWithApple,
+        signInWithTwitter,
         signOut,
         resetPassword,
         updateProfile,

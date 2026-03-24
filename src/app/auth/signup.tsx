@@ -8,8 +8,8 @@ import { useAuth } from "@/context/AuthContext";
 
 export default function SignUpScreen() {
   const router = useRouter();
-  const { signUp, signInWithGoogle, signInWithApple, loading, error, clearError } = useAuth();
-  const [socialLoading, setSocialLoading] = useState<"google" | "apple" | null>(null);
+  const { signUp, signInWithGoogle, signInWithTwitter, loading, error, clearError } = useAuth();
+  const [socialLoading, setSocialLoading] = useState<"google" | "twitter" | null>(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -45,10 +45,10 @@ export default function SignUpScreen() {
     }
   };
 
-  const handleAppleSignUp = async () => {
+  const handleTwitterSignUp = async () => {
     try {
-      setSocialLoading("apple");
-      await signInWithApple();
+      setSocialLoading("twitter");
+      await signInWithTwitter();
       router.replace("/onboarding/welcome");
     } catch (err) {
       // Error handled in AuthContext
@@ -185,24 +185,22 @@ export default function SignUpScreen() {
           )}
         </TouchableOpacity>
 
-        {/* Apple Sign-Up (iOS only) */}
-        {Platform.OS === "ios" && (
-          <TouchableOpacity 
-            className="flex-row items-center justify-center h-14 rounded-xl gap-3 bg-black mt-3"
-            onPress={handleAppleSignUp}
-            disabled={loading || socialLoading !== null}
-            style={{ opacity: loading || socialLoading !== null ? 0.5 : 1 }}
-          >
-            {socialLoading === "apple" ? (
-              <ActivityIndicator color={Colors.white} />
-            ) : (
-              <>
-                <MaterialIcons name="apple" size={22} color={Colors.white} />
-                <Text className="font-bold text-white">Sign up with Apple</Text>
-              </>
-            )}
-          </TouchableOpacity>
-        )}
+        {/* X (Twitter) Sign-Up */}
+        <TouchableOpacity 
+          className="flex-row items-center justify-center h-14 rounded-xl gap-3 bg-black mt-3"
+          onPress={handleTwitterSignUp}
+          disabled={loading || socialLoading !== null}
+          style={{ opacity: loading || socialLoading !== null ? 0.5 : 1 }}
+        >
+          {socialLoading === "twitter" ? (
+            <ActivityIndicator color={Colors.white} />
+          ) : (
+            <>
+              <Text className="font-bold text-white text-lg">𝕏</Text>
+              <Text className="font-bold text-white">Sign up with X</Text>
+            </>
+          )}
+        </TouchableOpacity>
 
         <View className="flex-1" />
         <TouchableOpacity 

@@ -12,7 +12,7 @@ interface AuthContextType {
   signUp: (email: string, password: string, displayName: string) => Promise<void>;
   signIn: (email: string, password: string) => Promise<void>;
   signInWithGoogle: () => Promise<void>;
-  signInWithApple: () => Promise<void>;
+  signInWithTwitter: () => Promise<void>;
   signOut: () => Promise<void>;
   resetPassword: (email: string) => Promise<void>;
   updateProfile: (data: Partial<Profile>) => Promise<void>;
@@ -196,26 +196,26 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const signInWithApple = async () => {
+  const signInWithTwitter = async () => {
     try {
       setLoading(true);
       setError(null);
 
-      const { error: appleError } = await supabase.auth.signInWithOAuth({
-        provider: "apple",
+      const { error: twitterError } = await supabase.auth.signInWithOAuth({
+        provider: "twitter",
         options: {
           redirectTo: "rheo://",
           skipBrowserRedirect: true,
         },
       });
 
-      if (appleError) {
-        setError(getAuthErrorMessage(appleError));
-        throw appleError;
+      if (twitterError) {
+        setError(getAuthErrorMessage(twitterError));
+        throw twitterError;
       }
     } catch (err: any) {
       if (!error) {
-        setError(err.message || "Failed to sign in with Apple");
+        setError(err.message || "Failed to sign in with X");
       }
       throw err;
     } finally {

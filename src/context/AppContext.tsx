@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useAuth } from "./AuthContext";
-import { dailyLogsService, cravingsService, userService } from "@/services/firestore";
+import * as supabaseService from "@/services/supabase";
 import type {
   AppState,
   AppContextType,
@@ -30,65 +30,77 @@ const defaultState: AppState = {
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export function AppProvider({ children }: { children: ReactNode }) {
-  const { user, userData, loading: authLoading } = useAuth();
+  const { user, profile, loading: authLoading } = useAuth();
   const [state, setState] = useState<AppState>(defaultState);
   const [loading, setLoading] = useState(true);
 
-  // Sync state from Firebase when user/userData changes
+  // Sync state from Supabase when user/profile changes
   useEffect(() => {
     if (authLoading) return;
 
-    if (user && userData) {
-      // User is logged in - use Firebase data
+    if (user && profile) {
+      // User is logged in - use Supabase data
       setState((prev) => ({
         ...prev,
-        userName: userData.displayName || user.email?.split("@")[0] || "User",
-        onboardingComplete: userData.onboardingComplete,
+        userName: profile.display_name || user.email?.split("@")[0] || "User",
+        onboardingComplete: profile.onboarding_complete || false,
         onboardingData: {
           ...defaultOnboarding,
-          ...userData.onboardingData,
+          goal: profile.goal as OnboardingData["goal"],
+          lastPeriodDate: profile.last_period_date,
+          cycleLength: profile.cycle_length || 28,
+          notificationsEnabled: profile.notifications_enabled || false,
         },
       }));
 
-      // Subscribe to daily logs
-      const unsubLogs = dailyLogsService.subscribe(user.uid, (logs) => {
-        setState((prev) => ({
-          ...prev,
-          dailyLogs: logs.map((log) => ({
-            date: log.date,
-            mood: log.mood,
-            flow: log.flow,
-            symptoms: log.symptoms,
-            notes: log.notes,
-          })),
-        }));
-      });
+      // Load daily logs from Supabase
+      loadDailyLogs(user.id);
 
-      // Subscribe to cravings
-      const unsubCravings = cravingsService.subscribe(user.uid, (cravings) => {
-        setState((prev) => ({
-          ...prev,
-          cravings: cravings.map((c) => ({
-            id: c.id,
-            item: c.item,
-            category: c.category,
-            notes: c.notes,
-            addedToList: c.fulfilled,
-          })),
-        }));
-      });
+      // Load cravings from Supabase
+      loadCravings(user.id);
 
       setLoading(false);
-
-      return () => {
-        unsubLogs();
-        unsubCravings();
-      };
     } else {
       // No user - load from AsyncStorage (offline mode)
       loadLocalState();
     }
-  }, [user, userData, authLoading]);
+  }, [user, profile, authLoading]);
+
+  const loadDailyLogs = async (userId: string) => {
+    try {
+      const logs = await supabaseService.getDailyLogs(userId);
+      setState((prev) => ({
+        ...prev,
+        dailyLogs: logs.map((log) => ({
+          date: log.date,
+          mood: log.mood as DailyLog["mood"],
+          flow: log.flow as DailyLog["flow"],
+          symptoms: log.symptoms || [],
+          notes: log.notes || "",
+        })),
+      }));
+    } catch (err) {
+      console.error("Error loading daily logs:", err);
+    }
+  };
+
+  const loadCravings = async (userId: string) => {
+    try {
+      const cravings = await supabaseService.getCravings(userId);
+      setState((prev) => ({
+        ...prev,
+        cravings: cravings.map((c) => ({
+          id: c.id,
+          item: c.item,
+          category: c.category,
+          notes: c.notes || "",
+          addedToList: c.fulfilled || false,
+        })),
+      }));
+    } catch (err) {
+      console.error("Error loading cravings:", err);
+    }
+  };
 
   // Load state from AsyncStorage (for offline/guest mode)
   const loadLocalState = async () => {
@@ -125,10 +137,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
       onboardingData: { ...prev.onboardingData, ...data },
     }));
 
-    // Sync to Firebase if logged in
+    // Sync to Supabase if logged in
     if (user) {
       try {
-        await userService.updateOnboardingData(user.uid, data);
+        await supabaseService.updateUserProfile(user.id, {
+          goal: data.goal || undefined,
+          last_period_date: data.lastPeriodDate || undefined,
+          cycle_length: data.cycleLength || undefined,
+          notifications_enabled: data.notificationsEnabled || undefined,
+        });
       } catch (err) {
         console.error("Error syncing onboarding data:", err);
       }
@@ -149,11 +166,13 @@ export function AppProvider({ children }: { children: ReactNode }) {
       },
     }));
 
-    // Sync to Firebase if logged in
+    // Sync to Supabase if logged in
     if (user) {
       try {
-        await userService.updateOnboardingData(user.uid, { lastPeriodDate });
-        await userService.completeOnboarding(user.uid);
+        await supabaseService.updateUserProfile(user.id, {
+          last_period_date: lastPeriodDate,
+          onboarding_complete: true,
+        });
       } catch (err) {
         console.error("Error completing onboarding:", err);
       }
@@ -169,10 +188,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
       return { ...prev, dailyLogs: logs };
     });
 
-    // Sync to Firebase if logged in
+    // Sync to Supabase if logged in
     if (user) {
       try {
-        await dailyLogsService.upsert(user.uid, log.date, {
+        await supabaseService.saveDailyLog(user.id, {
+          date: log.date,
           mood: log.mood,
           flow: log.flow,
           symptoms: log.symptoms,
@@ -192,13 +212,13 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const addCraving = async (craving: Craving) => {
     setState((p) => ({ ...p, cravings: [...p.cravings, craving] }));
 
-    // Sync to Firebase if logged in
+    // Sync to Supabase if logged in
     if (user) {
       try {
-        await cravingsService.add(user.uid, {
+        await supabaseService.addCraving(user.id, {
           item: craving.item,
           category: (craving.category as "food" | "activity" | "gift" | "other") || "other",
-          notes: craving.notes,
+          notes: craving.notes || null,
           fulfilled: craving.addedToList || false,
         });
       } catch (err) {
@@ -210,10 +230,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const removeCraving = async (id: string) => {
     setState((p) => ({ ...p, cravings: p.cravings.filter((c) => c.id !== id) }));
 
-    // Sync to Firebase if logged in
+    // Sync to Supabase if logged in
     if (user) {
       try {
-        await cravingsService.delete(id);
+        await supabaseService.deleteCraving(id);
       } catch (err) {
         console.error("Error removing craving:", err);
       }
@@ -231,10 +251,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
       ),
     }));
 
-    // Sync to Firebase if logged in
+    // Sync to Supabase if logged in
     if (user) {
       try {
-        await cravingsService.update(id, { fulfilled: !craving.addedToList });
+        await supabaseService.updateCraving(id, { fulfilled: !craving.addedToList });
       } catch (err) {
         console.error("Error toggling craving:", err);
       }

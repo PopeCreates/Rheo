@@ -7,9 +7,7 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.devfoma.rheo",
-      "usesAppleSignIn": true,
-      "googleServicesFile": "./GoogleService-Info.plist"
+      "bundleIdentifier": "com.devfoma.rheo"
     },
     "web": {
       "output": "static",
@@ -17,7 +15,6 @@
     },
     "android": {
       "package": "com.devfoma.rheo",
-      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/markme-logo3.png",
         "backgroundImage": "./assets/images/android-icon-background.png",
@@ -51,17 +48,6 @@
             "node_modules/@expo-google-fonts/plus-jakarta-sans/PlusJakartaSans_700Bold.ttf",
             "node_modules/@expo-google-fonts/plus-jakarta-sans/PlusJakartaSans_800ExtraBold.ttf"
           ]
-        }
-      ],
-      "@react-native-firebase/app",
-      "@react-native-firebase/auth",
-      "@react-native-google-signin/google-signin",
-      [
-        "expo-build-properties",
-        {
-          "ios": {
-            "useFrameworks": "static"
-          }
         }
       ]
     ],
